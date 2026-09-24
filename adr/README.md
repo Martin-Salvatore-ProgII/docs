@@ -8,6 +8,9 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | --- | --- | --- |
 | [0001](0001-app-habla-con-ambos-servicios.md) | La app KMP se comunica directamente con los dos servicios | Aceptado |
 | [0002](0002-comunicacion-unidireccional-turnos-catalogo.md) | Comunicación entre servicios en una sola dirección: turnos → catálogo | Aceptado |
+| [0003](0003-turnos-emite-jwt-usuarios.md) | El servicio de turnos registra a los usuarios finales y emite su JWT | Aceptado |
+| [0004](0004-external-patient-id-uuid.md) | `externalPatientId` es un UUID propio de cada usuario | Aceptado |
+| [0005](0005-configuracion-integracion-al-arrancar.md) | Los backends obtienen la configuración de la integración al arrancar | Aceptado |
 
 ## Plantilla
 

@@ -26,6 +26,8 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-08. Los secretos nunca se commitean ni se exponen.** El JWT técnico, las credenciales, los hosts de la cátedra y los valores del objeto `integration` van en configuración externa. No aparecen en el código, en los repos, en los logs, en capturas, en la documentación ni en la app. *(ENUNCIADO §9; REF §3, §5.1)*
 
+**P-13. Las dos identidades no se mezclan.** La cuenta técnica (ante la cátedra) y el usuario final (ante nuestro sistema) son independientes. El JWT técnico nunca sale de los backends. La identidad del usuario sale siempre de su JWT validado, y la integración técnica, del JWT técnico: nunca de un id de usuario o un `groupId` enviado por el cliente. *(ENUNCIADO §3.2, §9; REF §2, §6)*
+
 ## Alcance
 
 **P-09. Fuera de alcance.** No se implementan historias clínicas, recetas, diagnósticos, obras sociales, facturación o pagos, información médica real, videollamadas, gestión hospitalaria ni integraciones con instituciones externas. Todos los datos son ficticios. *(ENUNCIADO §1, §14)*

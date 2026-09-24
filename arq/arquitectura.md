@@ -51,22 +51,22 @@ flowchart TB
     end
 
     APP -->|búsquedas<br/>JWT de usuario| CS
-    APP -->|disponibilidad, reservas<br/>JWT de usuario| TS
+    APP -->|registro, login,<br/>disponibilidad, reservas<br/>JWT de usuario| TS
     TS -->|datos vigentes del catálogo<br/>JWT entre servicios| CS
 
     CS --- CDB
     TS --- TDB
 
-    CS -->|snapshot<br/>JWT técnico| API
+    CS -->|configuración de integración,<br/>snapshot<br/>JWT técnico| API
     CS -->|lectura catedra:sync:*| RED
     KC -->|CatalogUpdated| CS
 
-    TS -->|ocupaciones, holds, reservas<br/>JWT técnico| API
+    TS -->|configuración de integración,<br/>ocupaciones, holds, reservas<br/>JWT técnico| API
     KA -->|pedido de teléfono y resultados| TS
     TS -->|AdditionalInformationSubmitted| KT
 ```
 
-Los topics de Kafka llevan el sufijo `{groupId}` de la cuenta técnica (REF §15.2). Dónde se registran y autentican los usuarios finales y cómo se autentican los servicios entre sí se define en [`seguridad.md`](seguridad.md).
+Los topics de Kafka llevan el sufijo `{groupId}` de la cuenta técnica (REF §15.2). Cada backend obtiene al arrancar la configuración de Redis y Kafka desde la API de la cátedra ([ADR-0005](../adr/0005-configuracion-integracion-al-arrancar.md)). Las identidades y la autenticación se detallan en [`seguridad.md`](seguridad.md).
 
 ## Responsabilidades
 
@@ -89,6 +89,7 @@ Interfaz del usuario final con el flujo funcional completo: registro, inicio de 
 
 *(ENUNCIADO §4.2, §7)*
 
+- Registra y autentica a los usuarios finales y emite su JWT ([ADR-0003](../adr/0003-turnos-emite-jwt-usuarios.md)).
 - Construye la disponibilidad combinando los horarios vigentes (pedidos al catálogo) con las ocupaciones de la cátedra.
 - Inicia y conserva el estado local de los procesos de reserva: crea y confirma holds, participa del intercambio por Kafka y procesa confirmaciones, rechazos, vencimientos y procesos inválidos.
 - Asocia cada proceso y cada reserva al usuario final que lo inició, y aplica esa propiedad en toda consulta y cancelación.
@@ -99,7 +100,7 @@ Interfaz del usuario final con el flujo funcional completo: registro, inicio de 
 | Desde | Hacia | Permitido | Decisión |
 | --- | --- | --- | --- |
 | App KMP | Servicio de catálogo | Sí: búsquedas y datos del catálogo | [ADR-0001](../adr/0001-app-habla-con-ambos-servicios.md) |
-| App KMP | Servicio de turnos | Sí: disponibilidad, reservas y cancelaciones | [ADR-0001](../adr/0001-app-habla-con-ambos-servicios.md) |
+| App KMP | Servicio de turnos | Sí: registro, login, disponibilidad, reservas y cancelaciones | [ADR-0001](../adr/0001-app-habla-con-ambos-servicios.md) |
 | App KMP | Servicio de la cátedra | **No**: la app nunca ve credenciales de la cátedra | ENUNCIADO §3.2; REF §2 |
 | Servicio de turnos | Servicio de catálogo | Sí: datos vigentes antes de operar | [ADR-0002](../adr/0002-comunicacion-unidireccional-turnos-catalogo.md) |
 | Servicio de catálogo | Servicio de turnos | **No** | [ADR-0002](../adr/0002-comunicacion-unidireccional-turnos-catalogo.md) |
@@ -108,4 +109,4 @@ Interfaz del usuario final con el flujo funcional completo: registro, inicio de 
 ## Consecuencias de la separación
 
 - Si el servicio de catálogo no está disponible, turnos **no inicia** operaciones que requieran datos vigentes (disponibilidad, nuevas reservas), pero sigue atendiendo lo que depende solo de sus datos, como consultar las reservas propias. *(ENUNCIADO §8)*
-- Si el servicio de turnos no está disponible, el catálogo sigue sincronizando y respondiendo búsquedas.
+- Si el servicio de turnos no está disponible, el catálogo sigue sincronizando y respondiendo búsquedas a usuarios con un JWT vigente, pero no se puede registrar ni iniciar sesión ([ADR-0003](../adr/0003-turnos-emite-jwt-usuarios.md)).
