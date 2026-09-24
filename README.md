@@ -35,6 +35,7 @@ El resto de los documentos **no reescribe el enunciado**: lo cita (`ENUNCIADO §
 | [`arq/seguridad.md`](arq/seguridad.md) | Identidades, JWT, autorización y secretos | ¿Quién puede hacer qué y cómo se verifica? |
 | [`arq/modelo-db.md`](arq/modelo-db.md) | Modelo de datos de cada servicio | ¿Qué datos guarda cada servicio y a quién pertenecen? |
 | [`arq/maquina-estados.md`](arq/maquina-estados.md) | Máquina de estados local de la reserva | ¿Qué estados hay, qué los hace cambiar y cuáles son finales? |
+| [`arq/despliegue.md`](arq/despliegue.md) | Topología de ejecución con Docker Compose | ¿Qué contenedores se levantan, cómo se conectan y qué configuración reciben? |
 | [`arq/contratos.md`](arq/contratos.md) | Contratos entre nuestros servicios y hacia la app | ¿Qué operaciones, DTO, autenticación y errores expone cada servicio? |
 | [`arq/contratos/*.yaml`](arq/contratos/) | Los mismos contratos en formato OpenAPI | La versión validable del contrato, para implementar y probar |
 | [`adr/`](adr/) | Registro de decisiones de arquitectura (ADR) | ¿Qué decidimos, qué alternativas descartamos y por qué? |
@@ -61,10 +62,18 @@ flowchart LR
 3. **Decisiones**: si hay que elegir entre alternativas (ENUNCIADO §10), se escribe un ADR. Si cambian piezas, contratos o datos, se actualizan los documentos de `arq/`.
 4. **Spec de la feature**: se crea `specs/NNN-nombre/` con tres archivos:
    - `spec.md`: **qué** se construye. Referencia las HU, CU y RNF que cubre, e incluye los criterios de aceptación y lo que queda fuera. No habla de clases ni de librerías.
-   - `plan.md`: **cómo** se construye. Qué repos toca, qué capas y adaptadores, qué contratos, qué migraciones, qué tests. Respeta la constitución y los ADR.
-   - `tasks.md`: lista ordenada de tareas chicas y verificables. Cada tarea deja el sistema en un estado que compila y termina en uno o más commits.
+   - `plan.md`: **encuadre técnico** de la feature. Qué repos toca, qué contratos usa o cambia, qué datos se agregan o modifican, qué ADR aplican, riesgos y qué comportamientos se prueban. No describe clases, algoritmos ni pasos de implementación.
+   - `tasks.md`: lista ordenada de entregables chicos y verificables ("existe el endpoint X y cumple los criterios Y"). Cada tarea deja el sistema en un estado que compila y termina en uno o más commits.
 5. **Implementación**: el agente (o una persona) ejecuta las tareas en el repo de código, leyendo la constitución, la spec y el plan.
 6. **Trazabilidad**: se completa la fila con los tests y la evidencia. Si la implementación obligó a cambiar algo, **primero se corrige la spec** y después el código.
+
+## Qué va y qué no va en estos documentos
+
+Estos documentos son una guía de **producto, requisitos y arquitectura**. Sirven para unificar decisiones, no para escribir el código dos veces.
+
+**Sí van**: qué tiene que hacer el sistema y cómo se verifica; restricciones; piezas y responsabilidades; contratos (OpenAPI, eventos); el modelo de datos y a quién pertenece cada dato; estados y transiciones; decisiones con sus alternativas y su porqué.
+
+**No van**: pseudocódigo, lógica de negocio escrita paso a paso detrás de un contrato, nombres de clases o métodos, ni instrucciones de implementación. Esas decisiones las toma quien implementa, siguiendo la constitución (en los backends, la skill `/hexagonal`). Dictarlas acá mete ruido y empeora las decisiones técnicas.
 
 ## Convenciones
 
