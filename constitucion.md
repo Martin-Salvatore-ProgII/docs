@@ -28,6 +28,14 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-13. Las dos identidades no se mezclan.** La cuenta técnica (ante la cátedra) y el usuario final (ante nuestro sistema) son independientes. El JWT técnico nunca sale de los backends. La identidad del usuario sale siempre de su JWT validado, y la integración técnica, del JWT técnico: nunca de un id de usuario o un `groupId` enviado por el cliente. *(ENUNCIADO §3.2, §9; REF §2, §6)*
 
+## Robustez
+
+**P-14. Todo procesamiento de mensajes es idempotente.** Kafka entrega al menos una vez: recibir el mismo mensaje dos veces nunca repite efectos. `eventId` es la clave de idempotencia. *(ENUNCIADO §8; REF §15.1)*
+
+**P-15. Kafka avisa; los datos del catálogo vienen de Redis o del snapshot.** Un aviso nunca es la fuente de los datos ni de la decisión: siempre se compara con lo que informa Redis. *(REF §15.3, §16)*
+
+**P-16. Sin reintentos ilimitados ni estados irrecuperables.** Una falla deja el estado local en un punto consistente desde el que se puede continuar, y los reintentos son acotados y observables. *(ENUNCIADO §8; REF §18.4)*
+
 ## Alcance
 
 **P-09. Fuera de alcance.** No se implementan historias clínicas, recetas, diagnósticos, obras sociales, facturación o pagos, información médica real, videollamadas, gestión hospitalaria ni integraciones con instituciones externas. Todos los datos son ficticios. *(ENUNCIADO §1, §14)*

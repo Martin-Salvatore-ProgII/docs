@@ -37,9 +37,9 @@ flowchart TB
 
     subgraph NUESTRO[Nuestro sistema - Docker Compose]
         CS[Servicio de catálogo<br/>Java + Spring Boot]
-        CDB[(Base del catálogo)]
+        CDB[(PostgreSQL<br/>catálogo)]
         TS[Servicio de turnos<br/>Java + Spring Boot]
-        TDB[(Base de turnos)]
+        TDB[(PostgreSQL<br/>turnos)]
     end
 
     subgraph CAT[Servicio de la cátedra]
@@ -79,7 +79,7 @@ Interfaz del usuario final con el flujo funcional completo: registro, inicio de 
 *(ENUNCIADO §4.1, §6)*
 
 - Guarda la copia local de categorías, profesionales y horarios semanales, y la versión de catálogo aplicada.
-- Ejecuta la sincronización completa (snapshot REST) y la incremental (aviso por Kafka, datos desde Redis).
+- Ejecuta la sincronización completa (snapshot REST) y la incremental (aviso por Kafka, datos desde Redis), según la estrategia de [`sincronizacion.md`](sincronizacion.md).
 - Detecta discontinuidades y reconstruye la copia local.
 - Busca y filtra profesionales solo con datos locales: como mínimo por categoría, nombre, estado habilitado y disponibilidad.
 - Informa el estado y los errores de sincronización.

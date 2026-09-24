@@ -70,3 +70,23 @@ Cada historia describe qué necesita un actor y cómo se verifica que está cump
 3. **Dado** que la cátedra no responde o la integración no está `PROVISIONED`, **cuando** un backend arranca, **entonces** no arranca e informa el motivo sin mostrar secretos.
 4. **Dado** cualquier estado del sistema, **entonces** el JWT técnico y los valores de `integration` no aparecen en los repositorios, los logs, las respuestas a la app ni la documentación.
 5. **Dado** que el JWT técnico queda expuesto, **entonces** el procedimiento documentado es crear otra cuenta técnica, reconfigurar ambos backends y avisar a la cátedra (REF §5.4).
+
+## Catálogo
+
+### HU-04. Catálogo actualizado
+
+- **Estado:** Aceptado
+- **Origen:** ENUNCIADO §4.1, §5 (puntos 4 a 6), §6
+- **Actor:** usuario final
+
+**Como** usuario final **quiero** que el catálogo que veo en la app refleje los cambios que publica la cátedra **para** buscar y reservar sobre profesionales y horarios vigentes.
+
+**Criterios de aceptación**
+
+1. **Dado** que la cátedra publica una versión nueva del catálogo, **cuando** el servicio de catálogo la sincroniza, **entonces** mis búsquedas muestran los cambios, sin que tenga que hacer nada.
+2. **Dado** que hay una sincronización en curso, **cuando** busco profesionales, **entonces** veo los resultados de la copia anterior completa y un aviso no bloqueante de que el catálogo se está actualizando.
+3. **Dado** cualquier momento, **cuando** busco, **entonces** nunca veo una mezcla de datos de dos versiones distintas del catálogo.
+4. **Dado** que la sincronización falla, **cuando** busco, **entonces** sigo viendo la última copia completa y la búsqueda no falla por eso.
+5. **Dado** que estoy autenticado, **cuando** consulto el estado del catálogo, **entonces** veo la versión local, si hay una sincronización en curso, la última sincronización exitosa y el último error, si lo hubo.
+
+Los escenarios de sincronización del lado del servicio están en [CU-01 y CU-02](CU.md).

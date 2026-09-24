@@ -11,6 +11,13 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0003](0003-turnos-emite-jwt-usuarios.md) | El servicio de turnos registra a los usuarios finales y emite su JWT | Aceptado |
 | [0004](0004-external-patient-id-uuid.md) | `externalPatientId` es un UUID propio de cada usuario | Aceptado |
 | [0005](0005-configuracion-integracion-al-arrancar.md) | Los backends obtienen la configuración de la integración al arrancar | Aceptado |
+| [0006](0006-disparadores-sincronizacion.md) | La sincronización se dispara por Kafka, al arrancar y con un chequeo periódico | Aceptado |
+| [0007](0007-concurrencia-optimista-version-local.md) | Sincronizaciones simultáneas: una versión solo se aplica sobre la versión local esperada | Aceptado |
+| [0008](0008-deduplicacion-por-event-id.md) | Los eventos Kafka procesados se registran por `eventId` | Aceptado |
+| [0009](0009-referencias-faltantes-desde-redis.md) | Las entidades referenciadas que faltan se traen del estado actual en Redis | Aceptado |
+| [0010](0010-snapshot-en-una-transaccion.md) | El snapshot se aplica en una sola transacción y la app avisa que el catálogo se está actualizando | Aceptado |
+| [0011](0011-fallas-y-estado-de-sincronizacion.md) | Fallas de sincronización sin reintentos en loop y estado expuesto por el servicio | Aceptado |
+| [0012](0012-postgresql.md) | PostgreSQL como motor de base de datos de los dos servicios | Aceptado |
 
 ## Plantilla
 

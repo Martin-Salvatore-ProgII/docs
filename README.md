@@ -33,6 +33,7 @@ El resto de los documentos **no reescribe el enunciado**: lo cita (`ENUNCIADO §
 | [`requisitos/no-funcionales.md`](requisitos/no-funcionales.md) | Requisitos no funcionales: robustez, seguridad, pruebas | ¿Qué tiene que soportar el sistema más allá de funcionar? |
 | [`arq/arquitectura.md`](arq/arquitectura.md) | Contexto, contenedores y responsabilidades | ¿Qué piezas hay, qué hace cada una y cómo se conectan? |
 | [`arq/seguridad.md`](arq/seguridad.md) | Identidades, JWT, autorización y secretos | ¿Quién puede hacer qué y cómo se verifica? |
+| [`arq/sincronizacion.md`](arq/sincronizacion.md) | Estrategia de sincronización completa e incremental del catálogo | ¿Qué hace el catálogo en cada situación de versiones, duplicados y fallas? |
 | [`arq/modelo-db.md`](arq/modelo-db.md) | Modelo de datos de cada servicio | ¿Qué datos guarda cada servicio y a quién pertenecen? |
 | [`arq/maquina-estados.md`](arq/maquina-estados.md) | Máquina de estados local de la reserva | ¿Qué estados hay, qué los hace cambiar y cuáles son finales? |
 | [`arq/despliegue.md`](arq/despliegue.md) | Topología de ejecución con Docker Compose | ¿Qué contenedores se levantan, cómo se conectan y qué configuración reciben? |

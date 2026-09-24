@@ -33,3 +33,27 @@ Términos del dominio y de la integración, con el significado exacto que tienen
 **JWT de usuario.** Token que emite el servicio de turnos al usuario final cuando inicia sesión. La app lo usa en las llamadas a nuestros dos servicios. Es independiente del JWT técnico. *(ENUNCIADO §3.2)*
 
 **`externalPatientId`.** Identificador del usuario final que se envía a la cátedra al crear y confirmar un hold. En este proyecto es un UUID propio de cada usuario. *(REF §2, §9; [ADR-0004](adr/0004-external-patient-id-uuid.md))*
+
+## Sincronización
+
+**Versión del catálogo.** Número entero que identifica cada publicación del catálogo de la cátedra. Solo crece. *(REF §14.2)*
+
+**Versión local.** Versión del catálogo que refleja exactamente la copia local. Solo avanza cuando los datos de esa versión quedaron guardados por completo. *(ENUNCIADO §6; [`arq/sincronizacion.md`](arq/sincronizacion.md))*
+
+**Versión actual (C).** Última versión publicada por la cátedra, en `catedra:sync:current-version`. *(REF §14.2)*
+
+**Versión más vieja disponible (O).** Versión más antigua desde la que se puede avanzar de forma incremental, en `catedra:sync:oldest-available-version`. Si la versión local es menor, hace falta un snapshot. *(REF §14.2, §18.2)*
+
+**Snapshot.** Catálogo completo (habilitadas y deshabilitadas) obtenido por `GET /api/synchronization/snapshot`, junto con la versión a la que corresponde (`snapshotVersion`). *(REF §7)*
+
+**Sincronización completa.** Reemplazo de toda la copia local por un snapshot. *(ENUNCIADO §6.1)*
+
+**Sincronización incremental.** Aplicación, en orden y de a una, de las versiones posteriores a la local, leyendo de Redis los IDs afectados y el estado actual de esas entidades. *(ENUNCIADO §6.2; REF §14.5)*
+
+**Discontinuidad.** Situación en la que no se puede avanzar de forma incremental con seguridad: falta historial, la versión local quedó fuera de la ventana disponible o hay datos que no se pueden verificar. Se resuelve con un snapshot. *(ENUNCIADO §6.2)*
+
+**`CatalogUpdated`.** Evento Kafka que avisa que hay una versión nueva del catálogo. Es solo un aviso: no trae datos. *(REF §15.3)*
+
+**Baja lógica.** Forma en que la cátedra da de baja una entidad del catálogo: sigue existiendo con `enabled: false`. *(REF §14.4)*
+
+**`eventId`.** Identificador único de cada evento Kafka y clave funcional de idempotencia: un `eventId` ya procesado no se vuelve a aplicar. *(REF §15.1)*

@@ -13,6 +13,6 @@ Topología de ejecución local del sistema.
 
 Se completa cuando se decidan:
 
-- el motor de base de datos y si ambos servicios comparten instancia física (con bases o esquemas separados, [Constitución P-03](../constitucion.md));
+- si los dos servicios comparten una instancia física de PostgreSQL ([ADR-0012](../adr/0012-postgresql.md)) con bases separadas y usuarios sin permisos cruzados, o usan instancias distintas ([Constitución P-03](../constitucion.md));
 - en qué repositorio vive el archivo de Docker Compose, dado que los servicios están en repos separados;
 - cómo se entrega la configuración externa a los contenedores.
