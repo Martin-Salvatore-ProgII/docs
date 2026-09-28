@@ -9,6 +9,7 @@ Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-servi
 3. **Una rama por issue**, creada desde `main` actualizada.
 4. **Un PR por rama**, que cierra su issue al mergearse.
 5. **El merge conserva los commits** (merge commit, sin squash), para que el historial muestre cómo se construyó cada cambio.
+6. **Las pruebas pasan en CI** antes de mergear: el workflow de cada repo es un check obligatorio del ruleset ([ADR-0046](adr/0046-ci-con-github-actions.md)).
 
 **Excepción: el repo `docs`.** No tiene `main` protegida y se commitea directo, con Conventional Commits. Es documentación de trabajo propia y no forma parte de la entrega evaluada, así que no necesita el flujo de issues y PR.
 

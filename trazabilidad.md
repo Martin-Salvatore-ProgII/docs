@@ -39,7 +39,7 @@ Relación entre lo que exige el enunciado, dónde lo especificamos, en qué feat
 | Procesamiento idempotente de un mensaje duplicado | RNF-06, ADR-0008, ADR-0023, CU-01 (1a) | `CatalogUpdated` reprocesado; evento de reserva repetido | 🟨 |
 | Separación efectiva de datos entre servicios | Constitución P-03, ADR-0002 | | ⬜ |
 | Rechazo de accesos no autenticados o no autorizados | HU-02, HU-08, HU-09, RNF-03, RNF-04, ADR-0032 | Pedidos sin token, con token vencido o falsificado, y sobre reservas ajenas | 🟨 |
-| Tests automatizados de backend | | | ⬜ |
+| Tests automatizados de backend | RNF-10, [`arq/pruebas.md`](arq/pruebas.md) | Ejecución de las pruebas y el historial de CI de los PR | 🟨 |
 
 ## Opcionales
 
@@ -60,3 +60,4 @@ Relación entre lo que exige el enunciado, dónde lo especificamos, en qué feat
 | RNF-07 | Reintentos acotados y estado recuperable | | 🟨 |
 | RNF-08 | Lecturas consistentes durante las actualizaciones | | 🟨 |
 | RNF-09 | Sin supuestos fijos sobre los datos y valores configurables | | 🟨 |
+| RNF-10 | Pruebas automatizadas de los backends | | 🟨 |

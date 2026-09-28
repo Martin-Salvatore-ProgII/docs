@@ -49,6 +49,10 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0041](0041-postgresql-por-servicio.md) | Un contenedor de PostgreSQL por servicio | Aceptado |
 | [0042](0042-ubicacion-docker-compose.md) | Un Compose por servicio y el del sistema completo en turnos, incluyendo al del catálogo | Aceptado |
 | [0043](0043-configuracion-externa-env-y-secrets.md) | Configuración externa con `.env` y archivos secretos montados, ambos fuera de Git | Aceptado |
+| [0044](0044-pruebas-por-capa-con-catedra-simulada.md) | Pruebas por capa según la skill `/hexagonal`, con la cátedra siempre simulada | Aceptado |
+| [0045](0045-postgresql-real-en-tests.md) | Las pruebas usan PostgreSQL real con Testcontainers, nunca H2 | Aceptado |
+| [0046](0046-ci-con-github-actions.md) | Integración continua con GitHub Actions como check obligatorio para mergear | Aceptado |
+| [0047](0047-tests-basicos-en-la-app.md) | La app KMP tiene pocas pruebas, básicas y sobre lógica pura | Aceptado |
 
 ## Plantilla
 

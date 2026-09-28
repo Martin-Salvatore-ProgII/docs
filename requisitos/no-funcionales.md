@@ -105,3 +105,14 @@ Los valores operativos del sistema se definen por configuración externa, con un
 La zona horaria de la agenda es la excepción: es fija por decisión ([ADR-0016](../adr/0016-zona-horaria-argentina.md)).
 
 **Verificación:** los tests usan catálogos con datos variados (distintas duraciones, varios horarios por día, entidades deshabilitadas) y cambian los valores configurables; revisión de que el código no contiene datos del catálogo.
+
+## Pruebas
+
+### RNF-10. Pruebas automatizadas de los backends
+
+- **Estado:** Aceptado
+- **Origen:** ENUNCIADO §10.1, §11
+
+Los dos backends tienen pruebas automatizadas que cubren, como mínimo, registro y autenticación, sincronización, reservas, autorización e idempotencia, según la estrategia de [`arq/pruebas.md`](../arq/pruebas.md). Ningún test depende del servicio real de la cátedra.
+
+**Verificación:** cada criterio de aceptación de las HU obligatorias y cada situación de [`arq/robustez.md`](../arq/robustez.md) tiene al menos un test registrado en la trazabilidad; las pruebas pasan en CI en cada PR.
