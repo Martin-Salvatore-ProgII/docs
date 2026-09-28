@@ -1,0 +1,318 @@
+openapi: 3.0.3
+info:
+  title: API del servicio de catálogo
+  version: 0.1.0
+  description: |
+    Operaciones que expone el servicio de catálogo a la app KMP y al servicio de turnos.
+    Convenciones y reglas en docs/arq/contratos.md. Estado: Aceptado.
+servers:
+  - url: '{baseUrl}'
+    description: URL base del servicio de catálogo; se define en la configuración de cada cliente.
+    variables:
+      baseUrl:
+        default: http://localhost
+security:
+  - bearerAuth: []
+paths:
+  /api/professional-categories:
+    get:
+      summary: Listar las categorías habilitadas
+      operationId: listCategories
+      responses:
+        '200':
+          description: Categorías habilitadas ordenadas por nombre
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/CatalogNotReady'
+  /api/professionals:
+    get:
+      summary: Buscar profesionales en la copia local
+      operationId: searchProfessionals
+      parameters:
+        - name: categoryId
+          in: query
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Coincidencia parcial sobre nombre, apellido o nombre completo, sin distinguir mayúsculas ni tildes.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: enabled
+          in: query
+          description: Estado habilitado efectivo (profesional y categoría).
+          schema:
+            type: boolean
+            default: true
+        - name: date
+          in: query
+          description: Filtro de disponibilidad de agenda.
+          schema:
+            type: string
+            format: date
+        - name: timeFrom
+          in: query
+          description: Inicio de la franja horaria. Requiere date.
+          schema:
+            $ref: '#/components/schemas/LocalTime'
+        - name: timeTo
+          in: query
+          description: Fin de la franja horaria. Requiere date y debe ser posterior a timeFrom.
+          schema:
+            $ref: '#/components/schemas/LocalTime'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Sort'
+      responses:
+        '200':
+          description: Página de profesionales
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+            Link:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProfessionalSummary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/CatalogNotReady'
+  /api/professionals/{id}/agenda:
+    get:
+      summary: Agenda vigente de un profesional
+      operationId: getProfessionalAgenda
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Profesional, habilitado efectivo, horarios habilitados y versión del catálogo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessionalAgenda'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: PROFESSIONAL_NOT_FOUND
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          $ref: '#/components/responses/CatalogNotReady'
+  /api/catalog/sync-status:
+    get:
+      summary: Estado de sincronización del catálogo
+      operationId: getSyncStatus
+      responses:
+        '200':
+          description: Estado actual
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    Sort:
+      name: sort
+      in: query
+      schema:
+        type: string
+        default: lastName,firstName
+  responses:
+    BadRequest:
+      description: VALIDATION_ERROR
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Unauthorized:
+      description: Sin JWT, o JWT inválido o vencido
+    CatalogNotReady:
+      description: CATALOG_NOT_READY, el catálogo todavía no tiene versión local
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    LocalTime:
+      type: string
+      pattern: '^([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$'
+      example: '09:00:00'
+    DayOfWeek:
+      type: string
+      enum: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]
+    Category:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+    CategoryRef:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    ProfessionalSummary:
+      type: object
+      required: [id, firstName, lastName, category, enabled]
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryRef'
+        enabled:
+          type: boolean
+          description: Habilitado efectivo (profesional y categoría).
+    WeeklySchedule:
+      type: object
+      required: [id, dayOfWeek, startTime, endTime, slotDurationMinutes]
+      properties:
+        id:
+          type: integer
+          format: int64
+        dayOfWeek:
+          $ref: '#/components/schemas/DayOfWeek'
+        startTime:
+          $ref: '#/components/schemas/LocalTime'
+        endTime:
+          $ref: '#/components/schemas/LocalTime'
+        slotDurationMinutes:
+          type: integer
+          minimum: 1
+    ProfessionalAgenda:
+      type: object
+      required: [id, firstName, lastName, category, enabled, weeklySchedules, catalogVersion]
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryRef'
+        enabled:
+          type: boolean
+          description: Habilitado efectivo (profesional y categoría).
+        weeklySchedules:
+          type: array
+          description: Solo horarios habilitados.
+          items:
+            $ref: '#/components/schemas/WeeklySchedule'
+        catalogVersion:
+          type: integer
+          format: int64
+    SyncStatus:
+      type: object
+      required: [syncInProgress]
+      properties:
+        localVersion:
+          type: integer
+          format: int64
+          nullable: true
+        syncInProgress:
+          type: boolean
+        lastSuccessAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastSuccessType:
+          type: string
+          enum: [SNAPSHOT, INCREMENTAL]
+          nullable: true
+        lastErrorAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastError:
+          type: string
+          nullable: true
+    FieldError:
+      type: object
+      properties:
+        objectName:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        path:
+          type: string
+        code:
+          type: string
+        fieldErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'

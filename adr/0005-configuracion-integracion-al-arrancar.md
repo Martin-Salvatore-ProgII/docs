@@ -23,4 +23,4 @@ La configuración externa de cada backend contiene solo la **URL base de la API 
 - El punto 3 del §5 queda cubierto por el propio sistema y se puede demostrar.
 - El arranque depende de que la API de la cátedra responda. Si no responde, el servicio falla al iniciar, de forma visible, en lugar de quedar a medio configurar.
 - Las conexiones a Redis y Kafka se configuran con valores obtenidos en tiempo de ejecución, no con propiedades fijas, lo que suma trabajo de configuración en los backends.
-- **A confirmar con el profesor:** la interpretación del punto 3 del §5.
+- La interpretación del punto 3 del §5 no está confirmada por la cátedra. Si la cátedra indicara otra, este ADR se revisa.

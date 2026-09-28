@@ -36,6 +36,8 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-16. Sin reintentos ilimitados ni estados irrecuperables.** Una falla deja el estado local en un punto consistente desde el que se puede continuar, y los reintentos son acotados y observables. *(ENUNCIADO §8; REF §18.4)*
 
+**P-17. Un proceso de reserva nunca retrocede ni sale de un estado final.** Un evento tardío, repetido o fuera de orden no reabre ni cambia el resultado de un proceso terminado; la única salida de un estado final es de confirmado a cancelado. *(ENUNCIADO §7; REF §18.3)*
+
 ## Alcance
 
 **P-09. Fuera de alcance.** No se implementan historias clínicas, recetas, diagnósticos, obras sociales, facturación o pagos, información médica real, videollamadas, gestión hospitalaria ni integraciones con instituciones externas. Todos los datos son ficticios. *(ENUNCIADO §1, §14)*
@@ -46,4 +48,4 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-11. La documentación coincide con lo entregado.** Si la implementación obliga a cambiar algo, primero se corrige la spec y después el código. *(ENUNCIADO §12)*
 
-**P-12. El historial de Git muestra la evolución.** Commits chicos, frecuentes y con un solo cambio lógico cada uno. Nunca una carga final única. *(ENUNCIADO §13.1)*
+**P-12. El historial de Git muestra la evolución.** `main` está protegida y todo entra por pull request, con una issue y una rama por unidad de trabajo. Commits chicos, frecuentes y con un solo cambio lógico cada uno. Nunca una carga final única. El detalle está en [`guia-git.md`](guia-git.md). *(ENUNCIADO §13.1)*

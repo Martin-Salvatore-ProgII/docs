@@ -77,3 +77,25 @@ Ninguna falla de una dependencia externa genera reintentos ilimitados. Toda fall
 Ninguna lectura observa una actualización a medias: las búsquedas ven el catálogo completo de una versión o el de la siguiente, nunca una mezcla ([ADR-0010](../adr/0010-snapshot-en-una-transaccion.md)).
 
 **Verificación:** test que busca mientras se aplica un snapshot y comprueba que el resultado corresponde completo a una sola versión.
+
+## Mantenibilidad
+
+### RNF-09. Sin supuestos fijos sobre los datos de la cátedra, y valores operativos configurables
+
+- **Estado:** Aceptado
+- **Origen:** ENUNCIADO §1, §6; indicación del profesor sobre el versionado de datos
+
+El catálogo de la cátedra cambia como en la vida real: aparecen y se dan de baja categorías y profesionales, y cambian días, horarios y duraciones de los slots. El sistema no asume nada fijo sobre esos datos: ninguna categoría, profesional, día, horario ni duración se escribe en el código; todo sale del catálogo sincronizado.
+
+Los valores operativos del sistema se definen por configuración externa, con un valor inicial documentado. Hasta ahora:
+
+| Valor | Inicial | Decisión |
+| --- | --- | --- |
+| Intervalo del chequeo periódico de sincronización | 5 minutos | [ADR-0006](../adr/0006-disparadores-sincronizacion.md) |
+| Horizonte de fechas para la disponibilidad | 60 días | [ADR-0015](../adr/0015-reglas-disponibilidad-turnos.md) |
+| Tamaño de página por defecto y máximo | 20 y 100 | [`arq/contratos.md`](../arq/contratos.md) |
+| Intervalo de consulta del estado de una reserva (en la app) | 2 segundos | [ADR-0021](../adr/0021-app-consulta-estado-por-polling.md) |
+
+La zona horaria de la agenda es la excepción: es fija por decisión ([ADR-0016](../adr/0016-zona-horaria-argentina.md)).
+
+**Verificación:** los tests usan catálogos con datos variados (distintas duraciones, varios horarios por día, entidades deshabilitadas) y cambian los valores configurables; revisión de que el código no contiene datos del catálogo.

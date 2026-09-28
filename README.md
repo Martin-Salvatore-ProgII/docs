@@ -42,6 +42,7 @@ El resto de los documentos **no reescribe el enunciado**: lo cita (`ENUNCIADO §
 | [`adr/`](adr/) | Registro de decisiones de arquitectura (ADR) | ¿Qué decidimos, qué alternativas descartamos y por qué? |
 | [`specs/`](specs/) | Spec, plan y tareas de cada feature | ¿Qué se implementa ahora, en qué repo y en qué pasos? |
 | [`trazabilidad.md`](trazabilidad.md) | Matriz de requisito ↔ spec ↔ test ↔ evidencia | ¿Está cubierto todo lo obligatorio para aprobar? |
+| [`guia-git.md`](guia-git.md) | Flujo de trabajo con Git: issues, ramas, commits y PR | ¿Cómo se registra y se integra cada cambio? |
 
 ## Flujo de trabajo SDD
 

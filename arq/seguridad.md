@@ -44,6 +44,7 @@ El JWT técnico y el objeto `integration` nunca salen de los backends: no llegan
 
 ## Usuario final
 
+- Se implementa a mano, compatible con el usuario de JHipster y sin usar su generador ([ADR-0018](../adr/0018-usuario-compatible-sin-generador-jhipster.md)).
 - Se registra desde la app contra el servicio de turnos con los datos del usuario de JHipster: `login`, `password`, `firstName`, `lastName`, `email`, `imageUrl` (opcional) y `langKey` (ENUNCIADO §3.2). Las validaciones están en [HU-01](../requisitos/HU.md#hu-01-registro-de-usuario-final).
 - El id interno, el UUID usado como `externalPatientId`, el estado de activación, las autoridades y los campos de auditoría los asigna el backend. El cliente no puede elegirlos (ENUNCIADO §3.2).
 - Queda activo apenas se registra; no hay verificación por correo (ENUNCIADO §3.2).

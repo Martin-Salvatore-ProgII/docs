@@ -71,6 +71,7 @@ Reglas:
 ```mermaid
 erDiagram
     USER }o--o{ AUTHORITY : tiene
+    USER ||--o{ RESERVATION_PROCESS : inicia
 
     USER {
         long id
@@ -91,6 +92,30 @@ erDiagram
     AUTHORITY {
         string name
     }
+    RESERVATION_PROCESS {
+        uuid id
+        long userId
+        enum status
+        long professionalId
+        string professionalFirstName
+        string professionalLastName
+        date appointmentDate
+        time startTime
+        time endTime
+        string holdId
+        string reservationProcessId
+        long reservationId
+        instant expiresAt
+        string requestEventId
+        string submittedEventId
+        string lastMessage
+        string failureReason
+        string cancellationReason
+        instant createdAt
+        instant updatedAt
+        instant confirmedAt
+        instant cancelledAt
+    }
     PROCESSED_EVENT {
         string eventId
         instant processedAt
@@ -100,14 +125,22 @@ erDiagram
 | Entidad | Contenido | Origen |
 | --- | --- | --- |
 | `USER`, `AUTHORITY` | Usuarios finales con los datos del usuario de JHipster, más el UUID que se envía como `externalPatientId` | ENUNCIADO §3.2, [ADR-0003](../adr/0003-turnos-emite-jwt-usuarios.md), [ADR-0004](../adr/0004-external-patient-id-uuid.md) |
+| `RESERVATION_PROCESS` | Cada proceso de reserva, con su dueño, su estado, los identificadores de la cátedra y los datos históricos del turno y del profesional | [`maquina-estados.md`](maquina-estados.md), [ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md), [ADR-0025](../adr/0025-reservas-propias-desde-base-local.md) |
 | `PROCESSED_EVENT` | `eventId` de los eventos del topic de acciones ya procesados | [ADR-0008](../adr/0008-deduplicacion-por-event-id.md) |
 
 Reglas:
 
 - `login`, `email` y `externalPatientId` son únicos.
 - La contraseña se guarda solo como hash ([RNF-01](../requisitos/no-funcionales.md#rnf-01-contraseñas-protegidas)).
+- Cada proceso pertenece a un único usuario, y toda consulta o cambio se filtra por él ([`seguridad.md`](seguridad.md)).
+- `reservationProcessId` es único cuando existe; `holdId`, `reservationProcessId` y `expiresAt` se completan al crearse el hold ([ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md)).
+- `requestEventId` es el `eventId` del último pedido de teléfono y se devuelve en `AdditionalInformationSubmitted` (REF §15.4, §15.5). `submittedEventId` es el `eventId` del último envío.
+- Un usuario tiene como máximo un proceso en estado no final ([ADR-0024](../adr/0024-un-proceso-activo-por-usuario.md)).
+- Los datos del profesional son históricos: no se usan como catálogo vigente ([Constitución P-05](../constitucion.md)).
+- El teléfono no se guarda: se publica y se descarta. Si hace falta reenviarlo, se le pide de nuevo al usuario.
 
-**Pendiente:** procesos de reserva y reservas, con su asociación al usuario. Se definen con el flujo de reserva y la máquina de estados.
+La disponibilidad de turnos no se guarda: se calcula en cada consulta ([ADR-0015](../adr/0015-reglas-disponibilidad-turnos.md)).
+
 
 ## Lo que ningún servicio guarda
 

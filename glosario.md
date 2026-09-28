@@ -57,3 +57,41 @@ Términos del dominio y de la integración, con el significado exacto que tienen
 **Baja lógica.** Forma en que la cátedra da de baja una entidad del catálogo: sigue existiendo con `enabled: false`. *(REF §14.4)*
 
 **`eventId`.** Identificador único de cada evento Kafka y clave funcional de idempotencia: un `eventId` ya procesado no se vuelve a aplicar. *(REF §15.1)*
+
+## Búsqueda y disponibilidad
+
+**Habilitado (efectivo).** Un profesional está habilitado solo si él y su categoría tienen `enabled: true`. Es el criterio que usan la búsqueda, la agenda vigente y la disponibilidad. *([ADR-0014](adr/0014-habilitado-efectivo.md))*
+
+**Disponibilidad de agenda.** Filtro de la búsqueda: el profesional tiene algún horario semanal habilitado para el día de la semana de una fecha y, opcionalmente, dentro de una franja horaria. Se resuelve con la copia local y no garantiza turnos libres. *([ADR-0013](adr/0013-filtro-disponibilidad-de-agenda.md))*
+
+**Agenda vigente.** Datos actuales de un profesional con sus horarios semanales habilitados, tal como los informa el servicio de catálogo en una sola lectura. *([ADR-0017](adr/0017-operacion-agenda-vigente.md))*
+
+**Slot.** Turno posible de una fecha: un inicio y un fin que surgen de dividir un horario semanal en intervalos de `slotDurationMinutes`. Solo cuenta si termina dentro del horario. *(REF §7; [ADR-0015](adr/0015-reglas-disponibilidad-turnos.md))*
+
+**Ocupación.** Slot que la cátedra informa como no disponible: `CONFIRMED` (reservado) o `HELD` (bloqueado temporalmente, con `expiresAt`). Si un slot está en los dos estados, prevalece `CONFIRMED`. *(REF §8)*
+
+**Disponibilidad de turnos.** Slots libres de un profesional en una fecha: los de su agenda vigente menos las ocupaciones, sin los que ya pasaron. La calcula el servicio de turnos en cada consulta y no garantiza la reserva. *(ENUNCIADO §7; [CU-03](requisitos/CU.md#cu-03-consultar-la-disponibilidad-de-turnos))*
+
+**Hora de Argentina.** Zona horaria fija `America/Argentina/Buenos_Aires`, con la que se interpretan las horas de la agenda y se determinan "hoy" y "ahora". *([ADR-0016](adr/0016-zona-horaria-argentina.md))*
+
+## Reserva
+
+**Hold.** Bloqueo temporal de un slot en la cátedra, a nombre del proyecto, para que nadie más lo tome mientras se completa la reserva. Vence en `expiresAt`; guardarlo localmente no lo extiende. *(REF §9)*
+
+**`holdId`.** Identificador del hold en la cátedra. Se usa para confirmarlo. *(REF §9, §10)*
+
+**Proceso de reserva.** Todo el recorrido de una reserva, desde que el usuario toca "Reservar" hasta su resultado final y una eventual cancelación. Localmente, cada proceso tiene su propio id, su dueño y un estado de la [máquina de estados](arq/maquina-estados.md). *(ENUNCIADO §4.2, §7)*
+
+**`reservationProcessId`.** Identificador del proceso en la cátedra. Lo devuelve el hold y es la key de todos los mensajes Kafka de ese proceso. *(REF §9, §15.1)*
+
+**`reservationId`.** Identificador de la reserva confirmada en la cátedra. Llega con `AppointmentConfirmed`. *(REF §11, §15.6)*
+
+**Confirmación inicial.** Paso REST que acepta el hold y dispara el pedido de teléfono. No confirma la reserva: la deja `PHONE_PENDING` en la cátedra y `AWAITING_REQUEST` localmente. *(REF §10)*
+
+**Pedido de teléfono** (`AdditionalInformationRequested`). Evento con el que la cátedra pide el teléfono. Su `eventId` se guarda y se devuelve como `requestEventId`. *(REF §15.4)*
+
+**`requestEventId`.** El `eventId` del pedido de teléfono, devuelto en la respuesta. Si no coincide, la cátedra invalida el proceso (`REQUEST_EVENT_MISMATCH`). *(REF §15.5, §15.9)*
+
+**Estado final.** Estado del que un proceso ya no sale: `CANCELLED`, `EXPIRED`, `INVALID` y `FAILED`. `CONFIRMED` también es final, salvo por la cancelación. *([`arq/maquina-estados.md`](arq/maquina-estados.md))*
+
+**Proceso activo.** Proceso de reserva en un estado no final. Un usuario puede tener como máximo uno. *([ADR-0024](adr/0024-un-proceso-activo-por-usuario.md))*
