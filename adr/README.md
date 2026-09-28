@@ -43,6 +43,12 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0035](0035-https-entre-app-y-backends.md) | HTTPS entre la app y los backends, con certificado autofirmado en el entorno local | Aceptado |
 | [0036](0036-cors-cerrado.md) | CORS cerrado por defecto: ningún origen web permitido | Aceptado |
 | [0037](0037-rol-administrador-alcance-cerrado.md) | Rol administrador con alcance cerrado: ver todas las reservas y cancelar en nombre de un usuario | Aceptado |
+| [0038](0038-gradle-java-spring-boot.md) | Gradle en los tres repos, Java 25 en los backends, Java 21 en la app y Spring Boot 4 | Aceptado |
+| [0039](0039-flyway.md) | Flyway para las migraciones de base de datos | Aceptado |
+| [0040](0040-paquetes-segun-skill-hexagonal.md) | Los paquetes siguen la convención de la skill `/hexagonal` | Aceptado |
+| [0041](0041-postgresql-por-servicio.md) | Un contenedor de PostgreSQL por servicio | Aceptado |
+| [0042](0042-ubicacion-docker-compose.md) | Un Compose por servicio y el del sistema completo en turnos, incluyendo al del catálogo | Aceptado |
+| [0043](0043-configuracion-externa-env-y-secrets.md) | Configuración externa con `.env` y archivos secretos montados, ambos fuera de Git | Aceptado |
 
 ## Plantilla
 

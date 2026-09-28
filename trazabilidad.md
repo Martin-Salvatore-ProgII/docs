@@ -1,6 +1,6 @@
 # Trazabilidad
 
-Relación entre lo que exige el enunciado, dónde lo especificamos, dónde se implementa y prueba, y cómo se demuestra. Es el checklist de aprobación: una fila sin completar es algo que falta.
+Relación entre lo que exige el enunciado, dónde lo especificamos, en qué feature (`specs/`) se implementa, cómo se prueba, y cómo se demuestra. Es el checklist de aprobación: una fila sin completar es algo que falta.
 
 **Estados:** ⬜ pendiente · 🟨 especificado · 🟦 implementado · ✅ probado y demostrable
 

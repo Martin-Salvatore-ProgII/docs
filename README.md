@@ -1,6 +1,6 @@
 # Documentación del proyecto integrador 2026
 
-Repositorio de documentación del sistema distribuido de turnos. Guarda lo que **cruza repos**: requisitos, arquitectura, contratos entre servicios, decisiones y specs de cada feature. Lo propio de un solo repo (cómo compilar, ejecutar y probar ese repo) vive en el `README` de ese repo.
+Repositorio de documentación del sistema distribuido de turnos. Guarda lo que **cruza repos**: requisitos, arquitectura, contratos entre servicios, decisiones y el plan de tareas de cada feature. Lo propio de un solo repo (cómo compilar, ejecutar y probar ese repo) vive en el `README` de ese repo.
 
 El desarrollo sigue **Spec-Driven Development (SDD)**: primero se escribe y se acuerda la especificación, y recién después se genera el código a partir de ella, con agentes de IA o a mano. Por eso esta documentación no es un anexo que se escribe al final. Es la **entrada** del trabajo y tiene que coincidir en todo momento con lo implementado (ENUNCIADO §12).
 
@@ -36,11 +36,12 @@ El resto de los documentos **no reescribe el enunciado**: lo cita (`ENUNCIADO §
 | [`arq/sincronizacion.md`](arq/sincronizacion.md) | Estrategia de sincronización completa e incremental del catálogo | ¿Qué hace el catálogo en cada situación de versiones, duplicados y fallas? |
 | [`arq/modelo-db.md`](arq/modelo-db.md) | Modelo de datos de cada servicio | ¿Qué datos guarda cada servicio y a quién pertenecen? |
 | [`arq/maquina-estados.md`](arq/maquina-estados.md) | Máquina de estados local de la reserva | ¿Qué estados hay, qué los hace cambiar y cuáles son finales? |
+| [`arq/robustez.md`](arq/robustez.md) | Idempotencia y recuperación ante duplicados, pérdidas, desorden, fallas y reinicios | ¿Qué pasa cuando algo se repite, se pierde, llega tarde o se corta? |
 | [`arq/despliegue.md`](arq/despliegue.md) | Topología de ejecución con Docker Compose | ¿Qué contenedores se levantan, cómo se conectan y qué configuración reciben? |
 | [`arq/contratos.md`](arq/contratos.md) | Contratos entre nuestros servicios y hacia la app | ¿Qué operaciones, DTO, autenticación y errores expone cada servicio? |
 | [`arq/contratos/*.yaml`](arq/contratos/) | Los mismos contratos en formato OpenAPI | La versión validable del contrato, para implementar y probar |
 | [`adr/`](adr/) | Registro de decisiones de arquitectura (ADR) | ¿Qué decidimos, qué alternativas descartamos y por qué? |
-| [`specs/`](specs/) | Spec, plan y tareas de cada feature | ¿Qué se implementa ahora, en qué repo y en qué pasos? |
+| [`specs/`](specs/) | Tareas de cada feature, enlazadas a sus requisitos | ¿Qué se implementa ahora, en qué repo y en qué pasos? |
 | [`trazabilidad.md`](trazabilidad.md) | Matriz de requisito ↔ spec ↔ test ↔ evidencia | ¿Está cubierto todo lo obligatorio para aprobar? |
 | [`guia-git.md`](guia-git.md) | Flujo de trabajo con Git: issues, ramas, commits y PR | ¿Cómo se registra y se integra cada cambio? |
 
@@ -51,10 +52,9 @@ flowchart LR
     E[Enunciado y REF] --> R[Requisitos<br/>HU, CU, RNF]
     C[Constitución] -.restringe.-> R
     R --> A[Arquitectura y ADR]
-    A --> S[Spec de la feature]
-    S --> P[Plan]
-    P --> T[Tareas]
-    T --> K[Código y tests<br/>en el repo que corresponde]
+    A --> T[Tareas de la feature]
+    T --> I[Issues]
+    I --> K[Código y tests<br/>en el repo que corresponde]
     K --> M[Trazabilidad]
     M -.detecta huecos.-> R
 ```
@@ -62,12 +62,31 @@ flowchart LR
 1. **Entender** una parte del enunciado y discutirla. No se documenta nada que no se haya entendido y acordado.
 2. **Requisitos**: se agregan o ajustan las HU, los CU y los RNF que salen de esa parte.
 3. **Decisiones**: si hay que elegir entre alternativas (ENUNCIADO §10), se escribe un ADR. Si cambian piezas, contratos o datos, se actualizan los documentos de `arq/`.
-4. **Spec de la feature**: se crea `specs/NNN-nombre/` con tres archivos:
-   - `spec.md`: **qué** se construye. Referencia las HU, CU y RNF que cubre, e incluye los criterios de aceptación y lo que queda fuera. No habla de clases ni de librerías.
-   - `plan.md`: **encuadre técnico** de la feature. Qué repos toca, qué contratos usa o cambia, qué datos se agregan o modifican, qué ADR aplican, riesgos y qué comportamientos se prueban. No describe clases, algoritmos ni pasos de implementación.
-   - `tasks.md`: lista ordenada de entregables chicos y verificables ("existe el endpoint X y cumple los criterios Y"). Cada tarea deja el sistema en un estado que compila y termina en uno o más commits.
-5. **Implementación**: el agente (o una persona) ejecuta las tareas en el repo de código, leyendo la constitución, la spec y el plan.
-6. **Trazabilidad**: se completa la fila con los tests y la evidencia. Si la implementación obligó a cambiar algo, **primero se corrige la spec** y después el código.
+4. **Tareas de la feature**: se crea `specs/NNN-nombre.md`, un único archivo liviano (ver la plantilla más abajo). **No repite** lo que ya dicen las HU, los CU, los contratos o los ADR: los enlaza. La especificación *es* el conjunto de requisitos y arquitectura; este archivo solo recorta qué parte se construye ahora y en qué pasos.
+5. **Issues**: cada tarea se convierte en una issue en el repo de código correspondiente ([`guia-git.md`](guia-git.md)).
+6. **Implementación**: el agente (o una persona) resuelve la issue leyendo la constitución, el archivo de tareas y lo que este enlaza. El *cómo* lo resuelve el código, que tiene que ser legible por sí mismo.
+7. **Trazabilidad**: se completa la fila con los tests y la evidencia. Si la implementación obligó a cambiar algo, **primero se corrige la documentación** (requisito, contrato o ADR) y después el código.
+
+### Plantilla de `specs/NNN-nombre.md`
+
+```markdown
+# NNN. Nombre de la feature
+
+- **Estado:** Propuesto | Aceptado | Terminado
+- **Repos:** catalogo-service, turnos-service, app-kmp
+
+## Alcance
+
+Qué HU (y qué criterios), CU, RNF, contratos y ADR cubre, enlazados. Qué queda afuera explícitamente.
+
+## Tareas
+
+- [ ] Entregable chico y verificable ("existe X y cumple los criterios Y de HU-NN"). Repo. Issue: #N
+
+## Verificación
+
+Qué tests o pasos demuestran que la feature está terminada.
+```
 
 ## Qué va y qué no va en estos documentos
 
@@ -87,7 +106,7 @@ Estos documentos son una guía de **producto, requisitos y arquitectura**. Sirve
 | Caso de uso | `CU-NN` | `CU-03` |
 | Requisito no funcional | `RNF-NN` | `RNF-07` |
 | ADR | `adr/NNNN-titulo-corto.md` | `adr/0002-emisor-jwt-usuarios.md` |
-| Spec de feature | `specs/NNN-nombre/` | `specs/004-sincronizacion-incremental/` |
+| Tareas de una feature | `specs/NNN-nombre.md` | `specs/004-sincronizacion-incremental.md` |
 
 Los identificadores no se reutilizan. Si algo se descarta, se marca como descartado en lugar de borrarlo, para no romper las referencias.
 
@@ -111,7 +130,7 @@ Ningún documento contiene el JWT técnico, contraseñas, hosts reales de la cá
 Antes de trabajar en cualquier repo, un agente lee, en este orden:
 
 1. `constitucion.md` y `glosario.md`, siempre.
-2. La carpeta `specs/NNN-.../` de la feature asignada.
-3. Los documentos de `arq/`, los ADR y los requisitos que esa spec referencia.
+2. El archivo `specs/NNN-....md` de la feature asignada.
+3. Los requisitos, documentos de `arq/` y ADR que ese archivo enlaza.
 
 Si el agente encuentra una contradicción, o una decisión que no está tomada, **se detiene y la plantea** en lugar de resolverla por su cuenta. Las decisiones se toman en conjunto y quedan registradas acá.

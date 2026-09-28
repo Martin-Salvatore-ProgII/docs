@@ -16,8 +16,8 @@ Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-servi
 
 | SDD | Git |
 | --- | --- |
-| Spec de una feature (`specs/NNN-nombre/`) | Se commitea directo en `docs` |
-| Tarea de `tasks.md` | Una issue en el repo de código correspondiente, con su rama y su PR |
+| Tareas de una feature (`specs/NNN-nombre.md`) | Se commitea directo en `docs` |
+| Cada tarea de ese archivo | Una issue en el repo de código correspondiente, con su rama y su PR |
 | Decisión nueva (ADR) | Se commitea directo en `docs`, antes de implementarla |
 
 Si una tarea toca más de un repo (por ejemplo, un contrato entre servicios), se abre una issue en cada repo y se enlazan entre sí.

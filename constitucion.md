@@ -46,8 +46,10 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 ## Forma de trabajo
 
+**P-19. Libertad tecnológica, siempre defendible.** Se puede usar cualquier tecnología o librería mientras no choque con nada obligatorio (enunciado, REF, principios de esta constitución, la skill `/hexagonal`) y su elección se pueda defender: qué resuelve, qué alternativas había y por qué se eligió. Cada elección relevante queda en un ADR. Si una tecnología obligatoria exigiera otra, la exigida pasa a ser obligatoria. *(Criterio de la cátedra; ENUNCIADO §10)*
+
 **P-10. Las decisiones se toman en conjunto y quedan registradas.** Lo que el enunciado deja a criterio del alumno (ENUNCIADO §10) se decide junto con el alumno y se registra en un ADR antes de implementarlo. Un agente que encuentra una decisión sin tomar se detiene y la plantea. *(ENUNCIADO §10, §13.2)*
 
-**P-11. La documentación coincide con lo entregado.** Si la implementación obliga a cambiar algo, primero se corrige la spec y después el código. *(ENUNCIADO §12)*
+**P-11. La documentación coincide con lo entregado.** Si la implementación obliga a cambiar algo, primero se corrige la documentación (requisito, contrato o ADR) y después el código. *(ENUNCIADO §12)*
 
 **P-12. El historial de Git muestra la evolución.** En los repos de código, `main` está protegida y todo entra por pull request, con una issue y una rama por unidad de trabajo. Commits chicos, frecuentes y con un solo cambio lógico cada uno. Nunca una carga final única. El detalle está en [`guia-git.md`](guia-git.md). *(ENUNCIADO §13.1)*
