@@ -53,6 +53,9 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0045](0045-postgresql-real-en-tests.md) | Las pruebas usan PostgreSQL real con Testcontainers, nunca H2 | Aceptado |
 | [0046](0046-ci-con-github-actions.md) | Integración continua con GitHub Actions como check obligatorio para mergear | Aceptado |
 | [0047](0047-tests-basicos-en-la-app.md) | La app KMP tiene pocas pruebas, básicas y sobre lógica pura | Aceptado |
+| [0048](0048-compose-multiplatform.md) | La interfaz se construye con Compose Multiplatform en el código común | Aceptado |
+| [0049](0049-jwt-cifrado-en-el-dispositivo.md) | El JWT de usuario se guarda cifrado en el dispositivo | Aceptado |
+| [0050](0050-prototipos-con-herramientas-de-diseno.md) | Las pantallas principales se prototipan con las herramientas de diseño de Claude antes de implementarlas | Aceptado |
 
 ## Plantilla
 

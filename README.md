@@ -36,6 +36,7 @@ El resto de los documentos **no reescribe el enunciado**: lo cita (`ENUNCIADO §
 | [`arq/sincronizacion.md`](arq/sincronizacion.md) | Estrategia de sincronización completa e incremental del catálogo | ¿Qué hace el catálogo en cada situación de versiones, duplicados y fallas? |
 | [`arq/modelo-db.md`](arq/modelo-db.md) | Modelo de datos de cada servicio | ¿Qué datos guarda cada servicio y a quién pertenecen? |
 | [`arq/maquina-estados.md`](arq/maquina-estados.md) | Máquina de estados local de la reserva | ¿Qué estados hay, qué los hace cambiar y cuáles son finales? |
+| [`arq/interfaz.md`](arq/interfaz.md) | Pantallas, navegación y comportamiento de la app | ¿Qué pantallas hay, qué hace cada una y qué muestra ante cada estado o error? |
 | [`arq/pruebas.md`](arq/pruebas.md) | Estrategia de pruebas de los backends y de la app | ¿Qué se prueba, en qué nivel y cómo sabemos que alcanza? |
 | [`arq/robustez.md`](arq/robustez.md) | Idempotencia y recuperación ante duplicados, pérdidas, desorden, fallas y reinicios | ¿Qué pasa cuando algo se repite, se pierde, llega tarde o se corta? |
 | [`arq/despliegue.md`](arq/despliegue.md) | Topología de ejecución con Docker Compose | ¿Qué contenedores se levantan, cómo se conectan y qué configuración reciben? |

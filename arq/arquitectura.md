@@ -72,7 +72,7 @@ Los topics de Kafka llevan el sufijo `{groupId}` de la cuenta técnica (REF §15
 
 ### App KMP
 
-Interfaz del usuario final con el flujo funcional completo: registro, inicio de sesión, búsqueda de profesionales, disponibilidad, reserva (incluida la carga del teléfono), consulta y cancelación de las reservas propias. No habla con la cátedra ni conoce sus credenciales. *(ENUNCIADO §3.2, §5)*
+Interfaz del usuario final con el flujo funcional completo: registro, inicio de sesión, búsqueda de profesionales, disponibilidad, reserva (incluida la carga del teléfono), consulta y cancelación de las reservas propias. No habla con la cátedra ni conoce sus credenciales. Sus pantallas están en [`interfaz.md`](interfaz.md). *(ENUNCIADO §3.2, §5)*
 
 ### Servicio de catálogo y sincronización
 
