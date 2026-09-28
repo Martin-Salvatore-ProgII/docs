@@ -61,6 +61,12 @@ stateDiagram-v2
 | Cualquier no final | `AppointmentProcessExpired` | `EXPIRED` |
 | Cualquier no final | `AppointmentProcessInvalid` | `INVALID` |
 | `CONFIRMED` | La cátedra acepta la cancelación (200) o llega `AppointmentCancelled` | `CANCELLED` |
+| `STARTED` | Timeout al crear el hold ([ADR-0028](../adr/0028-timeout-al-crear-hold.md)) | `FAILED` |
+| `STARTED` | Reconciliación: quedó sin hold registrado | `FAILED` |
+| `HELD`, `AWAITING_REQUEST`, `AWAITING_PHONE` | Reconciliación: venció `expiresAt` más el margen | `EXPIRED` |
+| `PHONE_SUBMITTED` | Reconciliación: la cátedra informa `CONFIRMED` | `CONFIRMED` |
+| `PHONE_SUBMITTED` | Reconciliación: la cátedra informa `FAILED` | `EXPIRED` |
+| `CONFIRMED` | Reconciliación: la cátedra informa `CANCELLED` | `CANCELLED` |
 
 ## Reglas
 
@@ -72,4 +78,4 @@ stateDiagram-v2
 6. **Un rechazo de teléfono no es un estado aparte:** vuelve a `AWAITING_PHONE`, con el motivo y el mensaje del rechazo, hasta `expiresAt` (REF §15.7).
 7. **La vigencia real la define la cátedra** (`expiresAt`). Guardar el proceso localmente no extiende el hold (REF §9).
 
-Qué pasa con timeouts, respuestas perdidas, eventos que no llegan y reinicios con procesos a medias se define en la parte de robustez.
+Los timeouts y reintentos de cada operación están en [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md). Los eventos perdidos y los reinicios con procesos a medias se resuelven con la reconciliación periódica ([CU-05](../requisitos/CU.md#cu-05-reconciliar-procesos-de-reserva), [ADR-0030](../adr/0030-reconciliacion-periodica-de-procesos.md)).

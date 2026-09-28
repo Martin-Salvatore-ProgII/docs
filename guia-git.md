@@ -1,22 +1,24 @@
 # Flujo de trabajo con Git
 
-Cómo se trabaja en los cuatro repositorios (`app-kmp`, `catalogo-service`, `turnos-service` y `docs`). El objetivo es que el historial muestre la evolución del trabajo y permita seguir cada cambio desde el requisito hasta el código (ENUNCIADO §13.1; [Constitución P-12](constitucion.md)).
+Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-service` y `turnos-service`). El objetivo es que el historial muestre la evolución del trabajo y permita seguir cada cambio desde el requisito hasta el código (ENUNCIADO §13.1; [Constitución P-12](constitucion.md)).
 
 ## Reglas
 
-1. **`main` está protegida.** Nadie commitea directo a `main`: todo entra por pull request.
+1. **`main` está protegida en los repos de código.** Nadie commitea directo a `main`: todo entra por pull request.
 2. **Toda unidad de trabajo tiene una issue.** Antes de empezar se crea la issue en el repo donde se hace el cambio.
 3. **Una rama por issue**, creada desde `main` actualizada.
 4. **Un PR por rama**, que cierra su issue al mergearse.
 5. **El merge conserva los commits** (merge commit, sin squash), para que el historial muestre cómo se construyó cada cambio.
 
+**Excepción: el repo `docs`.** No tiene `main` protegida y se commitea directo, con Conventional Commits. Es documentación de trabajo propia y no forma parte de la entrega evaluada, así que no necesita el flujo de issues y PR.
+
 ## Relación con SDD
 
 | SDD | Git |
 | --- | --- |
-| Spec de una feature (`specs/NNN-nombre/`) | Se escribe y se aprueba con una issue y un PR en `docs` |
+| Spec de una feature (`specs/NNN-nombre/`) | Se commitea directo en `docs` |
 | Tarea de `tasks.md` | Una issue en el repo de código correspondiente, con su rama y su PR |
-| Decisión nueva (ADR) | Issue y PR en `docs`, antes de implementarla |
+| Decisión nueva (ADR) | Se commitea directo en `docs`, antes de implementarla |
 
 Si una tarea toca más de un repo (por ejemplo, un contrato entre servicios), se abre una issue en cada repo y se enlazan entre sí.
 

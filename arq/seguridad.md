@@ -60,11 +60,27 @@ La cátedra identifica todo por la cuenta técnica: `GET /api/appointments` devu
 - Lo que devuelva la cátedra se filtra por esa asociación antes de llegar a la app.
 - A la cátedra se envía como `externalPatientId` el UUID del usuario ([ADR-0004](../adr/0004-external-patient-id-uuid.md)).
 
+## JWT de usuario
+
+- **Firma:** par de claves RSA. Turnos firma con la clave privada; el catálogo valida con la clave pública y no puede emitir tokens ([ADR-0032](../adr/0032-jwt-firmado-con-par-de-claves.md)).
+- **Vigencia:** 24 horas, o 30 días con `rememberMe`, configurables y sin refresh tokens ([ADR-0033](../adr/0033-vigencia-jwt-usuario.md)).
+- **Validación:** los dos servicios verifican firma, vigencia y rol en cada pedido protegido ([RNF-04](../requisitos/no-funcionales.md#rnf-04-endpoints-protegidos-por-defecto)).
+- **Rol:** `ROLE_USER`, asignado al registrarse.
+
+## Comunicación entre servicios
+
+Turnos llama al catálogo reenviando el mismo JWT de usuario que recibió de la app. El catálogo lo valida igual que cuando llama la app. Así se preserva la identidad del usuario y la trazabilidad de punta a punta ([ADR-0034](../adr/0034-propagacion-jwt-usuario-entre-servicios.md)).
+
+## Canal y CORS
+
+- La app y los backends se comunican por HTTPS; en el entorno local, con un certificado autofirmado en el que confía la app ([ADR-0035](../adr/0035-https-entre-app-y-backends.md)).
+- CORS está cerrado: ningún origen web permitido, con una lista configurable vacía ([ADR-0036](../adr/0036-cors-cerrado.md)).
+
+## Limitaciones conocidas
+
+- No hay revocación anticipada de JWT de usuario: un token vale hasta su vencimiento.
+- No hay límite de intentos de inicio de sesión.
+
 ## Pendientes
 
-Se deciden en la parte de seguridad:
-
-- Cómo valida el catálogo el JWT de usuario que emite turnos (clave compartida o par de claves) y la vigencia de ese JWT.
-- Cómo se autentica turnos ante el catálogo: propagación del JWT de usuario o un JWT técnico propio, preservando identidad, autorización y trazabilidad (ENUNCIADO §9).
-- Protección del canal entre la app y los backends, y CORS (ENUNCIADO §9).
-- Rol administrador opcional (ENUNCIADO §9).
+- Rol administrador opcional (ENUNCIADO §9): en discusión.

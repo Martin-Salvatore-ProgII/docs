@@ -33,6 +33,15 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0025](0025-reservas-propias-desde-base-local.md) | Las reservas propias se consultan desde la base local de turnos | Aceptado |
 | [0026](0026-cancelacion-con-respuesta-rest.md) | La cancelación se registra con la respuesta REST de la cátedra | Aceptado |
 | [0027](0027-validacion-local-del-telefono.md) | El teléfono se valida con la regla de la cátedra antes de publicarlo | Aceptado |
+| [0028](0028-timeout-al-crear-hold.md) | Un timeout al crear el hold cierra el proceso como fallido, sin reintentar | Aceptado |
+| [0029](0029-reintentos-acotados-por-operacion.md) | Reintentos acotados solo en las operaciones seguras de repetir, con timeouts configurables | Aceptado |
+| [0030](0030-reconciliacion-periodica-de-procesos.md) | Reconciliación periódica de los procesos de reserva colgados | Aceptado |
+| [0031](0031-eventos-kafka-problematicos.md) | Los eventos Kafka que no se pueden procesar no bloquean el consumo | Aceptado |
+| [0032](0032-jwt-firmado-con-par-de-claves.md) | El JWT de usuario se firma con un par de claves: turnos firma y el catálogo solo valida | Aceptado |
+| [0033](0033-vigencia-jwt-usuario.md) | Vigencia del JWT de usuario: 24 horas, o 30 días con `rememberMe`, sin refresh tokens | Aceptado |
+| [0034](0034-propagacion-jwt-usuario-entre-servicios.md) | Turnos se autentica ante el catálogo propagando el JWT del usuario | Aceptado |
+| [0035](0035-https-entre-app-y-backends.md) | HTTPS entre la app y los backends, con certificado autofirmado en el entorno local | Aceptado |
+| [0036](0036-cors-cerrado.md) | CORS cerrado por defecto: ningún origen web permitido | Aceptado |
 
 ## Plantilla
 

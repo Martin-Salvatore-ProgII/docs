@@ -95,3 +95,11 @@ Términos del dominio y de la integración, con el significado exacto que tienen
 **Estado final.** Estado del que un proceso ya no sale: `CANCELLED`, `EXPIRED`, `INVALID` y `FAILED`. `CONFIRMED` también es final, salvo por la cancelación. *([`arq/maquina-estados.md`](arq/maquina-estados.md))*
 
 **Proceso activo.** Proceso de reserva en un estado no final. Un usuario puede tener como máximo uno. *([ADR-0024](adr/0024-un-proceso-activo-por-usuario.md))*
+
+## Robustez
+
+**Reconciliación.** Consulta periódica a la cátedra para resolver procesos de reserva que quedaron sin resultado (por eventos perdidos, reinicios o reintentos agotados). Es la red de seguridad del flujo de reserva. *([CU-05](requisitos/CU.md#cu-05-reconciliar-procesos-de-reserva), [ADR-0030](adr/0030-reconciliacion-periodica-de-procesos.md))*
+
+**Operación segura de repetir.** Operación con efectos que se puede reintentar sin duplicarlos, porque la cátedra la reconoce como ya hecha (confirmación inicial, cancelación, publicación con el mismo `eventId`). Crear un hold no lo es. *([ADR-0029](adr/0029-reintentos-acotados-por-operacion.md))*
+
+**Hold huérfano.** Hold que la cátedra creó pero cuya respuesta nunca llegó. Vence solo en su `expiresAt`. *([ADR-0028](adr/0028-timeout-al-crear-hold.md))*

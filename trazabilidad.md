@@ -22,7 +22,7 @@ Relación entre lo que exige el enunciado, dónde lo especificamos, dónde se im
 | 12 | Reflejar el resultado final localmente | CU-04, ADR-0023, [`maquina-estados.md`](arq/maquina-estados.md) | | | 🟨 |
 | 13 | Consultar las reservas propias | HU-08, ADR-0025 | | | 🟨 |
 | 14 | Cancelar una reserva propia confirmada | HU-09, ADR-0026 | | | 🟨 |
-| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011, RNF-07. Reservas: pendiente | | | 🟨 |
+| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | | | 🟨 |
 
 ## Evidencias (ENUNCIADO §11)
 
@@ -38,7 +38,7 @@ Relación entre lo que exige el enunciado, dónde lo especificamos, dónde se im
 | Consulta y cancelación propia sin acceso cruzado | HU-08, HU-09, RNF-03 | Dos usuarios; uno intenta ver y cancelar la reserva del otro | 🟨 |
 | Procesamiento idempotente de un mensaje duplicado | RNF-06, ADR-0008, ADR-0023, CU-01 (1a) | `CatalogUpdated` reprocesado; evento de reserva repetido | 🟨 |
 | Separación efectiva de datos entre servicios | Constitución P-03, ADR-0002 | | ⬜ |
-| Rechazo de accesos no autenticados o no autorizados | HU-02, RNF-03, RNF-04 | | 🟨 |
+| Rechazo de accesos no autenticados o no autorizados | HU-02, HU-08, HU-09, RNF-03, RNF-04, ADR-0032 | Pedidos sin token, con token vencido o falsificado, y sobre reservas ajenas | 🟨 |
 | Tests automatizados de backend | | | ⬜ |
 
 ## Requisitos no funcionales

@@ -52,7 +52,7 @@ flowchart TB
 
     APP -->|búsquedas<br/>JWT de usuario| CS
     APP -->|registro, login,<br/>disponibilidad, reservas<br/>JWT de usuario| TS
-    TS -->|datos vigentes del catálogo<br/>JWT entre servicios| CS
+    TS -->|datos vigentes del catálogo<br/>JWT de usuario propagado| CS
 
     CS --- CDB
     TS --- TDB

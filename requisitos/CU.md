@@ -137,4 +137,27 @@ La estrategia completa, con la tabla de decisiones, está en [`arq/sincronizacio
 - **11c. Llega `AppointmentProcessInvalid`:** el proceso pasa a `INVALID` con el motivo.
 - **Cualquier paso. Llega un evento repetido, tardío o sin transición válida:** se ignora y se registra ([ADR-0023](../adr/0023-estados-solo-avanzan.md)).
 
-Los timeouts, las respuestas perdidas, los eventos que no llegan y los reinicios con procesos a medias se definen en la parte de robustez.
+- **5b. Timeout al crear el hold:** el proceso pasa a `FAILED` con `INTEGRATION_TIMEOUT`, sin reintentar ([ADR-0028](../adr/0028-timeout-al-crear-hold.md)).
+- **6c, 10c. Timeout en la confirmación inicial o al publicar el teléfono:** se reintenta de forma acotada ([ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md)). Si se agotan los reintentos, el proceso queda en su estado y lo resuelve [CU-05](#cu-05-reconciliar-procesos-de-reserva).
+
+### CU-05. Reconciliar procesos de reserva
+
+- **Estado:** Aceptado
+- **Origen:** ENUNCIADO §4.2, §8; REF §11, §15.9, §18.3, §18.4
+- **Actor:** servicio de turnos
+- **Disparadores:** arranque del servicio y chequeo periódico ([ADR-0030](../adr/0030-reconciliacion-periodica-de-procesos.md))
+
+**Flujo principal**
+
+1. Turnos busca los procesos no finales cuyo `expiresAt` pasó hace más del margen configurado, y los que quedaron en `STARTED`.
+2. Los que están en `STARTED` pasan a `FAILED`.
+3. Los que están en `HELD`, `AWAITING_REQUEST` o `AWAITING_PHONE` pasan a `EXPIRED`: sin teléfono enviado, la cátedra no pudo confirmarlos.
+4. Para los que están en `PHONE_SUBMITTED`, consulta a la cátedra las reservas del `externalPatientId` de cada dueño y busca su `reservationProcessId`. `CONFIRMED` → `CONFIRMED`; `FAILED` → `EXPIRED`.
+5. Para los `CONFIRMED` con turno futuro, compara con la cátedra; si figura `CANCELLED`, pasa a `CANCELLED`.
+
+**Flujos alternativos**
+
+- **4a. La cátedra informa `PHONE_PENDING` o no devuelve el proceso:** se deja para el próximo ciclo.
+- **4b, 5a. La cátedra no responde:** los procesos quedan como están y se revisan en el próximo ciclo.
+
+**Postcondiciones:** ningún proceso queda indefinidamente en un estado no final; ninguna transición contradice la máquina de estados.

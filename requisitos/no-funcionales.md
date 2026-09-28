@@ -95,6 +95,12 @@ Los valores operativos del sistema se definen por configuración externa, con un
 | Horizonte de fechas para la disponibilidad | 60 días | [ADR-0015](../adr/0015-reglas-disponibilidad-turnos.md) |
 | Tamaño de página por defecto y máximo | 20 y 100 | [`arq/contratos.md`](../arq/contratos.md) |
 | Intervalo de consulta del estado de una reserva (en la app) | 2 segundos | [ADR-0021](../adr/0021-app-consulta-estado-por-polling.md) |
+| Timeouts de conexión y de respuesta hacia la cátedra y el catálogo | 2 y 5 segundos | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
+| Reintentos de operaciones seguras de repetir | 2 (1 en lecturas) | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
+| Intervalo y margen de la reconciliación de procesos | 60 y 30 segundos | [ADR-0030](../adr/0030-reconciliacion-periodica-de-procesos.md) |
+| Reintentos al procesar un evento Kafka | 3 | [ADR-0031](../adr/0031-eventos-kafka-problematicos.md) |
+| Vigencia del JWT de usuario (normal y con `rememberMe`) | 24 horas y 30 días | [ADR-0033](../adr/0033-vigencia-jwt-usuario.md) |
+| Orígenes CORS permitidos | Ninguno | [ADR-0036](../adr/0036-cors-cerrado.md) |
 
 La zona horaria de la agenda es la excepción: es fija por decisión ([ADR-0016](../adr/0016-zona-horaria-argentina.md)).
 

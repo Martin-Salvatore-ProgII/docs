@@ -48,4 +48,4 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-11. La documentación coincide con lo entregado.** Si la implementación obliga a cambiar algo, primero se corrige la spec y después el código. *(ENUNCIADO §12)*
 
-**P-12. El historial de Git muestra la evolución.** `main` está protegida y todo entra por pull request, con una issue y una rama por unidad de trabajo. Commits chicos, frecuentes y con un solo cambio lógico cada uno. Nunca una carga final única. El detalle está en [`guia-git.md`](guia-git.md). *(ENUNCIADO §13.1)*
+**P-12. El historial de Git muestra la evolución.** En los repos de código, `main` está protegida y todo entra por pull request, con una issue y una rama por unidad de trabajo. Commits chicos, frecuentes y con un solo cambio lógico cada uno. Nunca una carga final única. El detalle está en [`guia-git.md`](guia-git.md). *(ENUNCIADO §13.1)*
