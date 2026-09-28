@@ -41,6 +41,12 @@ Relación entre lo que exige el enunciado, dónde lo especificamos, dónde se im
 | Rechazo de accesos no autenticados o no autorizados | HU-02, HU-08, HU-09, RNF-03, RNF-04, ADR-0032 | Pedidos sin token, con token vencido o falsificado, y sobre reservas ajenas | 🟨 |
 | Tests automatizados de backend | | | ⬜ |
 
+## Opcionales
+
+| Requisito | Especificación | Spec | Tests | Estado |
+| --- | --- | --- | --- | --- |
+| Rol administrador (ENUNCIADO §9) | HU-10, ADR-0037, Constitución P-18 | | | 🟨 |
+
 ## Requisitos no funcionales
 
 | RNF | Tema | Tests | Estado |

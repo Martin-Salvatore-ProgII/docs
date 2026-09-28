@@ -184,3 +184,26 @@ Los escenarios de sincronización del lado del servicio están en [CU-01 y CU-02
 3. **Dado** una reserva mía que no está confirmada, **cuando** intento cancelarla, **entonces** se rechaza indicando que no se puede cancelar.
 4. **Dado** una reserva de otro usuario, **cuando** intento cancelarla, **entonces** la respuesta es la misma que si no existiera y la reserva no cambia.
 5. **Dado** que la cátedra no está disponible, **cuando** intento cancelar, **entonces** la reserva no cambia y veo que el servicio no está disponible temporalmente.
+
+## Administración
+
+### HU-10. Administrar reservas
+
+- **Estado:** Aceptado
+- **Origen:** ENUNCIADO §9 (rol administrador opcional)
+- **Actor:** administrador
+- **Alcance:** cerrado, según [ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)
+- **Prioridad:** después del flujo obligatorio
+
+**Como** administrador **quiero** ver todas las reservas y cancelar una en nombre de un usuario **para** dar soporte y verificar el funcionamiento del sistema.
+
+**Criterios de aceptación**
+
+1. **Dado** que tengo `ROLE_ADMIN`, **cuando** listo las reservas, **entonces** veo las de todos los usuarios, paginadas, y puedo filtrar por login del dueño, estado y rango de fechas del turno.
+2. **Dado** que tengo `ROLE_ADMIN`, **cuando** veo una reserva, **entonces** veo además su dueño, su `reservationProcessId`, su `failureReason` y quién la canceló, si corresponde.
+3. **Dado** una reserva confirmada de cualquier usuario, **cuando** la cancelo indicando un motivo, **entonces** queda cancelada y se registra que la canceló un administrador y cuál.
+4. **Dado** que intento cancelar sin motivo, **entonces** se rechaza.
+5. **Dado** un usuario sin `ROLE_ADMIN`, **cuando** llama a cualquier operación administrativa, **entonces** recibe 403.
+6. **Dado** que existen operaciones administrativas, **entonces** un usuario común sigue sin poder ver ni cancelar reservas ajenas.
+7. **Dado** que la configuración indica el login de un usuario registrado como administrador, **cuando** el servicio arranca, **entonces** ese usuario tiene `ROLE_ADMIN`. Si no se indica, no hay administrador.
+8. **Dado** que soy administrador, **entonces** la app me muestra la sección de administración; a un usuario común no se la muestra.

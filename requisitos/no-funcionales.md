@@ -36,9 +36,9 @@ La identidad del usuario final se obtiene siempre del JWT de usuario validado, y
 - **Estado:** Aceptado
 - **Origen:** ENUNCIADO §9, §11
 
-Todo endpoint de los dos servicios exige un JWT válido, salvo los declarados explícitamente como públicos (registro e inicio de sesión).
+Todo endpoint de los dos servicios exige un JWT válido, salvo los declarados explícitamente como públicos (registro e inicio de sesión). Las rutas administrativas (`/api/admin/**`) exigen además `ROLE_ADMIN`.
 
-**Verificación:** tests que llaman a endpoints protegidos sin token y con un token inválido o vencido, y esperan 401.
+**Verificación:** tests que llaman a endpoints protegidos sin token y con un token inválido o vencido, y esperan 401; y tests que llaman a rutas administrativas con un usuario común y esperan 403.
 
 ### RNF-05. Validación en cada límite
 

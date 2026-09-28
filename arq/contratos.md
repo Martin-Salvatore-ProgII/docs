@@ -36,6 +36,7 @@ Se siguen las mismas convenciones que la cátedra (REF §4), para que un mismo c
 | 403 | (puede no traer `code`) | JWT válido sin permiso para la operación |
 | 404 | `PROFESSIONAL_NOT_FOUND` | Profesional inexistente |
 | 404 | `RESERVATION_NOT_FOUND` | Reserva inexistente o de otro usuario |
+| 403 | (puede no traer `code`) | Operación administrativa sin `ROLE_ADMIN` |
 | 409 | `ACTIVE_RESERVATION_EXISTS` | El usuario ya tiene un proceso de reserva activo |
 | 409 | `PHONE_NOT_REQUESTED` | Se envía un teléfono y el proceso no está esperándolo |
 | 409 | `RESERVATION_NOT_CANCELLABLE` | Se cancela una reserva que no está confirmada ni cancelada |
@@ -200,3 +201,19 @@ Una reserva es un proceso de reserva local, con los estados de [`arq/maquina-est
 **Listar mis reservas:** filtro opcional `status` y paginación; orden por defecto `createdAt` descendente. Responde la lista paginada. Errores: `400 VALIDATION_ERROR`, `401`.
 
 **Cancelar una reserva:** cuerpo opcional `{ "reason" }` de hasta 500 caracteres. Responde `200` con la reserva en `CANCELLED`, también si ya estaba cancelada. Errores: `400 VALIDATION_ERROR`, `401`, `404 RESERVATION_NOT_FOUND`, `409 RESERVATION_NOT_CANCELLABLE`, `503 INTEGRATION_UNAVAILABLE`.
+
+### Administración
+
+Alcance cerrado según [ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md). Todas las operaciones exigen `ROLE_ADMIN`; sin ese rol responden `403`.
+
+| Operación | Método y ruta | Requisito |
+| --- | --- | --- |
+| Listar todas las reservas | `GET /api/admin/reservations` | HU-10 |
+| Ver cualquier reserva | `GET /api/admin/reservations/{id}` | HU-10 |
+| Cancelar en nombre de un usuario | `POST /api/admin/reservations/{id}/cancel` | HU-10 |
+
+- **Listar:** filtros opcionales `ownerLogin`, `status`, `from` y `to` (fechas del turno), y paginación; orden por defecto `createdAt` descendente.
+- **Representación:** la de una reserva, más `owner` (`{ login, firstName, lastName }`), `reservationProcessId` y `cancelledBy` (login de quien canceló, o `null`).
+- **Cancelar:** cuerpo obligatorio `{ "reason" }`, de 1 a 500 caracteres. Mismas respuestas y errores que la cancelación del dueño.
+
+Errores comunes: `400 VALIDATION_ERROR`, `401`, `403`, `404 RESERVATION_NOT_FOUND`, `409 RESERVATION_NOT_CANCELLABLE`, `503 INTEGRATION_UNAVAILABLE`.

@@ -103,3 +103,5 @@ Términos del dominio y de la integración, con el significado exacto que tienen
 **Operación segura de repetir.** Operación con efectos que se puede reintentar sin duplicarlos, porque la cátedra la reconoce como ya hecha (confirmación inicial, cancelación, publicación con el mismo `eventId`). Crear un hold no lo es. *([ADR-0029](adr/0029-reintentos-acotados-por-operacion.md))*
 
 **Hold huérfano.** Hold que la cátedra creó pero cuya respuesta nunca llegó. Vence solo en su `expiresAt`. *([ADR-0028](adr/0028-timeout-al-crear-hold.md))*
+
+**Administrador.** Usuario con `ROLE_ADMIN`. Puede ver todas las reservas y cancelar una en nombre de un usuario, y nada más. Se asigna por configuración a un usuario ya registrado. *([ADR-0037](adr/0037-rol-administrador-alcance-cerrado.md))*

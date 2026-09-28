@@ -42,6 +42,8 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-09. Fuera de alcance.** No se implementan historias clínicas, recetas, diagnósticos, obras sociales, facturación o pagos, información médica real, videollamadas, gestión hospitalaria ni integraciones con instituciones externas. Todos los datos son ficticios. *(ENUNCIADO §1, §14)*
 
+**P-18. El rol administrador tiene un alcance cerrado.** Solo puede listar y ver todas las reservas y cancelar una reserva confirmada en nombre de un usuario, en rutas propias protegidas por rol. Cualquier capacidad nueva requiere un ADR que reemplace al que lo define. Nunca debilita el aislamiento entre usuarios comunes. *(ENUNCIADO §9; [ADR-0037](adr/0037-rol-administrador-alcance-cerrado.md))*
+
 ## Forma de trabajo
 
 **P-10. Las decisiones se toman en conjunto y quedan registradas.** Lo que el enunciado deja a criterio del alumno (ENUNCIADO §10) se decide junto con el alumno y se registra en un ADR antes de implementarlo. Un agente que encuentra una decisión sin tomar se detiene y la plantea. *(ENUNCIADO §10, §13.2)*

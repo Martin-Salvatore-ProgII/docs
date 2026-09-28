@@ -111,6 +111,7 @@ erDiagram
         string lastMessage
         string failureReason
         string cancellationReason
+        string cancelledBy
         instant createdAt
         instant updatedAt
         instant confirmedAt
@@ -136,6 +137,7 @@ Reglas:
 - `reservationProcessId` es único cuando existe; `holdId`, `reservationProcessId` y `expiresAt` se completan al crearse el hold ([ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md)).
 - `requestEventId` es el `eventId` del último pedido de teléfono y se devuelve en `AdditionalInformationSubmitted` (REF §15.4, §15.5). `submittedEventId` es el `eventId` del último envío.
 - Un usuario tiene como máximo un proceso en estado no final ([ADR-0024](../adr/0024-un-proceso-activo-por-usuario.md)).
+- `cancelledBy` registra el login de quien canceló (el dueño o un administrador) ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)).
 - Los datos del profesional son históricos: no se usan como catálogo vigente ([Constitución P-05](../constitucion.md)).
 - El teléfono no se guarda: se publica y se descarta. Si hace falta reenviarlo, se le pide de nuevo al usuario.
 

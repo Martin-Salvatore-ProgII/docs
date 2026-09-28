@@ -42,6 +42,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0034](0034-propagacion-jwt-usuario-entre-servicios.md) | Turnos se autentica ante el catálogo propagando el JWT del usuario | Aceptado |
 | [0035](0035-https-entre-app-y-backends.md) | HTTPS entre la app y los backends, con certificado autofirmado en el entorno local | Aceptado |
 | [0036](0036-cors-cerrado.md) | CORS cerrado por defecto: ningún origen web permitido | Aceptado |
+| [0037](0037-rol-administrador-alcance-cerrado.md) | Rol administrador con alcance cerrado: ver todas las reservas y cancelar en nombre de un usuario | Aceptado |
 
 ## Plantilla
 
