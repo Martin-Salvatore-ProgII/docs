@@ -75,7 +75,7 @@ En cada PR de un repo de código se ejecutan todas sus pruebas con GitHub Action
 
 ([ADR-0047](../adr/0047-tests-basicos-en-la-app.md))
 
-Pocas pruebas, básicas y sin emulador ni pruebas de interfaz, sobre la lógica que la app aplica por su cuenta:
+Pocas pruebas, básicas y sin emulador ni pruebas de interfaz, sobre la lógica que la app aplica por su cuenta. Siguen la sección de pruebas de la skill `/mvvm-kmp`: ViewModels con repositorios fake escritos a mano (las librerías de mocks de JVM no funcionan en el código común de KMP) y funciones puras probadas directamente:
 
 - normalización y validación del teléfono antes de enviarlo;
 - qué muestra la app para cada estado de una reserva;

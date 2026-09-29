@@ -64,7 +64,8 @@ La app decide qué mostrar por el `status` y el `code` de la respuesta, nunca po
 
 ## Tecnología y diseño
 
-- **Interfaz compartida con Compose Multiplatform**, en el código común de KMP ([ADR-0048](../adr/0048-compose-multiplatform.md)).
+- **Arquitectura MVVM** según la skill `/mvvm-kmp`: por cada pantalla, un ViewModel con un único estado y acciones; repositorios detrás de interfaces; errores traducidos una sola vez ([ADR-0051](../adr/0051-mvvm-en-la-app.md)). Cada pantalla de la tabla de arriba es una feature de esa skill.
+- **Interfaz compartida con Compose Multiplatform**, en el código común de KMP ([ADR-0048](../adr/0048-compose-multiplatform.md)), con el stack de [ADR-0052](../adr/0052-stack-de-la-app.md).
 - **Componentes de Material 3**, los que trae Compose, antes que componentes a medida. Se pueden tomar como referencia catálogos de componentes prefabricados.
 - **Prototipos con las herramientas de diseño de Claude** antes de implementar las pantallas principales, para acordar la disposición y el flujo ([ADR-0050](../adr/0050-prototipos-con-herramientas-de-diseno.md)). El prototipo sirve de guía visual; la fuente de verdad sigue siendo este documento.
 - **El JWT se guarda cifrado** en el dispositivo ([ADR-0049](../adr/0049-jwt-cifrado-en-el-dispositivo.md)).

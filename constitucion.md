@@ -10,6 +10,8 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-02. Arquitectura hexagonal de la cátedra en los dos backends.** Es obligatoria y se implementa **tal cual la enseña la cátedra**: es una variante particular, recopilada en la skill `/hexagonal`, y esa skill es la única fuente del patrón. No se reemplaza por Clean Architecture, ports & adapters de libro, DDD táctico, CQRS ni ninguna variante "equivalente", ni se reconstruye de memoria. Ante un conflicto con código generado por una herramienta (por ejemplo, JHipster), gana la hexagonal. *(Requisito de la cátedra)*
 
+**P-20. Arquitectura MVVM en la app, según la skill `/mvvm-kmp`.** La app KMP se organiza con MVVM tal como lo define la skill `/mvvm-kmp`, que es la única fuente del patrón para la app. No se reemplaza por otra variante ni se reconstruye de memoria. *(Recomendación del profesor; [ADR-0051](adr/0051-mvvm-en-la-app.md))*
+
 ## Datos
 
 **P-03. Cada servicio es dueño exclusivo de sus datos y de sus migraciones.** Ningún servicio accede a las tablas, repositorios o estructuras internas del otro, ni se usa una base compartida como mecanismo de integración. Se permite la misma instancia física de base de datos solo con bases o esquemas separados, usuarios sin permisos cruzados y migraciones independientes. *(ENUNCIADO §3)*
@@ -46,7 +48,7 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 ## Forma de trabajo
 
-**P-19. Libertad tecnológica, siempre defendible.** Se puede usar cualquier tecnología o librería mientras no choque con nada obligatorio (enunciado, REF, principios de esta constitución, la skill `/hexagonal`) y su elección se pueda defender: qué resuelve, qué alternativas había y por qué se eligió. Cada elección relevante queda en un ADR. Si una tecnología obligatoria exigiera otra, la exigida pasa a ser obligatoria. *(Criterio de la cátedra; ENUNCIADO §10)*
+**P-19. Libertad tecnológica, siempre defendible.** Se puede usar cualquier tecnología o librería mientras no choque con nada obligatorio (enunciado, REF, principios de esta constitución, las skills `/hexagonal` y `/mvvm-kmp`) y su elección se pueda defender: qué resuelve, qué alternativas había y por qué se eligió. Cada elección relevante queda en un ADR. Si una tecnología obligatoria exigiera otra, la exigida pasa a ser obligatoria. *(Criterio de la cátedra; ENUNCIADO §10)*
 
 **P-10. Las decisiones se toman en conjunto y quedan registradas.** Lo que el enunciado deja a criterio del alumno (ENUNCIADO §10) se decide junto con el alumno y se registra en un ADR antes de implementarlo. Un agente que encuentra una decisión sin tomar se detiene y la plantea. *(ENUNCIADO §10, §13.2)*
 

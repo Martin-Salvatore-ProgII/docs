@@ -96,7 +96,7 @@ Estos documentos son una guía de **producto, requisitos y arquitectura**. Sirve
 
 **Sí van**: qué tiene que hacer el sistema y cómo se verifica; restricciones; piezas y responsabilidades; contratos (OpenAPI, eventos); el modelo de datos y a quién pertenece cada dato; estados y transiciones; decisiones con sus alternativas y su porqué.
 
-**No van**: pseudocódigo, lógica de negocio escrita paso a paso detrás de un contrato, nombres de clases o métodos, ni instrucciones de implementación. Esas decisiones las toma quien implementa, siguiendo la constitución (en los backends, la skill `/hexagonal`). Dictarlas acá mete ruido y empeora las decisiones técnicas.
+**No van**: pseudocódigo, lógica de negocio escrita paso a paso detrás de un contrato, nombres de clases o métodos, ni instrucciones de implementación. Esas decisiones las toma quien implementa, siguiendo la constitución (en los backends, la skill `/hexagonal`; en la app, la skill `/mvvm-kmp`). Dictarlas acá mete ruido y empeora las decisiones técnicas.
 
 ## Convenciones
 

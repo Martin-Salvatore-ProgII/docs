@@ -56,6 +56,8 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0048](0048-compose-multiplatform.md) | La interfaz se construye con Compose Multiplatform en el código común | Aceptado |
 | [0049](0049-jwt-cifrado-en-el-dispositivo.md) | El JWT de usuario se guarda cifrado en el dispositivo | Aceptado |
 | [0050](0050-prototipos-con-herramientas-de-diseno.md) | Las pantallas principales se prototipan con las herramientas de diseño de Claude antes de implementarlas | Aceptado |
+| [0051](0051-mvvm-en-la-app.md) | La app KMP sigue la arquitectura MVVM de la skill `/mvvm-kmp` | Aceptado |
+| [0052](0052-stack-de-la-app.md) | Stack de la app: lifecycle y navegación multiplataforma, Ktor, kotlinx.serialization y Koin | Propuesto |
 
 ## Plantilla
 
