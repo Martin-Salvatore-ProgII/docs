@@ -65,7 +65,7 @@ flowchart LR
 2. **Requisitos**: se agregan o ajustan las HU, los CU y los RNF que salen de esa parte.
 3. **Decisiones**: si hay que elegir entre alternativas (ENUNCIADO §10), se escribe un ADR. Si cambian piezas, contratos o datos, se actualizan los documentos de `arq/`.
 4. **Tareas de la feature**: se crea `specs/NNN-nombre.md`, un único archivo liviano (ver la plantilla más abajo). **No repite** lo que ya dicen las HU, los CU, los contratos o los ADR: los enlaza. La especificación *es* el conjunto de requisitos y arquitectura; este archivo solo recorta qué parte se construye ahora y en qué pasos.
-5. **Issues**: cada tarea se convierte en una issue en el repo de código correspondiente ([`guia-git.md`](guia-git.md)).
+5. **Issues**: el alumno convierte las tareas en issues de una milestone, desde GitHub, en el repo de código correspondiente. Qué entra en cada milestone se conversa antes ([`guia-git.md`](guia-git.md)).
 6. **Implementación**: el agente (o una persona) resuelve la issue leyendo la constitución, el archivo de tareas y lo que este enlaza. El *cómo* lo resuelve el código, que tiene que ser legible por sí mismo.
 7. **Trazabilidad**: se completa la fila con los tests y la evidencia. Si la implementación obligó a cambiar algo, **primero se corrige la documentación** (requisito, contrato o ADR) y después el código.
 
@@ -83,7 +83,7 @@ Qué HU (y qué criterios), CU, RNF, contratos y ADR cubre, enlazados. Qué qued
 
 ## Tareas
 
-- [ ] Entregable chico y verificable ("existe X y cumple los criterios Y de HU-NN"). Repo. Issue: #N
+- [ ] Entregable chico y verificable ("existe X y cumple los criterios Y de HU-NN"). Repo. Issue: #N (la crea el alumno)
 
 ## Verificación
 
