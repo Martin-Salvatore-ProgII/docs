@@ -58,6 +58,10 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0050](0050-prototipos-con-herramientas-de-diseno.md) | Las pantallas principales se prototipan con las herramientas de diseño de Claude antes de implementarlas | Aceptado |
 | [0051](0051-mvvm-en-la-app.md) | La app KMP sigue la arquitectura MVVM de la skill `/mvvm-kmp` | Aceptado |
 | [0052](0052-stack-de-la-app.md) | Stack de la app: lifecycle y navegación multiplataforma, Ktor, kotlinx.serialization y Koin | Propuesto |
+| [0053](0053-archunit-regla-de-dependencias.md) | La regla de dependencias de la hexagonal se verifica con un test de ArchUnit | Aceptado |
+| [0054](0054-postgresql-18-en-los-dos-servicios.md) | PostgreSQL 18 en los dos servicios, con la versión mayor fijada | Aceptado |
+| [0055](0055-convenciones-comunes-del-esqueleto.md) | Convenciones comunes del esqueleto de los dos backends | Aceptado |
+| [0056](0056-imagen-con-dockerfile-y-puertos.md) | Imagen de cada backend con un Dockerfile en dos etapas y puertos locales sin superposición | Aceptado |
 
 ## Plantilla
 
