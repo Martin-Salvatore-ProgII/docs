@@ -132,6 +132,10 @@ erDiagram
 Reglas:
 
 - `login`, `email` y `externalPatientId` son únicos.
+- `login` y `email` se guardan en minúsculas ([HU-01](../requisitos/HU.md#hu-01-registro-de-usuario-final)): el servicio los convierte antes de guardar y la base rechaza un valor con mayúsculas.
+- En la base, las tablas son `app_user`, `authority` y `app_user_authority` (la relación entre usuarios y autoridades). `USER` no se puede usar como nombre de tabla porque es una palabra reservada de PostgreSQL.
+- El `id` del usuario lo genera la base; el `externalPatientId` lo asigna el servicio al registrar ([ADR-0004](../adr/0004-external-patient-id-uuid.md)).
+- Las autoridades `ROLE_USER` y `ROLE_ADMIN` existen desde la primera migración.
 - La contraseña se guarda solo como hash ([RNF-01](../requisitos/no-funcionales.md#rnf-01-contraseñas-protegidas)).
 - Cada proceso pertenece a un único usuario, y toda consulta o cambio se filtra por él ([`seguridad.md`](seguridad.md)).
 - `reservationProcessId` es único cuando existe; `holdId`, `reservationProcessId` y `expiresAt` se completan al crearse el hold ([ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md)).
