@@ -13,37 +13,54 @@ Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-servi
 ```mermaid
 gitGraph
     commit id: "inicio"
-    branch dev
-    checkout dev
+    branch develop
+    checkout develop
     branch feat/12-registro
     commit id: "feat: ..."
     commit id: "test: ..."
-    checkout dev
+    checkout develop
     merge feat/12-registro
     branch feat/13-login
     commit id: "feat: ...."
-    checkout dev
+    checkout develop
     merge feat/13-login
+    branch milestone/2-usuarios
+    checkout develop
+    branch feat/14-reservas
+    commit id: "feat: ....."
+    checkout develop
+    merge feat/14-reservas
     checkout main
-    merge dev tag: "milestone"
+    merge milestone/2-usuarios tag: "milestone 2"
 ```
 
 | Rama | Para qué | Vida |
 | --- | --- | --- |
 | `main` | Lo entregable: el estado al cierre de cada milestone. Protegida | Permanente |
-| `dev` | Integración: acá se junta el trabajo de las issues | Permanente |
-| Rama de feature | El trabajo de **una** issue | Se borra al mergear a `dev` |
+| `develop` | Integración: acá se junta el trabajo de las issues | Permanente |
+| Rama de feature | El trabajo de **una** issue | Se borra al mergear a `develop` |
+| Rama de milestone | El estado de `develop` al cerrar **una** milestone, fijo. Es lo que se le presenta al profesor | Hasta que su PR se mergea a `main` |
 
 ## Reglas
 
 1. **Toda unidad de trabajo tiene una issue**, dentro de una milestone.
-2. **Una rama por issue**, creada desde `dev` actualizada.
-3. **Cada rama se mergea a `dev` por pull request** y después se borra.
-4. **Al completar una milestone, `dev` se mergea a `main` por pull request.** Nadie commitea directo a `main`.
+2. **Una rama por issue**, creada desde `develop` actualizada.
+3. **Cada rama se mergea a `develop` por pull request** y después se borra.
+4. **Al completar una milestone se crea su rama de milestone y esa rama se mergea a `main` por pull request**, con la revisión del profesor. Nadie commitea directo a `main` ni abre un PR de `develop` a `main`.
 5. **El merge conserva los commits** (merge commit, sin squash), para que el historial muestre cómo se construyó cada cambio.
 6. **Las pruebas pasan en CI** antes de mergear: el workflow de cada repo es un check obligatorio ([ADR-0046](adr/0046-ci-con-github-actions.md)).
 
-GitHub solo cierra una issue automáticamente (`Closes #N`) cuando el cambio llega a la rama por defecto, que es `main`. Como las ramas de feature se mergean a `dev`, la issue se cierra a mano al mergear su PR, o queda cerrada sola cuando la milestone llega a `main`.
+GitHub solo cierra una issue automáticamente (`Closes #N`) cuando el cambio llega a la rama por defecto, que es `main`. Como las ramas de feature se mergean a `develop`, la issue se cierra a mano al mergear su PR, o queda cerrada sola cuando la milestone llega a `main`.
+
+### Rama de milestone
+
+Un pull request no guarda una copia de la rama de origen: la sigue. Todo lo que se mergea a esa rama después de abrir el PR pasa a formar parte del PR. Por eso el PR hacia `main` no sale de `develop`: mientras el profesor revisa una milestone, `develop` sigue recibiendo el trabajo de la siguiente, y el PR terminaría mezclando las dos.
+
+- Al cerrar la última issue de una milestone, se crea la rama `milestone/<número>-<nombre>` en el commit de `develop` donde termina esa milestone (el merge de su último PR).
+- El PR hacia `main` sale de esa rama y lleva al profesor como revisor. `main` exige una aprobación para mergear.
+- La rama de milestone no recibe trabajo nuevo. `develop` sigue avanzando sin afectar al PR.
+- Si la revisión pide cambios, se corrigen en una rama que sale de la rama de milestone, se mergean a ella por PR y después se llevan también a `develop`.
+- Al mergear el PR a `main`, la rama de milestone se borra.
 
 **Excepción: el repo `docs`.** No tiene ramas protegidas y se commitea directo a `main`, con Conventional Commits. Es documentación de trabajo propia y no forma parte de la entrega evaluada, así que no necesita el flujo de issues y PR.
 
@@ -57,19 +74,26 @@ Una milestone agrupa las issues que, juntas, dejan algo terminado y demostrable.
 | --- | --- |
 | Tareas de una feature (`specs/NNN-nombre.md`) | Se commitea directo en `docs`. Es la base para conversar la milestone |
 | Las tareas de ese archivo | El alumno las convierte en issues de una milestone, en el repo de código correspondiente |
-| Cada issue | Una rama de feature y un PR hacia `dev` |
+| Cada issue | Una rama de feature y un PR hacia `develop` |
+| Milestone completa | Una rama de milestone y un PR hacia `main`, con revisión del profesor |
 | Decisión nueva (ADR) | Se commitea directo en `docs`, antes de implementarla |
 
 Si una tarea toca más de un repo (por ejemplo, un contrato entre servicios), se abre una issue en cada repo y se enlazan entre sí.
 
 ## Nombres
 
-**Ramas:** `<tipo>/<número-de-issue>-<descripción-corta>`, en minúsculas y con guiones.
+**Ramas de feature:** `<tipo>/<número-de-issue>-<descripción-corta>`, en minúsculas y con guiones.
 
 ```
 feat/12-registro-de-usuarios
 fix/31-offset-kafka-tras-falla
 docs/4-flujo-de-reserva
+```
+
+**Ramas de milestone:** `milestone/<número-de-milestone>-<nombre>`.
+
+```
+milestone/1-esqueleto-hexagonal
 ```
 
 **Commits:** [Conventional Commits](https://www.conventionalcommits.org/). El tipo y los términos técnicos estándar van en inglés; el asunto, en español, breve y en imperativo. Cada commit tiene un solo cambio lógico.
@@ -90,7 +114,7 @@ En español, explicativos y breves.
 
 **PR:**
 
-- **Contexto:** qué problema resuelve. Enlaza la issue (`Closes #N`) y cita el requisito (HU, spec, ENUNCIADO o REF). El PR de una rama de feature apunta a `dev`.
+- **Contexto:** qué problema resuelve. Enlaza la issue (`Closes #N`) y cita el requisito (HU, spec, ENUNCIADO o REF). El PR de una rama de feature apunta a `develop`.
 - **Qué se hizo y por qué:** las decisiones tomadas y las alternativas descartadas, si no están ya en un ADR.
 - **Cómo probarlo:** los tests que lo cubren y los pasos para verificarlo a mano, si hace falta.
 

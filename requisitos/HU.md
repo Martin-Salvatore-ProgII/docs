@@ -31,12 +31,14 @@ Cada historia describe qué necesita un actor y cómo se verifica que está cump
 | Campo | Obligatorio | Regla |
 | --- | --- | --- |
 | `login` | Sí | 1 a 50 caracteres; patrón de login de JHipster (`^(?>[a-zA-Z0-9!$&*+=?^_`{\|}~.-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*)\|(?>[_.@A-Za-z0-9-]+)$`); se guarda en minúsculas |
-| `password` | Sí | 4 a 100 caracteres |
+| `password` | Sí | 4 caracteres como mínimo y 72 bytes como máximo |
 | `firstName` | Sí | 2 a 50 caracteres |
 | `lastName` | Sí | 2 a 50 caracteres |
 | `email` | Sí | Email válido, 5 a 254 caracteres, único; se guarda en minúsculas |
 | `imageUrl` | No | Hasta 256 caracteres |
 | `langKey` | Sí | 2 a 10 caracteres |
+
+> El máximo de `password` es de 72 bytes, y no los 100 caracteres de la cátedra (REF §5.1), porque el algoritmo de hash, BCrypt, no procesa contraseñas más largas. Se mide en bytes: una letra con tilde o una `ñ` ocupan 2. Una contraseña más larga se rechaza con `VALIDATION_ERROR` en lugar de recortarse en silencio.
 
 > `firstName` y `lastName` son obligatorios aunque JHipster los permita vacíos, porque confirmar un hold exige `patientFirstName` y `patientLastName` de 2 a 100 caracteres (REF §10). Por la misma razón, su mínimo es de 2 caracteres.
 

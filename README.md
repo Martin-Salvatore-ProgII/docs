@@ -127,6 +127,17 @@ Cada HU, CU, RNF y ADR lleva un estado: **Propuesto** (borrador para discutir), 
 
 Ningún documento contiene el JWT técnico, contraseñas, hosts reales de la cátedra ni valores del objeto `integration`. En los ejemplos se usan marcadores como `<jwt-tecnico>`.
 
+### Comentarios de decisión en el código
+
+En los repos de código, cuando una decisión de diseño se materializa en un lugar concreto (por qué algo es un puerto, por qué se eligió un algoritmo, por qué una restricción está en la base), se deja ahí un comentario corto que explica el porqué. Reglas:
+
+- Va **en el lugar donde se tomó la decisión**, no en un documento aparte ni en la cabecera de cada archivo.
+- Explica **el porqué**, no lo que el código ya dice. Dos o tres líneas; si necesita más, la decisión merece un ADR y el comentario lo cita.
+- Solo para decisiones que alguien podría cuestionar o deshacer sin saber la razón. El código obvio no se comenta.
+- En español, como el resto de la documentación.
+
+Estos comentarios no reemplazan a los ADR: el ADR registra las alternativas y el contexto; el comentario evita tener que ir a buscarlo para entender una línea.
+
 ## Cómo usan esta documentación los agentes de IA
 
 Antes de trabajar en cualquier repo, un agente lee, en este orden:
