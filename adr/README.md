@@ -66,6 +66,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0058](0058-auditoria-automatica-de-spring-data.md) | Los campos de auditoría los completa Spring Data, no los casos de uso | Aceptado |
 | [0059](0059-excepciones-de-aplicacion-con-codigo.md) | Los casos de uso informan los rechazos de negocio con excepciones de aplicación que llevan el código funcional | Aceptado |
 | [0060](0060-contenido-y-claves-del-jwt-de-usuario.md) | El JWT de usuario lleva solo login y roles, se firma con la librería de Spring Security y sus claves nunca están en Git | Aceptado |
+| [0061](0061-administrador-inicial-creado-al-arrancar.md) | El administrador inicial lo crea el servicio al arrancar, con credenciales de la configuración externa | Aceptado |
 
 ## Plantilla
 

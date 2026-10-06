@@ -42,6 +42,8 @@ Cualquier capacidad nueva requiere un ADR que reemplace a este.
 
 ### Cómo nace un administrador
 
+> Esta sección fue reemplazada por el [ADR-0061](0061-administrador-inicial-creado-al-arrancar.md): el administrador ya no es un usuario registrado al que se le asigna el rol, sino una cuenta que crea el servicio al arrancar. El resto de este ADR sigue vigente.
+
 No hay credenciales de administrador en el código ni en los repositorios ([Constitución P-08](../constitucion.md)). La configuración externa del servicio de turnos puede indicar el login de un usuario ya registrado; al arrancar, ese usuario recibe `ROLE_ADMIN`. Si no se indica, no hay administrador.
 
 ## Alternativas consideradas

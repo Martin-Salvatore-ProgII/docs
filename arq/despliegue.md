@@ -63,7 +63,7 @@ El servicio de la cátedra se alcanza por la red que indique la cátedra (en el 
 
 | Qué | Dónde | En Git |
 | --- | --- | --- |
-| URL de la cátedra, JWT técnico, credenciales de base, login del administrador | `.env` de cada repo | No; se commitea `.env.example` |
+| URL de la cátedra, JWT técnico, credenciales de base, credenciales del administrador inicial (solo en turnos) | `.env` de cada repo | No; se commitea `.env.example` |
 | Par de claves del JWT de usuario, certificado TLS | Carpeta `secrets/`, montada en los contenedores | No |
 | Redis, Kafka y topics de la cátedra | Se obtienen de la cátedra al arrancar ([ADR-0005](../adr/0005-configuracion-integracion-al-arrancar.md)) | No |
 | Valores operativos ([RNF-09](../requisitos/no-funcionales.md#rnf-09-sin-supuestos-fijos-sobre-los-datos-de-la-cátedra-y-valores-operativos-configurables)) | Configuración de la aplicación, sobrescribible por variables de entorno | Sí, solo los valores iniciales |

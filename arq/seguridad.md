@@ -76,7 +76,7 @@ La cátedra identifica todo por la cuenta técnica: `GET /api/appointments` devu
 - **Claves:** turnos recibe solo la clave privada, como archivo externo; la pública se calcula a partir de ella. El catálogo recibe solo la pública, exportada de ese mismo archivo ([ADR-0043](../adr/0043-configuracion-externa-env-y-secrets.md)). Las pruebas generan un par en memoria: no hay claves en los repositorios.
 - **Vigencia:** 24 horas, o 30 días con `rememberMe`, configurables y sin refresh tokens ([ADR-0033](../adr/0033-vigencia-jwt-usuario.md)).
 - **Validación:** los dos servicios verifican firma, vigencia y rol en cada pedido protegido ([RNF-04](../requisitos/no-funcionales.md#rnf-04-endpoints-protegidos-por-defecto)).
-- **Roles:** `ROLE_USER`, asignado al registrarse, y `ROLE_ADMIN`, con alcance cerrado ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)). Las operaciones administrativas están en `/api/admin/**` y exigen `ROLE_ADMIN`; un usuario común recibe 403. El administrador se asigna por configuración externa a un usuario ya registrado; no hay credenciales de administrador en el código.
+- **Roles:** `ROLE_USER`, asignado al registrarse, y `ROLE_ADMIN`, con alcance cerrado ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)). Las operaciones administrativas están en `/api/admin/**` y exigen `ROLE_ADMIN`; un usuario común recibe 403. El administrador no se registra desde la app: lo crea el servicio de turnos al arrancar, con el login, la contraseña y el email de la configuración externa ([ADR-0061](../adr/0061-administrador-inicial-creado-al-arrancar.md)). No hay credenciales de administrador en el código ni en los repositorios.
 
 ## Comunicación entre servicios
 
