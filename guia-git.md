@@ -6,7 +6,8 @@ Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-servi
 
 - **Las milestones y las issues las crea el alumno, desde la interfaz de GitHub.** Ningún agente las crea, las cierra ni las modifica por su cuenta.
 - **Qué entra en cada milestone se conversa antes** entre el alumno y el agente: por dónde encarar el trabajo y cómo partirlo en issues.
-- El agente trabaja sobre una issue que ya existe, en su rama.
+- El agente trabaja sobre una issue que ya existe. Crea la rama de esa issue, vinculada a ella y a partir de `develop` actualizada, escribe los archivos y propone los mensajes de commit.
+- **Los commits, el push, el pull request y el merge los hace el alumno**, después de revisar los cambios. El agente no commitea ni mergea en los repos de código.
 
 ## Ramas
 
@@ -48,7 +49,7 @@ gitGraph
 3. **Cada rama se mergea a `develop` por pull request** y después se borra.
 4. **Al completar una milestone se crea su rama de milestone y esa rama se mergea a `main` por pull request**, con la revisión del profesor. Nadie commitea directo a `main` ni abre un PR de `develop` a `main`.
 5. **El merge conserva los commits** (merge commit, sin squash), para que el historial muestre cómo se construyó cada cambio.
-6. **Las pruebas pasan en CI** antes de mergear: el workflow de cada repo es un check obligatorio ([ADR-0046](adr/0046-ci-con-github-actions.md)).
+6. **Las pruebas corren en CI en cada pull request** ([ADR-0046](adr/0046-ci-con-github-actions.md)). En los PR hacia `develop` el resultado no bloquea el merge: las pruebas ya se corrieron en la máquina antes de commitear, y si el CI falla se corrige en la issue siguiente. En el PR hacia `main` se espera a que el CI pase antes de mergear.
 
 GitHub solo cierra una issue automáticamente (`Closes #N`) cuando el cambio llega a la rama por defecto, que es `main`. Como las ramas de feature se mergean a `develop`, la issue se cierra a mano al mergear su PR, o queda cerrada sola cuando la milestone llega a `main`.
 

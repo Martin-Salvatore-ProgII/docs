@@ -62,6 +62,10 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0054](0054-postgresql-18-en-los-dos-servicios.md) | PostgreSQL 18 en los dos servicios, con la versión mayor fijada | Aceptado |
 | [0055](0055-convenciones-comunes-del-esqueleto.md) | Convenciones comunes del esqueleto de los dos backends | Aceptado |
 | [0056](0056-imagen-con-dockerfile-y-puertos.md) | Imagen de cada backend con un Dockerfile en dos etapas y puertos locales sin superposición | Aceptado |
+| [0057](0057-contrasenas-con-bcrypt-hasta-72-bytes.md) | Las contraseñas se guardan con BCrypt y se limitan a 72 bytes | Aceptado |
+| [0058](0058-auditoria-automatica-de-spring-data.md) | Los campos de auditoría los completa Spring Data, no los casos de uso | Aceptado |
+| [0059](0059-excepciones-de-aplicacion-con-codigo.md) | Los casos de uso informan los rechazos de negocio con excepciones de aplicación que llevan el código funcional | Aceptado |
+| [0060](0060-contenido-y-claves-del-jwt-de-usuario.md) | El JWT de usuario lleva solo login y roles, se firma con la librería de Spring Security y sus claves nunca están en Git | Aceptado |
 
 ## Plantilla
 

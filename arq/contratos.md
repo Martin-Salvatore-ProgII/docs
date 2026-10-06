@@ -137,7 +137,8 @@ La autenticación de turnos ante esta operación se decide en la parte de seguri
 Compatibles con JHipster (ENUNCIADO §3.2):
 
 - **Registro:** recibe `login`, `password`, `firstName`, `lastName`, `email`, `imageUrl` (opcional) y `langKey`, con las reglas de [HU-01](../requisitos/HU.md#hu-01-registro-de-usuario-final). Responde `201` sin cuerpo. Errores: `400 VALIDATION_ERROR`, `400 USERNAME_ALREADY_EXISTS`, `400 EMAIL_ALREADY_EXISTS`.
-- **Inicio de sesión:** recibe `{ "username", "password", "rememberMe" }` y responde `200` con `{ "id_token": "<jwt-de-usuario>" }`. Credenciales incorrectas: `401`.
+- **Inicio de sesión:** recibe `{ "username", "password", "rememberMe" }` y responde `200` con `{ "id_token": "<jwt-de-usuario>" }`. `username` es el `login` del registro, sin distinguir mayúsculas; `rememberMe` es opcional y vale `false` si no se envía. Credenciales incorrectas: `401` sin `code`, igual para un login inexistente y para una contraseña incorrecta.
+- **JWT de usuario:** firmado con RS256, con el `login` en `sub` y la lista de roles en `auth`. El detalle está en [`seguridad.md`](seguridad.md#jwt-de-usuario).
 
 ### Disponibilidad
 
