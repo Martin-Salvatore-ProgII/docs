@@ -23,7 +23,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0015](0015-reglas-disponibilidad-turnos.md) | Reglas de la disponibilidad de turnos: una fecha, horizonte acotado, solo slots completos y futuros | Aceptado |
 | [0016](0016-zona-horaria-argentina.md) | La agenda usa la zona horaria fija de Argentina | Aceptado |
 | [0017](0017-operacion-agenda-vigente.md) | El catálogo expone la agenda vigente de un profesional en una sola operación | Aceptado |
-| [0018](0018-usuario-compatible-sin-generador-jhipster.md) | El usuario se implementa a mano dentro de la hexagonal, compatible con JHipster, sin usar su generador | Aceptado (pendiente de confirmación de la cátedra) |
+| [0018](0018-usuario-compatible-sin-generador-jhipster.md) | El usuario se implementa a mano dentro de la hexagonal, compatible con JHipster, sin usar su generador | Aceptado |
 | [0019](0019-hold-y-confirmacion-una-accion.md) | Hold y confirmación inicial son una sola acción del usuario | Aceptado |
 | [0020](0020-telefono-a-pedido.md) | El teléfono se pide cuando llega el pedido de la cátedra | Aceptado |
 | [0021](0021-app-consulta-estado-por-polling.md) | La app sigue el proceso de reserva consultando su estado | Aceptado |

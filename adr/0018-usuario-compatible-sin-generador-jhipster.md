@@ -25,4 +25,4 @@ Ante un conflicto entre la estructura de JHipster y la hexagonal, gana la hexago
 
 - Todo el código de los backends sigue un único patrón.
 - La compatibilidad se verifica por contrato (campos, validaciones y endpoints), no por el origen del código.
-- **Pendiente de confirmación de la cátedra:** el profesor lo consulta con el otro docente. Si la respuesta exige otra cosa, este ADR se reemplaza.
+- No requiere una confirmación aparte de la cátedra: el enunciado establece que "el uso de JHipster será opcional, aunque recomendado por la cátedra", y que usarlo o no "no modifica los requisitos funcionales, de integración, seguridad, separación de datos, pruebas y documentación" (ENUNCIADO §3.1). Si la cátedra indicara otra cosa, este ADR se reemplaza.
