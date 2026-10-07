@@ -64,6 +64,8 @@ Reglas:
 - **La identidad de cada entidad del catálogo es el `id` que asigna la cátedra.** Así, aplicar un cambio o un snapshot es escribir por ese id, y reaplicar da el mismo resultado.
 - Las relaciones categoría → profesional → horario se mantienen con integridad referencial ([ADR-0009](../adr/0009-referencias-faltantes-desde-redis.md)).
 - Las entidades deshabilitadas se conservan con `enabled = false`; no hay borrado físico (REF §14.4).
+- **La base no valida el contenido de los datos de la cátedra** ([RNF-09](../requisitos/no-funcionales.md#rnf-09-sin-supuestos-fijos-sobre-los-datos-de-la-cátedra-y-valores-operativos-configurables)). Los textos no tienen largo máximo y no hay reglas sobre horas ni duraciones: un valor inesperado se guarda igual y no frena la sincronización. La base garantiza solo la estructura (campos obligatorios, salvo `description`), las relaciones y que el día de la semana sea uno de los siete del contrato (REF §7).
+- En la base, las tablas son `professional_category`, `professional` y `weekly_schedule`. Las horas de atención se guardan sin zona, tal como las publica la cátedra (REF §4).
 - La versión local y los datos que representa se modifican siempre en la misma transacción ([ADR-0007](../adr/0007-concurrencia-optimista-version-local.md), [ADR-0010](../adr/0010-snapshot-en-una-transaccion.md)).
 
 ## Servicio de turnos
