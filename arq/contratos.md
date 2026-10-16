@@ -48,6 +48,17 @@ Los códigos que coinciden con los de la cátedra (`VALIDATION_ERROR`, `USERNAME
 
 Una reserva de otro usuario responde igual que una inexistente (`404 RESERVATION_NOT_FOUND`), para no revelar que existe.
 
+### Catálogo no listo
+
+Mientras el catálogo no tiene una versión local (antes del primer snapshot), las operaciones que responden con la copia local (categorías, búsqueda de profesionales y agenda) responden `503 CATALOG_NOT_READY`. Una sincronización en curso no cuenta como "no listo": mientras tanto se responde con la copia vigente ([ADR-0010](../adr/0010-snapshot-en-una-transaccion.md)). El estado de sincronización responde siempre, porque es donde se ve que el catálogo todavía no está listo.
+
+Cómo se aplica en el servicio de catálogo:
+
+- La regla ("listo" = hay versión local) vive en un caso de uso de la feature de sincronización, que es la dueña del estado.
+- Cada endpoint que responde con la copia local lo declara con una anotación compartida (`@RequiresCatalogReady`). Un interceptor de la feature de sincronización la revisa antes de entrar al controller y, si el catálogo no está listo, el manejador de errores responde el 503.
+- Así la regla está en un solo lugar y las demás features no dependen de la de sincronización ([ADR-0062](../adr/0062-features-se-comunican-por-puertos-de-dominio.md), [ADR-0063](../adr/0063-lo-reutilizable-se-lleva-a-shared.md)). Un endpoint nuevo que responda con la copia local solo tiene que llevar la anotación.
+- La autenticación se verifica antes: sin un JWT válido la respuesta es `401`, esté o no listo el catálogo.
+
 ## Servicio de catálogo
 
 | Operación | Método y ruta | Consumidor | Requisito |
