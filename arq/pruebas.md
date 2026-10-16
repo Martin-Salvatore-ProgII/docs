@@ -56,6 +56,7 @@ El servicio de catálogo, visto desde turnos, se simula de la misma forma.
 
 - **Nada de H2 ni bases en memoria:** PostgreSQL real en los tests ([ADR-0045](../adr/0045-postgresql-real-en-tests.md)).
 - **Tests deterministas:** el tiempo se controla en los tests (vencimientos, "hoy" y "ahora" en hora de Argentina), sin esperas reales ni dependencia de la hora de la máquina.
+- **Datos reales de la cátedra:** la respuesta principal de la cátedra simulada es una copia de lo que publicó la cátedra real (por ejemplo, un snapshot completo). Los casos borde se arman modificando esa copia.
 - **Datos variados:** los catálogos de prueba incluyen distintas duraciones de slot, varios horarios por día y entidades deshabilitadas ([RNF-09](../requisitos/no-funcionales.md#rnf-09-sin-supuestos-fijos-sobre-los-datos-de-la-cátedra-y-valores-operativos-configurables)).
 - **Sin secretos reales:** los tests usan claves, certificados y tokens generados para las pruebas.
 
