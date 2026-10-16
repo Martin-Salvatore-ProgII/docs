@@ -16,7 +16,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 2 | catálogo | M1 Esqueleto hexagonal | Lo mismo que el anterior, para el catálogo | — | ✅ |
 | 3 | turnos | M2 Usuario y Auth | Registro, inicio de sesión con JWT, endpoints protegidos, administrador inicial | 1 | 🟦 |
 | 4 | catálogo | M2 Endpoint categorías | Validación del JWT de turnos, endpoints protegidos, tablas del catálogo, listado de categorías | 2, 3 | 🟦 |
-| 5 | catálogo | M3 Sincronización por snapshot | Configuración de la integración, copia local completa desde el snapshot, estado de sincronización, sincronización al arrancar y chequeo periódico | 4 | 🟨 |
+| 5 | catálogo | M3 Sincronización por snapshot | Configuración de la integración, copia local completa desde el snapshot, estado de sincronización, sincronización al arrancar y chequeo periódico | 4 | 🟦 |
 | 6 | catálogo | M4 Búsqueda de profesionales y agenda | Los cuatro filtros de búsqueda y la agenda vigente de un profesional | 5 | 🟨 |
 | 7 | turnos | M3 Disponibilidad de turnos | Configuración de la integración, clientes del catálogo y de ocupaciones, cálculo de la disponibilidad | 3, 6 | 🟨 |
 | 8 | turnos | M4 Inicio de reserva | Proceso de reserva, hold y confirmación inicial por REST | 7 | 🟨 |
@@ -27,7 +27,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 13 | turnos y catálogo | Canal seguro | HTTPS entre la app y los backends (ADR-0035) | 12 | 🟨 |
 | 14 | turnos | Administración (opcional) | Listar, ver y cancelar reservas de cualquier usuario (HU-10) | 11 | 🟨 |
 
-Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
+Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5 (Catálogo M3) está terminada y en revisión. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
 
 ## Alcance funcional (ENUNCIADO §5)
 
@@ -35,8 +35,8 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detal
 | --- | --- | --- | --- | --- | --- |
 | 1 | Registrar y autenticar usuarios finales | HU-01, HU-02, RNF-01, RNF-04 | Turnos M2 | `UserAuthenticationFlowTest`, `UserControllerTest`, `RegisterUserUseCaseImplTest`, `AuthenticateUserUseCaseImplTest` | 🟦 |
 | 2 | Registrar la cuenta técnica una vez | HU-03 | Hecho a mano (REF §5.1) | No aplica | ✅ |
-| 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | `CatedraIntegrationConfigTest` (catálogo) | 🟨 |
-| 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `CatalogSnapshotSyncTest`, `SynchronizeCatalogUseCaseImplTest`, `CatedraSnapshotAdapterTest`, `Jpa*RepositoryAdapterTest`, `DatabaseMigrationTest` (catálogo) | 🟨 |
+| 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | `CatedraIntegrationConfigTest`, `CatedraReadExecutorTest` (catálogo) | 🟦 parcial |
+| 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `CatalogSnapshotSyncTest`, `SynchronizeCatalogUseCaseImplTest`, `CatedraSnapshotAdapterTest`, `Jpa*RepositoryAdapterTest`, `DatabaseMigrationTest` (catálogo) | 🟦 |
 | 5 | Mantener el catálogo actualizado con Kafka y Redis | HU-04, CU-01, ADR-0006 a ADR-0009 | Catálogo M5 | | 🟨 |
 | 6 | Detectar discontinuidad y reconstruir | CU-01 (3b, 4a), CU-02 | Catálogo M5 | | 🟨 |
 | 7 | Buscar y filtrar con la copia local | HU-05, ADR-0013, ADR-0014 | Catálogo M4. Categorías: Catálogo M2 | `CategoryAccessTest`, `JpaCategoryRepositoryAdapterTest` | 🟨 parcial |
@@ -47,13 +47,13 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detal
 | 12 | Reflejar el resultado final localmente | CU-04, ADR-0023, [`maquina-estados.md`](arq/maquina-estados.md) | Turnos M5 | | 🟨 |
 | 13 | Consultar las reservas propias | HU-08, ADR-0025 | Turnos M6 | | 🟨 |
 | 14 | Cancelar una reserva propia confirmada | HU-09, ADR-0026 | Turnos M6 | | 🟨 |
-| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `CatalogSnapshotSyncTest`, `JpaSyncStateRepositoryAdapterTest` (catálogo) | 🟨 |
+| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `CatalogSnapshotSyncTest`, `JpaSyncStateRepositoryAdapterTest`, `CatalogReadinessAccessTest` (catálogo) | 🟦 parcial |
 
 ## Evidencias (ENUNCIADO §11)
 
 | Evidencia | Especificación | Cómo se demuestra | Milestone | Estado |
 | --- | --- | --- | --- | --- |
-| Inicialización desde snapshot | CU-02 | Base vacía al arrancar ([`sincronizacion.md`](arq/sincronizacion.md#cómo-se-demuestra-enunciado-11)) | Catálogo M3 | 🟨 |
+| Inicialización desde snapshot | CU-02 | Base vacía al arrancar ([`sincronizacion.md`](arq/sincronizacion.md#cómo-se-demuestra-enunciado-11)); se ve en `GET /api/catalog/sync-status` | Catálogo M3 | 🟦 |
 | Actualización incremental | CU-01, HU-04 | Publicación de una versión con el servicio al día | Catálogo M5 | 🟨 |
 | Recuperación por snapshot tras una discontinuidad | CU-01 (3b), CU-02 | Servicio detenido hasta quedar por debajo de O | Catálogo M5 | 🟨 |
 | Búsquedas sobre datos locales | HU-05 (7), Constitución P-06 | Búsqueda que funciona con la cátedra inaccesible | Catálogo M4 | 🟨 |
@@ -82,7 +82,7 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detal
 | RNF-04 | Endpoints protegidos por defecto | Turnos M2, Catálogo M2 | `SecurityConfigTest` (los dos servicios), `CategoryAccessTest` | 🟦 |
 | RNF-05 | Validación en cada límite | Turnos M2. Integraciones: milestones siguientes | `UserControllerTest`, `MaxBytesValidatorTest`, `GlobalExceptionHandlerTest` | 🟦 parcial |
 | RNF-06 | Procesamiento idempotente de mensajes | Catálogo M5, Turnos M5 | | 🟨 |
-| RNF-07 | Reintentos acotados y estado recuperable | Catálogo M3 y M5, Turnos M3 a M5 | | 🟨 |
-| RNF-08 | Lecturas consistentes durante las actualizaciones | Catálogo M3 | | 🟨 |
+| RNF-07 | Reintentos acotados y estado recuperable | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `JpaSyncStateRepositoryAdapterTest` (catálogo) | 🟦 parcial |
+| RNF-08 | Lecturas consistentes durante las actualizaciones | Catálogo M3 | `CatalogSnapshotSyncTest`, `IsCatalogReadyUseCaseImplTest`, `CatalogReadinessAccessTest` (catálogo) | 🟦 |
 | RNF-09 | Sin supuestos fijos sobre los datos y valores configurables | Catálogo M2 en adelante | `DatabaseMigrationTest` (catálogo); vigencia del JWT y CORS configurables | 🟦 parcial |
 | RNF-10 | Pruebas automatizadas de los backends | Todas | CI de GitHub Actions en cada PR, en los dos servicios | 🟦 parcial |
