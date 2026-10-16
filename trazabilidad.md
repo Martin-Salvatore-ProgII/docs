@@ -35,7 +35,7 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detal
 | --- | --- | --- | --- | --- | --- |
 | 1 | Registrar y autenticar usuarios finales | HU-01, HU-02, RNF-01, RNF-04 | Turnos M2 | `UserAuthenticationFlowTest`, `UserControllerTest`, `RegisterUserUseCaseImplTest`, `AuthenticateUserUseCaseImplTest` | 🟦 |
 | 2 | Registrar la cuenta técnica una vez | HU-03 | Hecho a mano (REF §5.1) | No aplica | ✅ |
-| 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | | 🟨 |
+| 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | `CatedraIntegrationConfigTest` (catálogo) | 🟨 |
 | 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `DatabaseMigrationTest` (catálogo) | 🟨 |
 | 5 | Mantener el catálogo actualizado con Kafka y Redis | HU-04, CU-01, ADR-0006 a ADR-0009 | Catálogo M5 | | 🟨 |
 | 6 | Detectar discontinuidad y reconstruir | CU-01 (3b, 4a), CU-02 | Catálogo M5 | | 🟨 |
