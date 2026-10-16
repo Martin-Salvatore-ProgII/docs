@@ -36,7 +36,7 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detal
 | 1 | Registrar y autenticar usuarios finales | HU-01, HU-02, RNF-01, RNF-04 | Turnos M2 | `UserAuthenticationFlowTest`, `UserControllerTest`, `RegisterUserUseCaseImplTest`, `AuthenticateUserUseCaseImplTest` | 🟦 |
 | 2 | Registrar la cuenta técnica una vez | HU-03 | Hecho a mano (REF §5.1) | No aplica | ✅ |
 | 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | `CatedraIntegrationConfigTest` (catálogo) | 🟨 |
-| 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `DatabaseMigrationTest` (catálogo) | 🟨 |
+| 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `DatabaseMigrationTest`, `CatedraSnapshotAdapterTest`, `Jpa*RepositoryAdapterTest` (catálogo) | 🟨 |
 | 5 | Mantener el catálogo actualizado con Kafka y Redis | HU-04, CU-01, ADR-0006 a ADR-0009 | Catálogo M5 | | 🟨 |
 | 6 | Detectar discontinuidad y reconstruir | CU-01 (3b, 4a), CU-02 | Catálogo M5 | | 🟨 |
 | 7 | Buscar y filtrar con la copia local | HU-05, ADR-0013, ADR-0014 | Catálogo M4. Categorías: Catálogo M2 | `CategoryAccessTest`, `JpaCategoryRepositoryAdapterTest` | 🟨 parcial |
@@ -47,7 +47,7 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub. Las demás se detal
 | 12 | Reflejar el resultado final localmente | CU-04, ADR-0023, [`maquina-estados.md`](arq/maquina-estados.md) | Turnos M5 | | 🟨 |
 | 13 | Consultar las reservas propias | HU-08, ADR-0025 | Turnos M6 | | 🟨 |
 | 14 | Cancelar una reserva propia confirmada | HU-09, ADR-0026 | Turnos M6 | | 🟨 |
-| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | | 🟨 |
+| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `JpaSyncStateRepositoryAdapterTest` (catálogo) | 🟨 |
 
 ## Evidencias (ENUNCIADO §11)
 
