@@ -41,6 +41,7 @@ Los timeouts iniciales (2 y 5 segundos) se verificaron contra la cátedra real p
 | Dos sincronizaciones a la vez | Solo aplica la que encuentra la versión local esperada | [ADR-0007](../adr/0007-concurrencia-optimista-version-local.md) |
 | Redis o la API de la cátedra no responden | Se registra el error, sin reintentos en loop; se reintenta en el próximo chequeo | [ADR-0011](../adr/0011-fallas-y-estado-de-sincronizacion.md) |
 | Reinicio | Al arrancar se ejecuta un ciclo de sincronización | [ADR-0006](../adr/0006-disparadores-sincronizacion.md) |
+| Caída a mitad de una sincronización | Al arrancar se borra la marca de sincronización en curso que quedó en la base: un proceso que recién arranca no tiene ningún ciclo en curso. Con varias instancias, el dato podría verse como terminado mientras otra sincroniza; es informativo, y la consistencia la protege la regla de versión | [ADR-0007](../adr/0007-concurrencia-optimista-version-local.md), [ADR-0011](../adr/0011-fallas-y-estado-de-sincronizacion.md) |
 
 ### Reservas
 

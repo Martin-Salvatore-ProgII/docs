@@ -56,7 +56,7 @@ erDiagram
 | Entidad | Contenido | Origen |
 | --- | --- | --- |
 | `PROFESSIONAL_CATEGORY`, `PROFESSIONAL`, `WEEKLY_SCHEDULE` | Copia local del catálogo, con los mismos campos que publica la cátedra | REF §7, §14.4 |
-| `SYNC_STATE` | Un único registro con la versión local y el estado de sincronización | [`sincronizacion.md`](sincronizacion.md), [ADR-0011](../adr/0011-fallas-y-estado-de-sincronizacion.md) |
+| `SYNC_STATE` | Un único registro con la versión local y el estado de sincronización. Lo crea la migración, sin versión local, y la base no admite otro | [`sincronizacion.md`](sincronizacion.md), [ADR-0011](../adr/0011-fallas-y-estado-de-sincronizacion.md) |
 | `PROCESSED_EVENT` | `eventId` de los avisos `CatalogUpdated` ya procesados | [ADR-0008](../adr/0008-deduplicacion-por-event-id.md) |
 
 Reglas:
