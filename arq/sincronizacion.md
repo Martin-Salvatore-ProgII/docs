@@ -114,6 +114,8 @@ El servicio informa su estado de sincronización (ENUNCIADO §4.1; [ADR-0011](..
 - fecha y tipo (snapshot o incremental) de la última sincronización exitosa;
 - último error, si lo hubo, y cuándo ocurrió.
 
+Un éxito posterior no borra el último error: comparando sus fechas se ve si el servicio ya se recuperó. El mensaje distingue el origen: los de la cátedra la nombran (`Catedra service unavailable (...)`, `Unexpected response from the catedra: ...`) y los propios empiezan con `Internal error:`. Ninguno muestra la dirección de la cátedra ni detalles de la base; el detalle completo de un error interno queda solo en el log del servicio.
+
 Se expone a usuarios autenticados y se usa tanto para el aviso de la app como para mostrar las transiciones de versión en la demo. El namespace privado de Redis (`alumnos:{groupId}:*`) no se usa para esto: es opcional y duplicaría lo que ya está en la base (REF §14.6).
 
 ## Cómo se demuestra (ENUNCIADO §11)
