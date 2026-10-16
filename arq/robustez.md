@@ -10,8 +10,24 @@ Cómo se comporta el sistema cuando algo se repite, se pierde, llega fuera de or
 4. **Los estados solo avanzan.** Un proceso de reserva nunca retrocede ni sale de un estado final ([Constitución P-17](../constitucion.md), [`maquina-estados.md`](maquina-estados.md)).
 5. **Un timeout no prueba que la operación falló.** Solo se repite lo que es seguro repetir; lo demás se reconcilia (REF §18.4, [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md)).
 6. **Ningún reintento es ilimitado.** Cuando se agotan, el estado queda consistente y un mecanismo periódico lo retoma ([Constitución P-16](../constitucion.md)).
+7. **Los únicos reintentos son los decididos.** Ninguna librería reintenta por su cuenta: un reintento oculto se sumaría a los del [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) y no quedaría en el log. Las pruebas de los clientes HTTP cuentan los pedidos que llegan.
 
 ## Situaciones y mecanismos
+
+### Arranque de los dos servicios
+
+Al arrancar, cada servicio pide la configuración de la integración a la cátedra ([ADR-0005](../adr/0005-configuracion-integracion-al-arrancar.md)). Es una lectura, así que sigue la regla de reintentos y timeouts de las lecturas ([ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md)). Ningún mensaje muestra valores de la integración ni el JWT.
+
+| Situación | Qué pasa | Mensaje |
+| --- | --- | --- |
+| Sin conexión, timeout o error 5xx, también en el reintento | No arranca | `Catedra service unavailable (<tipo de falla>)` |
+| La cátedra rechaza el JWT técnico (401 o 403) | No arranca, sin reintentar: repetir no cambia la respuesta | `The catedra rejected the technical JWT` |
+| Otra respuesta inesperada (otro 4xx, cuerpo ilegible) | No arranca, sin reintentar | `Unexpected response from the catedra: <detalle>` |
+| Responde, pero `provisioningStatus` no es `PROVISIONED` | No arranca | `Catedra integration is in state <estado>` |
+
+El tipo de falla es la clase de la excepción (por ejemplo, `ConnectException` o `HTTP 503`). El mensaje original no se muestra porque incluye la dirección de la cátedra.
+
+Los timeouts iniciales (2 y 5 segundos) se verificaron contra la cátedra real por la red de ZeroTier: la conexión tarda unos 200 ms y la respuesta unos 400 ms.
 
 ### Catálogo
 
