@@ -36,6 +36,18 @@ La cátedra se simula en dos niveles:
 1. **Como puerto mockeado**, en las pruebas de casos de uso. La lógica de negocio no sabe que existe una cátedra: habla con puertos de salida, y en el test esos puertos son mocks de Mockito que responden lo que el escenario necesita (un hold creado, un `SLOT_ALREADY_HELD`, un timeout, un evento duplicado).
 2. **Como servidor falso**, en las pruebas de adaptadores. Un servidor HTTP de prueba (WireMock) responde como la API de la cátedra según la REF, incluidos sus errores `problem+json` y sus demoras. Para Kafka y Redis, el test publica los eventos y carga las claves con el formato de la REF §14 y §15, sobre contenedores reales.
 
+### Por qué WireMock para los clientes REST
+
+En un adaptador REST lo que se prueba es justamente la parte HTTP: la ruta, el encabezado `Authorization`, la lectura del JSON, los códigos de error, el timeout y el reintento. WireMock es un servidor HTTP falso al que el test le programa las respuestas (un 200 con un cuerpo, un 401, un `problem+json`, una demora, una conexión cortada). El adaptador le habla por HTTP de verdad, igual que a la cátedra.
+
+| Alternativa | Por qué no |
+| --- | --- |
+| Mockito sobre el cliente HTTP | No hay HTTP: no prueba encabezados, JSON real, timeouts ni reintentos |
+| `MockRestServiceServer` de Spring | Intercepta el cliente sin red: no puede simular una cátedra lenta ni una conexión cortada |
+| WireMock | Red real, con demoras y fallas de conexión programables |
+
+WireMock corre en un contenedor de Testcontainers, como PostgreSQL, y no dentro de la JVM de la prueba: así su servidor web embebido no choca con las versiones que maneja Spring Boot.
+
 Con la cátedra simulada se prueban a propósito los casos que en la realidad son difíciles de provocar: discontinuidades, eventos duplicados o fuera de orden, timeouts, vencimientos y respuestas perdidas.
 
 El servicio de catálogo, visto desde turnos, se simula de la misma forma.
