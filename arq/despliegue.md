@@ -78,4 +78,11 @@ Cada repo tiene su propio `.env`, y al levantar el sistema completo hacen falta 
 
 Por eso las variables del `.env` de turnos llevan el prefijo `TURNOS_`. El prefijo existe solo en el `.env` y en el `compose.yaml`: dentro de su contenedor, cada servicio recibe la conexión con los mismos nombres (`DB_URL`, `DB_USER`, `DB_PASSWORD`; [ADR-0055](../adr/0055-convenciones-comunes-del-esqueleto.md)).
 
+La conexión con la cátedra sigue la misma regla. Los dos servicios usan la misma cuenta técnica, así que los valores son iguales, pero los nombres en el `.env` no se repiten:
+
+| Qué | `.env` del catálogo | `.env` de turnos | Dentro del contenedor |
+| --- | --- | --- | --- |
+| URL base de la API de la cátedra | `CATEDRA_API_URL` | `TURNOS_CATEDRA_API_URL` | `CATEDRA_API_URL` |
+| JWT técnico | `CATEDRA_TECHNICAL_TOKEN` | `TURNOS_CATEDRA_TECHNICAL_TOKEN` | `CATEDRA_TECHNICAL_TOKEN` |
+
 El volumen de la base del catálogo es distinto según desde dónde se levante: levantado desde su repo usa un volumen, y levantado como parte del sistema completo usa otro. Los datos de una forma no aparecen en la otra.
