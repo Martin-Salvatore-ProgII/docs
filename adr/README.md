@@ -68,6 +68,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0060](0060-contenido-y-claves-del-jwt-de-usuario.md) | El JWT de usuario lleva solo login y roles, se firma con la librería de Spring Security y sus claves nunca están en Git | Aceptado |
 | [0061](0061-administrador-inicial-creado-al-arrancar.md) | El administrador inicial lo crea el servicio al arrancar, con credenciales de la configuración externa | Aceptado |
 | [0062](0062-features-se-comunican-por-puertos-de-dominio.md) | Las features de un servicio se comunican solo por los puertos de su dominio | Aceptado |
+| [0063](0063-lo-reutilizable-se-lleva-a-shared.md) | Lo que se puede reutilizar se lleva a `shared` en cuanto aparece el segundo uso | Aceptado |
 
 ## Plantilla
 
