@@ -67,6 +67,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0059](0059-excepciones-de-aplicacion-con-codigo.md) | Los casos de uso informan los rechazos de negocio con excepciones de aplicación que llevan el código funcional | Aceptado |
 | [0060](0060-contenido-y-claves-del-jwt-de-usuario.md) | El JWT de usuario lleva solo login y roles, se firma con la librería de Spring Security y sus claves nunca están en Git | Aceptado |
 | [0061](0061-administrador-inicial-creado-al-arrancar.md) | El administrador inicial lo crea el servicio al arrancar, con credenciales de la configuración externa | Aceptado |
+| [0062](0062-features-se-comunican-por-puertos-de-dominio.md) | Las features de un servicio se comunican solo por los puertos de su dominio | Aceptado |
 
 ## Plantilla
 
