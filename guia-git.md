@@ -58,7 +58,8 @@ GitHub solo cierra una issue automáticamente (`Closes #N`) cuando el cambio lle
 Un pull request no guarda una copia de la rama de origen: la sigue. Todo lo que se mergea a esa rama después de abrir el PR pasa a formar parte del PR. Por eso el PR hacia `main` no sale de `develop`: mientras el profesor revisa una milestone, `develop` sigue recibiendo el trabajo de la siguiente, y el PR terminaría mezclando las dos.
 
 - Al cerrar la última issue de una milestone, se crea la rama `milestone/<número>-<nombre>` en el commit de `develop` donde termina esa milestone (el merge de su último PR).
-- El PR hacia `main` sale de esa rama y lleva al profesor como revisor. `main` exige una aprobación para mergear.
+- El PR hacia `main` sale de esa rama y lleva al profesor como revisor. `main` exige una aprobación y que el CI pase para mergear.
+- **El PR de milestone siempre apunta a `main`**, aunque la milestone anterior todavía no se haya mergeado. Mientras tanto, su diff muestra también los commits de la anterior; cuando esa se mergea, el diff se achica solo. No se encadena sobre la rama de la milestone anterior: esa rama no tiene las reglas de `main`, y el PR se podría mergear sin la aprobación del profesor. Conviene avisarle que revise primero la milestone anterior.
 - La rama de milestone no recibe trabajo nuevo. `develop` sigue avanzando sin afectar al PR.
 - Si la revisión pide cambios, se corrigen en una rama que sale de la rama de milestone, se mergean a ella por PR y después se llevan también a `develop`.
 - Al mergear el PR a `main`, la rama de milestone se borra.
