@@ -17,7 +17,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 3 | turnos | M2 Usuario y Auth | Registro, inicio de sesión con JWT, endpoints protegidos, administrador inicial | 1 | 🟦 |
 | 4 | catálogo | M2 Endpoint categorías | Validación del JWT de turnos, endpoints protegidos, tablas del catálogo, listado de categorías | 2, 3 | 🟦 |
 | 5 | catálogo | M3 Sincronización por snapshot | Configuración de la integración, copia local completa desde el snapshot, estado de sincronización, sincronización al arrancar y chequeo periódico | 4 | 🟦 |
-| 6 | catálogo | M4 Búsqueda de profesionales y agenda | Los cuatro filtros de búsqueda y la agenda vigente de un profesional | 5 | 🟨 |
+| 6 | catálogo | M4 Búsqueda de profesionales y agenda | Los cuatro filtros de búsqueda y la agenda vigente de un profesional | 5 | 🟦 |
 | 7 | turnos | M3 Disponibilidad de turnos | Configuración de la integración, clientes del catálogo y de ocupaciones, cálculo de la disponibilidad | 3, 6 | 🟨 |
 | 8 | turnos | M4 Inicio de reserva | Proceso de reserva, hold y confirmación inicial por REST | 7 | 🟨 |
 | 9 | catálogo | M5 Sincronización incremental | Redis, aviso `CatalogUpdated` por Kafka, discontinuidad, duplicados. El chequeo periódico ya existe desde la M3: se le suma la decisión con Redis | 5 | 🟨 |
@@ -39,8 +39,8 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5 (Catálogo M3)
 | 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `CatalogSnapshotSyncTest`, `SynchronizeCatalogUseCaseImplTest`, `CatedraSnapshotAdapterTest`, `Jpa*RepositoryAdapterTest`, `DatabaseMigrationTest` (catálogo) | 🟦 |
 | 5 | Mantener el catálogo actualizado con Kafka y Redis | HU-04, CU-01, ADR-0006 a ADR-0009 | Catálogo M5 | | 🟨 |
 | 6 | Detectar discontinuidad y reconstruir | CU-01 (3b, 4a), CU-02 | Catálogo M5 | | 🟨 |
-| 7 | Buscar y filtrar con la copia local | HU-05, ADR-0013, ADR-0014 | Catálogo M4. Categorías: Catálogo M2 | `CategoryAccessTest`, `JpaCategoryRepositoryAdapterTest` | 🟨 parcial |
-| 8 | Construir y mostrar turnos disponibles | HU-06, CU-03, ADR-0015 a ADR-0017 | Turnos M3. Agenda: Catálogo M4 | | 🟨 |
+| 7 | Buscar y filtrar con la copia local | HU-05, ADR-0013, ADR-0014, ADR-0064, ADR-0065 | Catálogo M4. Categorías: Catálogo M2 | `ProfessionalSearchFiltersTest`, `ProfessionalSearchAccessTest`, `SearchProfessionalsUseCaseImplTest`, `ProfessionalTest`, `JpaProfessionalRepositoryAdapterTest`, `ProfessionalControllerTest`, `PaginationHeadersTest`, `CategoryAccessTest`, `JpaCategoryRepositoryAdapterTest` (catálogo) | 🟦 |
+| 8 | Construir y mostrar turnos disponibles | HU-06, CU-03, ADR-0015 a ADR-0017 | Turnos M3. Agenda: Catálogo M4 | Agenda: `GetProfessionalAgendaUseCaseImplTest`, `JpaWeeklyScheduleRepositoryAdapterTest`, `ProfessionalControllerTest`, `ProfessionalSearchAccessTest` (catálogo) | 🟦 parcial |
 | 9 | Solicitar un hold | HU-07, CU-04, ADR-0019, ADR-0022 | Turnos M4 | | 🟨 |
 | 10 | Iniciar la confirmación por REST | HU-07, CU-04, ADR-0019 | Turnos M4 | | 🟨 |
 | 11 | Recibir el pedido de información y responder por Kafka | HU-07, CU-04, ADR-0020, ADR-0021, ADR-0027 | Turnos M5 | | 🟨 |
@@ -56,8 +56,8 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5 (Catálogo M3)
 | Inicialización desde snapshot | CU-02 | Base vacía al arrancar ([`sincronizacion.md`](arq/sincronizacion.md#cómo-se-demuestra-enunciado-11)); se ve en `GET /api/catalog/sync-status` | Catálogo M3 | 🟦 |
 | Actualización incremental | CU-01, HU-04 | Publicación de una versión con el servicio al día | Catálogo M5 | 🟨 |
 | Recuperación por snapshot tras una discontinuidad | CU-01 (3b), CU-02 | Servicio detenido hasta quedar por debajo de O | Catálogo M5 | 🟨 |
-| Búsquedas sobre datos locales | HU-05 (7), Constitución P-06 | Búsqueda que funciona con la cátedra inaccesible | Catálogo M4 | 🟨 |
-| Filtros por categoría, nombre, habilitado y disponibilidad | HU-05 (1 a 4) | Cada filtro, solo y combinado, desde la app | Catálogo M4, app | 🟨 |
+| Búsquedas sobre datos locales | HU-05 (7), Constitución P-06 | Búsqueda que funciona con la cátedra inaccesible | Catálogo M4 | 🟦 |
+| Filtros por categoría, nombre, habilitado y disponibilidad | HU-05 (1 a 4) | Cada filtro, solo y combinado, desde la app | Catálogo M4, app | 🟦 parcial |
 | Reserva confirmada por REST y Kafka | HU-07, CU-04 | Reserva completa desde la app, con el teléfono | Turnos M4 y M5, app | 🟨 |
 | Reserva que expira sin completar la información | HU-07 (6), CU-04 (11b), ADR-0020 | Reserva en la que no se ingresa el teléfono | Turnos M5, app | 🟨 |
 | Consulta y cancelación propia sin acceso cruzado | HU-08, HU-09, RNF-03 | Dos usuarios; uno intenta ver y cancelar la reserva del otro | Turnos M6, app | 🟨 |
