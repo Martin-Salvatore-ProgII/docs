@@ -81,13 +81,13 @@ Parámetros, todos opcionales y combinables:
 | `categoryId` | entero | Categoría del profesional |
 | `name` | texto, 1 a 100 | Coincidencia parcial sobre nombre, apellido o nombre completo, sin distinguir mayúsculas ni tildes |
 | `enabled` | booleano, por defecto `true` | Estado habilitado según [ADR-0014](../adr/0014-habilitado-efectivo.md) |
-| `date` | fecha | Filtro de disponibilidad de agenda ([ADR-0013](../adr/0013-filtro-disponibilidad-de-agenda.md)) |
-| `timeFrom`, `timeTo` | hora | Franja horaria opcional; requieren `date` y `timeFrom` < `timeTo` |
+| `date` | fecha | Filtro de disponibilidad de agenda ([ADR-0013](../adr/0013-filtro-disponibilidad-de-agenda.md)); entre hoy y el horizonte ([ADR-0065](../adr/0065-reglas-entrada-filtro-disponibilidad.md)) |
+| `timeFrom`, `timeTo` | hora | Franja horaria opcional; van juntas, requieren `date` y `timeFrom` < `timeTo` ([ADR-0065](../adr/0065-reglas-entrada-filtro-disponibilidad.md)) |
 | `page`, `size`, `sort` | | Paginación; orden por defecto `lastName,firstName` |
 
 Respuesta: lista paginada de `{ id, firstName, lastName, category: { id, name }, enabled }`.
 
-Errores: `400 VALIDATION_ERROR`, `401`, `503 CATALOG_NOT_READY`.
+Errores: `400 VALIDATION_ERROR`, `400 DATE_OUT_OF_RANGE`, `401`, `503 CATALOG_NOT_READY`.
 
 ### Agenda vigente de un profesional
 

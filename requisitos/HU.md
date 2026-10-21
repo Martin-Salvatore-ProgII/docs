@@ -110,7 +110,7 @@ Los escenarios de sincronización del lado del servicio están en [CU-01 y CU-02
 5. **Dado** que puedo filtrar por categoría, **entonces** la app me ofrece la lista de categorías habilitadas.
 6. **Dado** muchos resultados, **entonces** vienen paginados, ordenados por apellido y nombre, con el total disponible.
 7. **Dado** que la cátedra no está disponible, **cuando** busco, **entonces** la búsqueda funciona igual, porque usa solo la copia local (ENUNCIADO §6.2).
-8. **Dado** un filtro inválido (por ejemplo, una franja cuyo inicio es posterior al fin, o una franja sin fecha), **entonces** la búsqueda se rechaza indicando el problema.
+8. **Dado** un filtro inválido (por ejemplo, una franja cuyo inicio es posterior al fin, una franja sin fecha o una fecha pasada o más allá del horizonte), **entonces** la búsqueda se rechaza indicando el problema ([ADR-0065](../adr/0065-reglas-entrada-filtro-disponibilidad.md)).
 
 ## Turnos
 

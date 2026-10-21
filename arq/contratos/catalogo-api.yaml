@@ -56,18 +56,18 @@ paths:
             default: true
         - name: date
           in: query
-          description: Filtro de disponibilidad de agenda.
+          description: Filtro de disponibilidad de agenda. Entre hoy y el horizonte (ADR-0065); fuera de ese rango, DATE_OUT_OF_RANGE.
           schema:
             type: string
             format: date
         - name: timeFrom
           in: query
-          description: Inicio de la franja horaria. Requiere date.
+          description: Inicio de la franja horaria. Va junto con timeTo y requiere date.
           schema:
             $ref: '#/components/schemas/LocalTime'
         - name: timeTo
           in: query
-          description: Fin de la franja horaria. Requiere date y debe ser posterior a timeFrom.
+          description: Fin de la franja horaria. Va junto con timeFrom, requiere date y debe ser posterior a timeFrom.
           schema:
             $ref: '#/components/schemas/LocalTime'
         - $ref: '#/components/parameters/Page'
@@ -90,7 +90,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/ProfessionalSummary'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          description: VALIDATION_ERROR o DATE_OUT_OF_RANGE
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '503':

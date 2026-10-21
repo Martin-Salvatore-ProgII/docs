@@ -70,6 +70,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0062](0062-features-se-comunican-por-puertos-de-dominio.md) | Las features de un servicio se comunican solo por los puertos de su dominio | Aceptado |
 | [0063](0063-lo-reutilizable-se-lleva-a-shared.md) | Lo que se puede reutilizar se lleva a `shared` en cuanto aparece el segundo uso | Aceptado |
 | [0064](0064-lecturas-entre-features-por-puertos.md) | Una feature lee los datos de otra por su puerto, no con un JOIN a su tabla | Aceptado |
+| [0065](0065-reglas-entrada-filtro-disponibilidad.md) | El filtro de disponibilidad de la búsqueda acepta fechas entre hoy y el horizonte, y franjas completas | Aceptado |
 
 ## Plantilla
 

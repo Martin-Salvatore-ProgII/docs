@@ -92,7 +92,7 @@ Los valores operativos del sistema se definen por configuración externa, con un
 | Valor | Inicial | Decisión |
 | --- | --- | --- |
 | Intervalo del chequeo periódico de sincronización | 5 minutos | [ADR-0006](../adr/0006-disparadores-sincronizacion.md) |
-| Horizonte de fechas para la disponibilidad | 60 días | [ADR-0015](../adr/0015-reglas-disponibilidad-turnos.md) |
+| Horizonte de fechas para la disponibilidad y el filtro de la búsqueda (el mismo valor en los dos servicios) | 60 días | [ADR-0015](../adr/0015-reglas-disponibilidad-turnos.md), [ADR-0065](../adr/0065-reglas-entrada-filtro-disponibilidad.md) |
 | Tamaño de página por defecto y máximo | 20 y 100 | [`arq/contratos.md`](../arq/contratos.md) |
 | Intervalo de consulta del estado de una reserva (en la app) | 2 segundos | [ADR-0021](../adr/0021-app-consulta-estado-por-polling.md) |
 | Timeouts de conexión y de respuesta hacia la cátedra y el catálogo | 2 y 5 segundos | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
