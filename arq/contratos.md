@@ -108,7 +108,7 @@ Respuesta, leída en una sola lectura consistente:
 ```
 
 - `enabled` es el habilitado efectivo (profesional y categoría).
-- `weeklySchedules` incluye solo los horarios habilitados.
+- `weeklySchedules` incluye solo los horarios habilitados, ordenados de lunes a domingo y, dentro de cada día, por hora de inicio.
 - Un profesional deshabilitado se devuelve igual, con `enabled: false`: decidir qué hacer es responsabilidad del consumidor.
 
 Errores: `401`, `404 PROFESSIONAL_NOT_FOUND`, `503 CATALOG_NOT_READY`.

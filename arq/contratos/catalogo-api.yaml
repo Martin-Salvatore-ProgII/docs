@@ -261,7 +261,7 @@ components:
           description: Habilitado efectivo (profesional y categoría).
         weeklySchedules:
           type: array
-          description: Solo horarios habilitados.
+          description: Solo horarios habilitados, ordenados de lunes a domingo y, dentro de cada día, por hora de inicio.
           items:
             $ref: '#/components/schemas/WeeklySchedule'
         catalogVersion:
