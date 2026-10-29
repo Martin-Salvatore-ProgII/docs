@@ -6,7 +6,8 @@ Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-servi
 
 - **Las milestones y las issues las crea el alumno, desde la interfaz de GitHub.** Ningún agente las crea, las cierra ni las modifica por su cuenta.
 - **Qué entra en cada milestone se conversa antes** entre el alumno y el agente: por dónde encarar el trabajo y cómo partirlo en issues.
-- El agente trabaja sobre una issue que ya existe. Crea la rama de esa issue, vinculada a ella y a partir de `develop` actualizada, escribe los archivos y propone los mensajes de commit.
+- El agente trabaja sobre una issue que ya existe. Crea la rama de esa issue **solo en local**, a partir de `develop` actualizada (`git checkout -b <tipo>/<N>-<descripcion>`), escribe los archivos y propone los mensajes de commit. No escribe nada en GitHub: la rama remota la crea el push del alumno, y el pull request la vincula a la issue con "Cierra la Issue #N".
+- Los comandos que el agente entrega para pegar van **uno por línea**, sin `\` de continuación: pegados en zsh, los cortes de línea se rompen y el comando no se ejecuta.
 - **Los commits, el push, el pull request y el merge los hace el alumno**, después de revisar los cambios. El agente no commitea ni mergea en los repos de código.
 
 ## Ramas
