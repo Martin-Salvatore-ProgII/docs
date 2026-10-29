@@ -18,7 +18,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 4 | catálogo | M2 Endpoint categorías | Validación del JWT de turnos, endpoints protegidos, tablas del catálogo, listado de categorías | 2, 3 | 🟦 |
 | 5 | catálogo | M3 Sincronización por snapshot | Configuración de la integración, copia local completa desde el snapshot, estado de sincronización, sincronización al arrancar y chequeo periódico | 4 | 🟦 |
 | 6 | catálogo | M4 Búsqueda de profesionales y agenda | Los cuatro filtros de búsqueda y la agenda vigente de un profesional | 5 | 🟦 |
-| 7 | turnos | M3 Disponibilidad de turnos | Configuración de la integración, clientes del catálogo y de ocupaciones, cálculo de la disponibilidad | 3, 6 | 🟨 |
+| 7 | turnos | M3 Disponibilidad de turnos | Configuración de la integración, clientes del catálogo y de ocupaciones, cálculo de la disponibilidad | 3, 6 | 🟦 |
 | 8 | turnos | M4 Inicio de reserva | Proceso de reserva, hold y confirmación inicial por REST | 7 | 🟨 |
 | 9 | catálogo | M5 Sincronización incremental | Redis, aviso `CatalogUpdated` por Kafka, discontinuidad, duplicados. El chequeo periódico ya existe desde la M3: se le suma la decisión con Redis | 5 | 🟨 |
 | 10 | turnos | M5 Reserva por Kafka | Pedido y envío del teléfono, eventos terminales, reconciliación de procesos | 8 | 🟨 |
@@ -27,7 +27,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 13 | turnos y catálogo | Canal seguro | HTTPS entre la app y los backends (ADR-0035) | 12 | 🟨 |
 | 14 | turnos | Administración (opcional) | Listar, ver y cancelar reservas de cualquier usuario (HU-10) | 11 | 🟨 |
 
-Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5 (Catálogo M3) está terminada y en revisión. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
+Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5, la 6 y la 7 (Catálogo M3 y M4, Turnos M3) están terminadas y en revisión. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
 
 ## Alcance funcional (ENUNCIADO §5)
 
@@ -35,19 +35,19 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5 (Catálogo M3)
 | --- | --- | --- | --- | --- | --- |
 | 1 | Registrar y autenticar usuarios finales | HU-01, HU-02, RNF-01, RNF-04 | Turnos M2 | `UserAuthenticationFlowTest`, `UserControllerTest`, `RegisterUserUseCaseImplTest`, `AuthenticateUserUseCaseImplTest` | 🟦 |
 | 2 | Registrar la cuenta técnica una vez | HU-03 | Hecho a mano (REF §5.1) | No aplica | ✅ |
-| 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | `CatedraIntegrationConfigTest`, `CatedraReadExecutorTest` (catálogo) | 🟦 parcial |
+| 3 | Autenticar la integración y recuperar su configuración | HU-03, ADR-0005 | Catálogo M3, Turnos M3 | `CatedraIntegrationConfigTest`, `CatedraReadExecutorTest` (los dos servicios), `RemoteReadRetryTest` (turnos) | 🟦 |
 | 4 | Obtener y guardar un snapshot completo | HU-04, CU-02, ADR-0010, ADR-0012 | Catálogo M3. Tablas: Catálogo M2 | `CatalogSnapshotSyncTest`, `SynchronizeCatalogUseCaseImplTest`, `CatedraSnapshotAdapterTest`, `Jpa*RepositoryAdapterTest`, `DatabaseMigrationTest` (catálogo) | 🟦 |
 | 5 | Mantener el catálogo actualizado con Kafka y Redis | HU-04, CU-01, ADR-0006 a ADR-0009 | Catálogo M5 | | 🟨 |
 | 6 | Detectar discontinuidad y reconstruir | CU-01 (3b, 4a), CU-02 | Catálogo M5 | | 🟨 |
 | 7 | Buscar y filtrar con la copia local | HU-05, ADR-0013, ADR-0014, ADR-0064, ADR-0065 | Catálogo M4. Categorías: Catálogo M2 | `ProfessionalSearchFiltersTest`, `ProfessionalSearchAccessTest`, `SearchProfessionalsUseCaseImplTest`, `ProfessionalTest`, `JpaProfessionalRepositoryAdapterTest`, `ProfessionalControllerTest`, `PaginationHeadersTest`, `CategoryAccessTest`, `JpaCategoryRepositoryAdapterTest` (catálogo) | 🟦 |
-| 8 | Construir y mostrar turnos disponibles | HU-06, CU-03, ADR-0015 a ADR-0017 | Turnos M3. Agenda: Catálogo M4 | Agenda: `GetProfessionalAgendaUseCaseImplTest`, `JpaWeeklyScheduleRepositoryAdapterTest`, `ProfessionalControllerTest`, `ProfessionalSearchAccessTest` (catálogo) | 🟦 parcial |
+| 8 | Construir y mostrar turnos disponibles | HU-06, CU-03, ADR-0015 a ADR-0017, ADR-0066, ADR-0067 | Turnos M3. Agenda: Catálogo M4 | `AvailabilityFlowTest`, `GetAvailabilityUseCaseImplTest`, `ScheduleSlotsTest`, `AvailabilityControllerTest`, `CatalogServiceAdapterTest`, `CatedraOccupancyAdapterTest` (turnos). Agenda: `GetProfessionalAgendaUseCaseImplTest`, `JpaWeeklyScheduleRepositoryAdapterTest`, `ProfessionalControllerTest`, `ProfessionalSearchAccessTest` (catálogo) | 🟦 |
 | 9 | Solicitar un hold | HU-07, CU-04, ADR-0019, ADR-0022 | Turnos M4 | | 🟨 |
 | 10 | Iniciar la confirmación por REST | HU-07, CU-04, ADR-0019 | Turnos M4 | | 🟨 |
 | 11 | Recibir el pedido de información y responder por Kafka | HU-07, CU-04, ADR-0020, ADR-0021, ADR-0027 | Turnos M5 | | 🟨 |
 | 12 | Reflejar el resultado final localmente | CU-04, ADR-0023, [`maquina-estados.md`](arq/maquina-estados.md) | Turnos M5 | | 🟨 |
 | 13 | Consultar las reservas propias | HU-08, ADR-0025 | Turnos M6 | | 🟨 |
 | 14 | Cancelar una reserva propia confirmada | HU-09, ADR-0026 | Turnos M6 | | 🟨 |
-| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `CatalogSnapshotSyncTest`, `JpaSyncStateRepositoryAdapterTest`, `CatalogReadinessAccessTest` (catálogo) | 🟦 parcial |
+| 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Disponibilidad: CU-03 (3c, 4a). Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `CatalogSnapshotSyncTest`, `JpaSyncStateRepositoryAdapterTest`, `CatalogReadinessAccessTest` (catálogo); `RemoteReadRetryTest`, `CatalogServiceAdapterTest`, `CatedraOccupancyAdapterTest`, `AvailabilityFlowTest` (turnos) | 🟦 parcial |
 
 ## Evidencias (ENUNCIADO §11)
 
@@ -80,9 +80,9 @@ Las milestones 5 a 8 ya tienen sus issues creadas en GitHub; la 5 (Catálogo M3)
 | RNF-02 | Secretos en configuración externa | Turnos y Catálogo M1 y M2 | Las pruebas generan sus claves en memoria (`TestJwtKeysConfiguration`); `.env` y `secrets/` fuera de Git | 🟦 |
 | RNF-03 | La identidad sale del token | Turnos M2, Catálogo M2. Reservas: Turnos M4 a M6 | `SecurityConfigTest` (los dos servicios), `UserAuthenticationFlowTest` | 🟦 parcial |
 | RNF-04 | Endpoints protegidos por defecto | Turnos M2, Catálogo M2 | `SecurityConfigTest` (los dos servicios), `CategoryAccessTest` | 🟦 |
-| RNF-05 | Validación en cada límite | Turnos M2. Integraciones: milestones siguientes | `UserControllerTest`, `MaxBytesValidatorTest`, `GlobalExceptionHandlerTest` | 🟦 parcial |
+| RNF-05 | Validación en cada límite | Turnos M2 y M3. Integraciones: milestones siguientes | `UserControllerTest`, `MaxBytesValidatorTest`, `GlobalExceptionHandlerTest`, `AvailabilityControllerTest`, `CatalogServiceAdapterTest`, `CatedraOccupancyAdapterTest` (turnos) | 🟦 parcial |
 | RNF-06 | Procesamiento idempotente de mensajes | Catálogo M5, Turnos M5 | | 🟨 |
-| RNF-07 | Reintentos acotados y estado recuperable | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `JpaSyncStateRepositoryAdapterTest` (catálogo) | 🟦 parcial |
+| RNF-07 | Reintentos acotados y estado recuperable | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `JpaSyncStateRepositoryAdapterTest` (catálogo); `RemoteReadRetryTest`, `CatedraReadExecutorTest` (turnos) | 🟦 parcial |
 | RNF-08 | Lecturas consistentes durante las actualizaciones | Catálogo M3 | `CatalogSnapshotSyncTest`, `IsCatalogReadyUseCaseImplTest`, `CatalogReadinessAccessTest` (catálogo) | 🟦 |
-| RNF-09 | Sin supuestos fijos sobre los datos y valores configurables | Catálogo M2 en adelante | `DatabaseMigrationTest` (catálogo); vigencia del JWT y CORS configurables | 🟦 parcial |
+| RNF-09 | Sin supuestos fijos sobre los datos y valores configurables | Catálogo M2 en adelante, Turnos M3 | `DatabaseMigrationTest` (catálogo), `ScheduleSlotsTest` (turnos); vigencia del JWT, CORS, timeouts y horizonte configurables | 🟦 parcial |
 | RNF-10 | Pruebas automatizadas de los backends | Todas | CI de GitHub Actions en cada PR, en los dos servicios | 🟦 parcial |
