@@ -72,6 +72,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0064](0064-lecturas-entre-features-por-puertos.md) | Una feature lee los datos de otra por su puerto, no con un JOIN a su tabla | Aceptado |
 | [0065](0065-reglas-entrada-filtro-disponibilidad.md) | El filtro de disponibilidad de la búsqueda acepta fechas entre hoy y el horizonte, y franjas completas | Aceptado |
 | [0066](0066-jwt-del-usuario-desde-el-pedido-en-curso.md) | Turnos toma el JWT que reenvía al catálogo del pedido en curso, y solo llama al catálogo dentro de un pedido del usuario | Aceptado |
+| [0067](0067-ocupacion-bloquea-el-slot-de-su-hora.md) | Una ocupación bloquea solo el slot que empieza a su misma hora | Aceptado |
 
 ## Plantilla
 
