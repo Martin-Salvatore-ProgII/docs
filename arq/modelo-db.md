@@ -143,7 +143,7 @@ Reglas:
 - Cada proceso pertenece a un único usuario, y toda consulta o cambio se filtra por él ([`seguridad.md`](seguridad.md)).
 - `reservationProcessId` es único cuando existe; `holdId`, `reservationProcessId` y `expiresAt` se completan al crearse el hold ([ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md)).
 - `requestEventId` es el `eventId` del último pedido de teléfono y se devuelve en `AdditionalInformationSubmitted` (REF §15.4, §15.5). `submittedEventId` es el `eventId` del último envío.
-- Un usuario tiene como máximo un proceso en estado no final ([ADR-0024](../adr/0024-un-proceso-activo-por-usuario.md)).
+- Un usuario tiene como máximo un proceso en estado no final ([ADR-0024](../adr/0024-un-proceso-activo-por-usuario.md)). Lo garantiza la base, también ante pedidos simultáneos, con un índice único sobre el usuario limitado a esos estados ([ADR-0070](../adr/0070-reglas-ante-concurrencia-en-la-base.md)).
 - `version` aumenta en cada cambio del proceso: un cambio hecho sobre una lectura vieja no se guarda ([ADR-0068](../adr/0068-bloqueo-optimista-proceso-de-reserva.md)).
 - `cancelledBy` registra el login de quien canceló (el dueño o un administrador) ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)).
 - Los datos del profesional son históricos: no se usan como catálogo vigente ([Constitución P-05](../constitucion.md)).
