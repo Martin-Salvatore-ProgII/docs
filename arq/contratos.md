@@ -206,7 +206,7 @@ Una reserva es un proceso de reserva local, con los estados de [`arq/maquina-est
 
 **Iniciar una reserva:** recibe `{ "professionalId", "date", "startTime" }`. Responde `201` con la reserva, ya en `AWAITING_REQUEST` o en un estado final si la cátedra la rechazó o no respondió ([ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md)). Si la confirmación inicial se quedó sin respuesta después de los reintentos, la reserva sigue en `HELD`: la cátedra pudo haberla recibido, y la app sigue consultando su estado hasta que avance ([ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md)). `INVALID_SLOT` incluye un turno de hoy que ya empezó. Errores: `400 VALIDATION_ERROR`, `400 DATE_OUT_OF_RANGE`, `400 PROFESSIONAL_DISABLED`, `400 INVALID_SLOT`, `401`, `404 PROFESSIONAL_NOT_FOUND`, `409 ACTIVE_RESERVATION_EXISTS`, `503 CATALOG_UNAVAILABLE`.
 
-**Ver una reserva:** responde `200` con la reserva. Es la operación que la app consulta periódicamente mientras el proceso no es final. Errores: `401`, `404 RESERVATION_NOT_FOUND`.
+**Ver una reserva:** responde `200` con la reserva. Es la operación que la app consulta periódicamente mientras el proceso no es final. Errores: `400 VALIDATION_ERROR` (el id no es un UUID), `401`, `404 RESERVATION_NOT_FOUND`.
 
 **Enviar el teléfono:** recibe `{ "phoneNumber" }`. Responde `202` con la reserva en `PHONE_SUBMITTED`. Errores: `400 INVALID_PHONE_NUMBER`, `401`, `404 RESERVATION_NOT_FOUND`, `409 PHONE_NOT_REQUESTED`, `503 INTEGRATION_UNAVAILABLE`.
 
