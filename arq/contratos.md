@@ -202,9 +202,9 @@ Una reserva es un proceso de reserva local, con los estados de [`arq/maquina-est
 - `status`: uno de los estados de la máquina (`STARTED`, `HELD`, `AWAITING_REQUEST`, `AWAITING_PHONE`, `PHONE_SUBMITTED`, `CONFIRMED`, `CANCELLED`, `EXPIRED`, `INVALID`, `FAILED`).
 - `expiresAt`: vencimiento informado por la cátedra; solo tiene sentido mientras el proceso no es final.
 - `message`: último mensaje de la cátedra para el usuario (el del pedido o el del rechazo del teléfono).
-- `failureReason`: motivo de `FAILED`, `EXPIRED` o `INVALID`, como código estable (por ejemplo, `SLOT_ALREADY_HELD`, `HOLD_EXPIRED`, `REQUEST_EVENT_MISMATCH`, `INTEGRATION_TIMEOUT`).
+- `failureReason`: motivo de `FAILED`, `EXPIRED` o `INVALID`, como código estable (por ejemplo, `SLOT_ALREADY_HELD`, `HOLD_EXPIRED`, `REQUEST_EVENT_MISMATCH`, `INTEGRATION_TIMEOUT`, `INTEGRATION_UNAVAILABLE`). Es para que la app elija su propio mensaje: nunca se le muestra al usuario tal cual ([ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md)).
 
-**Iniciar una reserva:** recibe `{ "professionalId", "date", "startTime" }`. Responde `201` con la reserva, ya en `AWAITING_REQUEST` o en un estado final si la cátedra la rechazó. Errores: `400 VALIDATION_ERROR`, `400 DATE_OUT_OF_RANGE`, `400 PROFESSIONAL_DISABLED`, `400 INVALID_SLOT`, `401`, `404 PROFESSIONAL_NOT_FOUND`, `409 ACTIVE_RESERVATION_EXISTS`, `503 CATALOG_UNAVAILABLE`, `503 INTEGRATION_UNAVAILABLE`.
+**Iniciar una reserva:** recibe `{ "professionalId", "date", "startTime" }`. Responde `201` con la reserva, ya en `AWAITING_REQUEST` o en un estado final si la cátedra la rechazó o no respondió ([ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md)). `INVALID_SLOT` incluye un turno de hoy que ya empezó. Errores: `400 VALIDATION_ERROR`, `400 DATE_OUT_OF_RANGE`, `400 PROFESSIONAL_DISABLED`, `400 INVALID_SLOT`, `401`, `404 PROFESSIONAL_NOT_FOUND`, `409 ACTIVE_RESERVATION_EXISTS`, `503 CATALOG_UNAVAILABLE`.
 
 **Ver una reserva:** responde `200` con la reserva. Es la operación que la app consulta periódicamente mientras el proceso no es final. Errores: `401`, `404 RESERVATION_NOT_FOUND`.
 

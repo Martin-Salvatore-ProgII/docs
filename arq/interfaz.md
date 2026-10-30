@@ -49,6 +49,7 @@ Es la pantalla que muestra la máquina de estados. Mientras el proceso no es fin
 - En `AWAITING_PHONE` muestra el mensaje de la cátedra, el tiempo restante y el campo de teléfono. Si viene de un rechazo, muestra el motivo.
 - El teléfono se valida antes de enviarlo, con la misma regla que el backend ([ADR-0027](../adr/0027-validacion-local-del-telefono.md)).
 - En un estado final deja de consultar y muestra el resultado, con acceso a Mis reservas.
+- En `FAILED`, `EXPIRED` o `INVALID` muestra un mensaje propio para cada `failureReason`, nunca el código ni un texto técnico. `INTEGRATION_TIMEOUT` e `INTEGRATION_UNAVAILABLE` se muestran como que no se pudo reservar en ese momento y que se puede volver a intentar ([ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md)).
 
 ## Errores
 

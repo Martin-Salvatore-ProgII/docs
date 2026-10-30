@@ -61,7 +61,7 @@ stateDiagram-v2
 | Cualquier no final | `AppointmentProcessExpired` | `EXPIRED` |
 | Cualquier no final | `AppointmentProcessInvalid` | `INVALID` |
 | `CONFIRMED` | La cátedra acepta la cancelación (200) o llega `AppointmentCancelled` | `CANCELLED` |
-| `STARTED` | Timeout al crear el hold ([ADR-0028](../adr/0028-timeout-al-crear-hold.md)) | `FAILED` |
+| `STARTED` | Timeout o cualquier otra falla al crear el hold ([ADR-0028](../adr/0028-timeout-al-crear-hold.md), [ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md)) | `FAILED` |
 | `STARTED` | Reconciliación: quedó sin hold registrado | `FAILED` |
 | `HELD`, `AWAITING_REQUEST`, `AWAITING_PHONE` | Reconciliación: venció `expiresAt` más el margen | `EXPIRED` |
 | `PHONE_SUBMITTED` | Reconciliación: la cátedra informa `CONFIRMED` | `CONFIRMED` |

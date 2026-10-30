@@ -51,6 +51,7 @@ Los timeouts iniciales (2 y 5 segundos) se verificaron contra la cátedra real p
 | Evento tardío o fuera de orden | Si no es un avance válido desde el estado actual, se ignora y se registra | [ADR-0023](../adr/0023-estados-solo-avanzan.md) |
 | El pedido de teléfono llega antes que la respuesta de la confirmación | El proceso ya estaba guardado con su `reservationProcessId`; avanza igual | [ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md) |
 | Timeout al crear el hold | `FAILED`, sin reintentar; el hold huérfano vence solo | [ADR-0028](../adr/0028-timeout-al-crear-hold.md) |
+| La cátedra no responde o falla al crear el hold | `FAILED`, sin reintentar; el usuario puede volver a intentar | [ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md) |
 | Timeout al confirmar, cancelar o publicar el teléfono | Reintento acotado; la cátedra reconoce lo ya hecho | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
 | Evento final perdido | La reconciliación consulta la cátedra y cierra el proceso | [ADR-0030](../adr/0030-reconciliacion-periodica-de-procesos.md), [CU-05](../requisitos/CU.md#cu-05-reconciliar-procesos-de-reserva) |
 | Vencimiento sin teléfono enviado | La reconciliación lo cierra como vencido sin consultar | [ADR-0030](../adr/0030-reconciliacion-periodica-de-procesos.md) |

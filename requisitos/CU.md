@@ -138,6 +138,7 @@ La estrategia completa, con la tabla de decisiones, está en [`arq/sincronizacio
 - **Cualquier paso. Llega un evento repetido, tardío o sin transición válida:** se ignora y se registra ([ADR-0023](../adr/0023-estados-solo-avanzan.md)).
 
 - **5b. Timeout al crear el hold:** el proceso pasa a `FAILED` con `INTEGRATION_TIMEOUT`, sin reintentar ([ADR-0028](../adr/0028-timeout-al-crear-hold.md)).
+- **5c. La cátedra no responde o falla al crear el hold:** el proceso pasa a `FAILED` con `INTEGRATION_UNAVAILABLE`, sin reintentar ([ADR-0069](../adr/0069-toda-falla-del-hold-cierra-el-proceso.md)).
 - **6c, 10c. Timeout en la confirmación inicial o al publicar el teléfono:** se reintenta de forma acotada ([ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md)). Si se agotan los reintentos, el proceso queda en su estado y lo resuelve [CU-05](#cu-05-reconciliar-procesos-de-reserva).
 
 ### CU-05. Reconciliar procesos de reserva

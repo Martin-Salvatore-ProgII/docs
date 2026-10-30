@@ -74,6 +74,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0066](0066-jwt-del-usuario-desde-el-pedido-en-curso.md) | Turnos toma el JWT que reenvía al catálogo del pedido en curso, y solo llama al catálogo dentro de un pedido del usuario | Aceptado |
 | [0067](0067-ocupacion-bloquea-el-slot-de-su-hora.md) | Una ocupación bloquea solo el slot que empieza a su misma hora | Aceptado |
 | [0068](0068-bloqueo-optimista-proceso-de-reserva.md) | Cambios simultáneos sobre un proceso de reserva: bloqueo optimista con versión | Aceptado |
+| [0069](0069-toda-falla-del-hold-cierra-el-proceso.md) | Toda falla al crear el hold cierra el proceso como fallido, y la app lo recibe como un rechazo | Aceptado |
 
 ## Plantilla
 
