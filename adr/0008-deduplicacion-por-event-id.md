@@ -19,4 +19,6 @@ Cada servicio registra en su base los `eventId` de los eventos Kafka que proces�
 
 - El mismo criterio de idempotencia en los dos servicios, fácil de explicar y de demostrar.
 - Un duplicado queda registrado de forma visible (en logs), lo que sirve como evidencia del §11.
-- Una tabla más por servicio. Cuánto tiempo se conservan los `eventId` se define al implementar.
+- Una tabla más por servicio.
+- **Retención (catálogo, decidida al implementar):** los `eventId` se conservan 7 días (configurable, RNF-09) y el chequeo periódico borra los más viejos. Sin purga, la tabla crecería con cada aviso sin límite. Un aviso viejo que se repitiera después de purgado es inofensivo: la decisión sale de comparar versiones con Redis, así que reprocesarlo no hace nada. En turnos, la retención se define al implementar su registro.
+- **Cómo se garantiza el "una sola vez":** la clave primaria de la tabla y un `INSERT ... ON CONFLICT DO NOTHING`, no una consulta previa ([ADR-0070](0070-reglas-ante-concurrencia-en-la-base.md)).

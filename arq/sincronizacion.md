@@ -55,6 +55,10 @@ En cada ciclo de sincronización se leen C y O de Redis y se comparan con la ver
 
 > Con L = 3, O = 4 y C = 7 **no** se aplica desde `changes:4`: como L < O, corresponde un snapshot (REF §18.2).
 
+**Un solo snapshot por ciclo.** Si después de reemplazar la copia el historial sigue sin cerrar (otra versión no verificable, o L < O), otro snapshot no lo arreglaría y repetirlo sin fin está prohibido (ENUNCIADO §8). El ciclo termina con el error registrado y lo retoma el próximo disparador. Una excepción es que el snapshot resulte *más nuevo* que lo que Redis informa todavía (L > C justo después de aplicarlo): es una publicación en curso, no un error, y el ciclo termina sin registrar nada.
+
+**Redis no responde** (o no publica las versiones): se registra el error y **no** se pasa a snapshot. Un snapshot no arregla un Redis caído, y la copia local sigue siendo válida.
+
 ```mermaid
 flowchart TD
     D([Disparador]) --> R[Leer C y O de Redis]
@@ -86,7 +90,7 @@ El número que trae `CatalogUpdated` no se usa para decidir: siempre se compara 
 
 ## Duplicados y concurrencia
 
-- **Avisos duplicados.** La entrega de Kafka es al menos una vez (REF §15.1). Cada `eventId` procesado se registra y un duplicado se reconoce y se ignora. Aunque no se registrara, reprocesar sería inofensivo, porque L ya sería igual a C ([ADR-0008](../adr/0008-deduplicacion-por-event-id.md)).
+- **Avisos duplicados.** La entrega de Kafka es al menos una vez (REF §15.1). Cada `eventId` procesado se registra y un duplicado se reconoce y se ignora. Los registros se conservan 7 días y se purgan en el chequeo periódico. Aunque no se registrara, reprocesar sería inofensivo, porque L ya sería igual a C ([ADR-0008](../adr/0008-deduplicacion-por-event-id.md)).
 - **Offset de Kafka.** Se confirma después de persistir el resultado del aviso (REF §16).
 - **Sincronizaciones simultáneas.** Si dos disparadores coinciden, una versión solo se aplica si la versión local sigue siendo la anterior en el momento de guardar. La que llega segunda no aplica nada ([ADR-0007](../adr/0007-concurrencia-optimista-version-local.md)).
 
@@ -103,7 +107,7 @@ Si Redis, la API REST o la base no responden durante un ciclo:
 
 Las búsquedas nunca ven una copia a medias: ven la copia anterior completa hasta que la sincronización termina y después la nueva completa ([ADR-0010](../adr/0010-snapshot-en-una-transaccion.md)).
 
-Mientras hay una sincronización en curso, la app muestra un aviso no bloqueante de "catálogo actualizándose", para que el usuario sepa que un cambio reciente todavía puede no verse. Puede seguir buscando sobre la copia vigente ([HU-04](../requisitos/HU.md#hu-04-catálogo-actualizado)).
+La marca de "sincronización en curso" se enciende cuando hay algo para aplicar (una versión o un snapshot), no al leer Redis: un chequeo periódico que encuentra la copia al día no la toca, para que la app no muestre el aviso cada 5 minutos sin motivo. Mientras hay una sincronización en curso, la app muestra un aviso no bloqueante de "catálogo actualizándose", para que el usuario sepa que un cambio reciente todavía puede no verse. Puede seguir buscando sobre la copia vigente ([HU-04](../requisitos/HU.md#hu-04-catálogo-actualizado)).
 
 ## Estado de sincronización
 
