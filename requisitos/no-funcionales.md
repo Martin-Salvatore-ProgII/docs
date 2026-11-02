@@ -100,7 +100,9 @@ Los valores operativos del sistema se definen por configuración externa, con un
 | Reintentos de operaciones seguras de repetir | 2 (1 en lecturas) | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
 | Espera antes de cada reintento de una operación segura de repetir | 500 ms, y se duplica en cada uno (500 ms y 1 s) | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
 | Intervalo y margen de la reconciliación de procesos | 60 y 30 segundos | [ADR-0030](../adr/0030-reconciliacion-periodica-de-procesos.md) |
-| Reintentos al procesar un evento Kafka | 3 | [ADR-0031](../adr/0031-eventos-kafka-problematicos.md) |
+| Reintentos al procesar un evento Kafka | 3, sin espera entre ellos | [ADR-0031](../adr/0031-eventos-kafka-problematicos.md) |
+| Cuánto se conservan los `eventId` de los eventos de reserva ya procesados (turnos) | 7 días | [ADR-0008](../adr/0008-deduplicacion-por-event-id.md) |
+| Espera máxima del productor de Kafka al publicar el teléfono | Igual al timeout de respuesta de la cátedra (5 segundos) | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
 | Vigencia del JWT de usuario (normal y con `rememberMe`) | 24 horas y 30 días | [ADR-0033](../adr/0033-vigencia-jwt-usuario.md) |
 | Orígenes CORS permitidos | Ninguno | [ADR-0036](../adr/0036-cors-cerrado.md) |
 

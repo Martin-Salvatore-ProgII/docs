@@ -130,7 +130,7 @@ erDiagram
 | --- | --- | --- |
 | `USER`, `AUTHORITY` | Usuarios finales con los datos del usuario de JHipster, más el UUID que se envía como `externalPatientId` | ENUNCIADO §3.2, [ADR-0003](../adr/0003-turnos-emite-jwt-usuarios.md), [ADR-0004](../adr/0004-external-patient-id-uuid.md) |
 | `RESERVATION_PROCESS` | Cada proceso de reserva, con su dueño, su estado, los identificadores de la cátedra y los datos históricos del turno y del profesional | [`maquina-estados.md`](maquina-estados.md), [ADR-0022](../adr/0022-proceso-guardado-antes-de-llamar.md), [ADR-0025](../adr/0025-reservas-propias-desde-base-local.md) |
-| `PROCESSED_EVENT` | `eventId` de los eventos del topic de acciones ya procesados | [ADR-0008](../adr/0008-deduplicacion-por-event-id.md) |
+| `PROCESSED_EVENT` | `eventId` de los eventos del topic de acciones ya procesados. Se purgan a los 7 días, en cada ciclo de la reconciliación | [ADR-0008](../adr/0008-deduplicacion-por-event-id.md) |
 
 Reglas:
 
