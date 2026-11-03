@@ -145,7 +145,7 @@ Reglas:
 - `requestEventId` es el `eventId` del último pedido de teléfono y se devuelve en `AdditionalInformationSubmitted` (REF §15.4, §15.5). `submittedEventId` es el `eventId` del último envío.
 - Un usuario tiene como máximo un proceso en estado no final ([ADR-0024](../adr/0024-un-proceso-activo-por-usuario.md)). Lo garantiza la base, también ante pedidos simultáneos, con un índice único sobre el usuario limitado a esos estados ([ADR-0070](../adr/0070-reglas-ante-concurrencia-en-la-base.md)).
 - `version` aumenta en cada cambio del proceso: un cambio hecho sobre una lectura vieja no se guarda ([ADR-0068](../adr/0068-bloqueo-optimista-proceso-de-reserva.md)).
-- `cancelledBy` registra el login de quien canceló (el dueño o un administrador) ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)).
+- `cancelledBy` registra el login de quien canceló (el dueño o un administrador) ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)), o `CATEDRA` si la cancelación la informó la cátedra, por `AppointmentCancelled` o en la reconciliación, sin que este servicio la pidiera.
 - Los datos del profesional son históricos: no se usan como catálogo vigente ([Constitución P-05](../constitucion.md)).
 - El teléfono no se guarda: se publica y se descarta. Si hace falta reenviarlo, se le pide de nuevo al usuario.
 
