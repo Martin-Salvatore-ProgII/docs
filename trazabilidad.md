@@ -22,12 +22,12 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 8 | turnos | M4 Inicio de reserva | Proceso de reserva, hold y confirmación inicial por REST | 7 | 🟦 |
 | 9 | catálogo | M5 Sincronización incremental | Redis, aviso `CatalogUpdated` por Kafka, discontinuidad, duplicados. El chequeo periódico ya existe desde la M3: se le suma la decisión con Redis | 5 | 🟦 |
 | 10 | turnos | M5 Reserva por Kafka | Pedido y envío del teléfono, eventos terminales, reconciliación de procesos | 8 | 🟦 |
-| 11 | turnos | M6 Mis reservas | Consulta y cancelación de las reservas propias | 10 | 🟨 |
+| 11 | turnos | M6 Mis reservas | Consulta y cancelación de las reservas propias | 10 | 🟦 |
 | 12 | app-kmp | M1 a M4 | Registro e inicio de sesión, búsqueda, disponibilidad y reserva, mis reservas | 3, 6, 7, 10, 11 | 🟨 |
 | 13 | turnos y catálogo | Canal seguro | HTTPS entre la app y los backends (ADR-0035) | 12 | 🟨 |
 | 14 | turnos | Administración (opcional) | Listar, ver y cancelar reservas de cualquier usuario (HU-10) | 11 | 🟨 |
 
-Las milestones 1 a 7 están en `main`. La 8 (Turnos M4), la 9 (Catálogo M5) y la 10 (Turnos M5) están terminadas y en revisión. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
+Las milestones 1 a 7 están en `main`. La 8 (Turnos M4), la 9 (Catálogo M5), la 10 (Turnos M5) y la 11 (Turnos M6) están terminadas y en revisión. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
 
 ## Alcance funcional (ENUNCIADO §5)
 
@@ -45,8 +45,8 @@ Las milestones 1 a 7 están en `main`. La 8 (Turnos M4), la 9 (Catálogo M5) y l
 | 10 | Iniciar la confirmación por REST | HU-07, CU-04, ADR-0019, ADR-0029 | Turnos M4 | `ReservationFlowTest`, `StartReservationUseCaseImplTest`, `CatedraHoldAdapterTest`, `RemoteCommandRetryTest` | 🟦 |
 | 11 | Recibir el pedido de información y responder por Kafka | HU-07, CU-04, ADR-0020, ADR-0021, ADR-0027 | Turnos M5 | `ReservationEventFlowTest`, `HandleReservationEventUseCaseImplTest`, `SubmitPhoneUseCaseImplTest`, `PhoneNumberTest`, `ReservationEventMessageMapperTest`, `ReservationEventListenerTest`, `ReservationEventKafkaTest`, `KafkaAdditionalInformationAdapterTest`, `KafkaConfigTest`, `ReservationControllerTest` | 🟦 |
 | 12 | Reflejar el resultado final localmente | CU-04, ADR-0023, [`maquina-estados.md`](arq/maquina-estados.md) | Turnos M5 | `ReservationEventFlowTest`, `HandleReservationEventUseCaseImplTest`, `ReservationProcessTest`, `StartReservationUseCaseImplTest` (el 202 tardío no retrocede) | 🟦 |
-| 13 | Consultar las reservas propias | HU-08, ADR-0025 | Turnos M6 | | 🟨 |
-| 14 | Cancelar una reserva propia confirmada | HU-09, ADR-0026 | Turnos M6 | | 🟨 |
+| 13 | Consultar las reservas propias | HU-08, ADR-0025 | Turnos M6 | `ReservationIsolationTest`, `ListReservationsUseCaseImplTest`, `JpaReservationProcessRepositoryAdapterTest`, `ReservationControllerTest`, `PaginationHeadersTest`, `MaxPageSizeValidatorTest` | 🟦 |
+| 14 | Cancelar una reserva propia confirmada | HU-09, ADR-0026, ADR-0071 | Turnos M6 | `ReservationFlowTest`, `ReservationIsolationTest`, `CancelReservationUseCaseImplTest`, `CatedraAppointmentAdapterTest`, `ReservationControllerTest`, `HandleReservationEventUseCaseImplTest` y `ReservationEventFlowTest` (`AppointmentCancelled`) | 🟦 |
 | 15 | Informar errores de integración y recuperarse | Sincronización: CU-01, ADR-0011. Disponibilidad: CU-03 (3c, 4a). Reservas: CU-04, CU-05, ADR-0028 a ADR-0031. RNF-07 | Catálogo M3 y M5, Turnos M3 a M5 | `CatedraReadExecutorTest`, `SynchronizeCatalogUseCaseImplTest`, `CatalogSnapshotSyncTest`, `JpaSyncStateRepositoryAdapterTest`, `CatalogReadinessAccessTest`, `RedisCatalogAdapterTest`, `CatalogIncrementalSyncTest` (catálogo); `RemoteReadRetryTest`, `CatalogServiceAdapterTest`, `CatedraOccupancyAdapterTest`, `AvailabilityFlowTest`, `ReconcileReservationProcessesUseCaseImplTest`, `CatedraAppointmentAdapterTest`, `ReservationReconciliationSchedulerTest`, `ReservationReconciliationStartupTest`, `ReservationEventFlowTest` (turnos) | 🟦 parcial |
 
 ## Evidencias (ENUNCIADO §11)
@@ -60,10 +60,10 @@ Las milestones 1 a 7 están en `main`. La 8 (Turnos M4), la 9 (Catálogo M5) y l
 | Filtros por categoría, nombre, habilitado y disponibilidad | HU-05 (1 a 4) | Cada filtro, solo y combinado, desde la app | Catálogo M4, app | 🟦 parcial |
 | Reserva confirmada por REST y Kafka | HU-07, CU-04 | Reserva completa desde la app, con el teléfono | Turnos M4 y M5 (`ReservationEventFlowTest`, contra un Kafka simulado), app | 🟦 parcial |
 | Reserva que expira sin completar la información | HU-07 (6), CU-04 (11b), ADR-0020 | Reserva en la que no se ingresa el teléfono | Turnos M5 (`ReservationEventFlowTest`, evento y reconciliación), app | 🟦 parcial |
-| Consulta y cancelación propia sin acceso cruzado | HU-08, HU-09, RNF-03 | Dos usuarios; uno intenta ver y cancelar la reserva del otro | Turnos M6, app | 🟨 |
+| Consulta y cancelación propia sin acceso cruzado | HU-08, HU-09, RNF-03 | Dos usuarios; uno intenta ver y cancelar la reserva del otro | Turnos M6 (`ReservationIsolationTest`) 🟦, app | 🟦 parcial |
 | Procesamiento idempotente de un mensaje duplicado | RNF-06, ADR-0008, ADR-0023, CU-01 (1a) | `CatalogUpdated` reprocesado; evento de reserva repetido | Catálogo M5 🟦, Turnos M5 🟦 (`ReservationEventFlowTest`, `JpaProcessedEventRepositoryAdapterTest`) | 🟦 |
 | Separación efectiva de datos entre servicios | Constitución P-03, ADR-0002, ADR-0041 | Cada servicio con su propio contenedor de PostgreSQL, base, usuario y volumen; el usuario de turnos no existe en la base del catálogo | Turnos M1, Catálogo M1 | ✅ |
-| Rechazo de accesos no autenticados o no autorizados | HU-02, HU-08, HU-09, RNF-03, RNF-04, ADR-0032 | Pedidos sin token, con token vencido o falsificado, de un usuario común a rutas administrativas, y sobre reservas ajenas | Turnos M2, Catálogo M2. Reservas ajenas: Turnos M6 | 🟦 parcial |
+| Rechazo de accesos no autenticados o no autorizados | HU-02, HU-08, HU-09, RNF-03, RNF-04, ADR-0032 | Pedidos sin token, con token vencido o falsificado, de un usuario común a rutas administrativas, y sobre reservas ajenas | Turnos M2, Catálogo M2. Reservas ajenas: Turnos M6 (`ReservationIsolationTest`) | 🟦 |
 | Tests automatizados de backend | RNF-10, [`arq/pruebas.md`](arq/pruebas.md) | Ejecución de las pruebas y el historial de CI de los PR | Todas | 🟦 parcial |
 
 ## Opcionales
@@ -78,7 +78,7 @@ Las milestones 1 a 7 están en `main`. La 8 (Turnos M4), la 9 (Catálogo M5) y l
 | --- | --- | --- | --- | --- |
 | RNF-01 | Contraseñas protegidas | Turnos M2 | `BcryptPasswordHasherAdapterTest`, `UserAuthenticationFlowTest`, `UserControllerTest` | ✅ |
 | RNF-02 | Secretos en configuración externa | Turnos y Catálogo M1 y M2 | Las pruebas generan sus claves en memoria (`TestJwtKeysConfiguration`); `.env` y `secrets/` fuera de Git | ✅ |
-| RNF-03 | La identidad sale del token | Turnos M2, Catálogo M2. Reservas: Turnos M4 a M6 | `SecurityConfigTest` (los dos servicios), `UserAuthenticationFlowTest`, `ReservationFlowTest` | 🟦 parcial |
+| RNF-03 | La identidad sale del token | Turnos M2, Catálogo M2. Reservas: Turnos M4 a M6 | `SecurityConfigTest` (los dos servicios), `UserAuthenticationFlowTest`, `ReservationFlowTest`, `ReservationIsolationTest` | 🟦 |
 | RNF-04 | Endpoints protegidos por defecto | Turnos M2, Catálogo M2 | `SecurityConfigTest` (los dos servicios), `CategoryAccessTest` | ✅ |
 | RNF-05 | Validación en cada límite | Turnos M2 y M3. Integraciones: milestones siguientes | `UserControllerTest`, `MaxBytesValidatorTest`, `GlobalExceptionHandlerTest`, `AvailabilityControllerTest`, `CatalogServiceAdapterTest`, `CatedraOccupancyAdapterTest` (turnos) | 🟦 parcial |
 | RNF-06 | Procesamiento idempotente de mensajes | Catálogo M5, Turnos M5 | `HandleCatalogUpdatedUseCaseImplTest`, `JpaProcessedEventRepositoryAdapterTest`, `CatalogIncrementalSyncTest` (catálogo); `HandleReservationEventUseCaseImplTest`, `JpaProcessedEventRepositoryAdapterTest`, `PurgeProcessedEventsUseCaseImplTest`, `ReservationEventFlowTest` (turnos) | 🟦 parcial |
