@@ -184,6 +184,7 @@ Los escenarios de sincronización del lado del servicio están en [CU-01 y CU-02
 1. **Dado** una reserva mía confirmada, **cuando** la cancelo, opcionalmente con un motivo, **entonces** queda cancelada y el turno se libera ([ADR-0026](../adr/0026-cancelacion-con-respuesta-rest.md)).
 2. **Dado** una reserva mía ya cancelada, **cuando** la vuelvo a cancelar, **entonces** la operación responde éxito sin cambios.
 3. **Dado** una reserva mía que no está confirmada, **cuando** intento cancelarla, **entonces** se rechaza indicando que no se puede cancelar.
+   Lo mismo si el turno ya empezó ([ADR-0071](../adr/0071-no-se-cancela-un-turno-que-ya-empezo.md)).
 4. **Dado** una reserva de otro usuario, **cuando** intento cancelarla, **entonces** la respuesta es la misma que si no existiera y la reserva no cambia.
 5. **Dado** que la cátedra no está disponible, **cuando** intento cancelar, **entonces** la reserva no cambia y veo que el servicio no está disponible temporalmente.
 

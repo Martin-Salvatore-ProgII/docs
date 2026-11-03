@@ -39,7 +39,7 @@ Se siguen las mismas convenciones que la cátedra (REF §4), para que un mismo c
 | 403 | (puede no traer `code`) | Operación administrativa sin `ROLE_ADMIN` |
 | 409 | `ACTIVE_RESERVATION_EXISTS` | El usuario ya tiene un proceso de reserva activo |
 | 409 | `PHONE_NOT_REQUESTED` | Se envía un teléfono y el proceso no está esperándolo |
-| 409 | `RESERVATION_NOT_CANCELLABLE` | Se cancela una reserva que no está confirmada ni cancelada |
+| 409 | `RESERVATION_NOT_CANCELLABLE` | Se cancela una reserva que no está confirmada ni cancelada, o cuyo turno ya empezó ([ADR-0071](../adr/0071-no-se-cancela-un-turno-que-ya-empezo.md)) |
 | 503 | `CATALOG_NOT_READY` | El catálogo todavía no tiene una versión local |
 | 503 | `CATALOG_UNAVAILABLE` | Turnos no pudo obtener datos del catálogo |
 | 503 | `INTEGRATION_UNAVAILABLE` | Turnos no pudo obtener datos de la cátedra |

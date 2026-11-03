@@ -76,6 +76,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0068](0068-bloqueo-optimista-proceso-de-reserva.md) | Cambios simultáneos sobre un proceso de reserva: bloqueo optimista con versión | Aceptado |
 | [0069](0069-toda-falla-del-hold-cierra-el-proceso.md) | Toda falla al crear el hold cierra el proceso como fallido, y la app lo recibe como un rechazo | Aceptado |
 | [0070](0070-reglas-ante-concurrencia-en-la-base.md) | Las reglas que tienen que valer ante pedidos simultáneos las garantiza la base de datos | Aceptado |
+| [0071](0071-no-se-cancela-un-turno-que-ya-empezo.md) | Una reserva cuyo turno ya empezó no se cancela | Aceptado |
 
 ## Plantilla
 
