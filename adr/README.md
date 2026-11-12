@@ -57,7 +57,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0049](0049-jwt-cifrado-en-el-dispositivo.md) | El JWT de usuario se guarda cifrado en el dispositivo | Aceptado |
 | [0050](0050-prototipos-con-herramientas-de-diseno.md) | Las pantallas principales se prototipan con las herramientas de diseño de Claude antes de implementarlas | Aceptado |
 | [0051](0051-mvvm-en-la-app.md) | La app KMP sigue la arquitectura MVVM de la skill `/mvvm-kmp` | Aceptado |
-| [0052](0052-stack-de-la-app.md) | Stack de la app: lifecycle y navegación multiplataforma, Ktor, kotlinx.serialization y Koin | Propuesto |
+| [0052](0052-stack-de-la-app.md) | Stack de la app: librerías oficiales, Ktor, kotlinx.serialization y dependencias armadas a mano | Aceptado |
 | [0053](0053-archunit-regla-de-dependencias.md) | La regla de dependencias de la hexagonal se verifica con un test de ArchUnit | Aceptado |
 | [0054](0054-postgresql-18-en-los-dos-servicios.md) | PostgreSQL 18 en los dos servicios, con la versión mayor fijada | Aceptado |
 | [0055](0055-convenciones-comunes-del-esqueleto.md) | Convenciones comunes del esqueleto de los dos backends | Aceptado |
@@ -77,6 +77,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0069](0069-toda-falla-del-hold-cierra-el-proceso.md) | Toda falla al crear el hold cierra el proceso como fallido, y la app lo recibe como un rechazo | Aceptado |
 | [0070](0070-reglas-ante-concurrencia-en-la-base.md) | Las reglas que tienen que valer ante pedidos simultáneos las garantiza la base de datos | Aceptado |
 | [0071](0071-no-se-cancela-un-turno-que-ya-empezo.md) | Una reserva cuyo turno ya empezó no se cancela | Aceptado |
+| [0072](0072-app-solo-android.md) | La app se compila solo para Android | Aceptado |
 
 ## Plantilla
 
