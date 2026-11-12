@@ -208,5 +208,5 @@ Los escenarios de sincronización del lado del servicio están en [CU-01 y CU-02
 4. **Dado** que intento cancelar sin motivo, **entonces** se rechaza.
 5. **Dado** un usuario sin `ROLE_ADMIN`, **cuando** llama a cualquier operación administrativa, **entonces** recibe 403.
 6. **Dado** que existen operaciones administrativas, **entonces** un usuario común sigue sin poder ver ni cancelar reservas ajenas.
-7. **Dado** que la configuración indica el login de un usuario registrado como administrador, **cuando** el servicio arranca, **entonces** ese usuario tiene `ROLE_ADMIN`. Si no se indica, no hay administrador.
+7. **Dado** que la configuración indica el login y la contraseña del administrador, **cuando** el servicio arranca, **entonces** esa cuenta existe y tiene `ROLE_ADMIN`; no se crea desde el registro de la app ([ADR-0061](../adr/0061-administrador-inicial-creado-al-arrancar.md)). Si no se indica, no hay administrador.
 8. **Dado** que soy administrador, **entonces** la app me muestra la sección de administración; a un usuario común no se la muestra.

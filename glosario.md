@@ -104,4 +104,4 @@ Términos del dominio y de la integración, con el significado exacto que tienen
 
 **Hold huérfano.** Hold que la cátedra creó pero cuya respuesta nunca llegó. Vence solo en su `expiresAt`. *([ADR-0028](adr/0028-timeout-al-crear-hold.md))*
 
-**Administrador.** Usuario con `ROLE_ADMIN`. Puede ver todas las reservas y cancelar una en nombre de un usuario, y nada más. Se asigna por configuración a un usuario ya registrado. *([ADR-0037](adr/0037-rol-administrador-alcance-cerrado.md))*
+**Administrador.** Usuario con `ROLE_ADMIN`. Puede ver todas las reservas y cancelar una en nombre de un usuario, y nada más. Es una cuenta que crea el servicio de turnos al arrancar, con las credenciales de la configuración; no se registra desde la app ([ADR-0061](adr/0061-administrador-inicial-creado-al-arrancar.md)). *([ADR-0037](adr/0037-rol-administrador-alcance-cerrado.md))*

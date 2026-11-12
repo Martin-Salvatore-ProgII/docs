@@ -226,6 +226,7 @@ Alcance cerrado según [ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.
 
 - **Listar:** filtros opcionales `ownerLogin`, `status`, `from` y `to` (fechas del turno), y paginación; orden por defecto `createdAt` descendente.
 - **Representación:** la de una reserva, más `owner` (`{ login, firstName, lastName }`), `reservationProcessId` y `cancelledBy` (login de quien canceló, o `null`).
-- **Cancelar:** cuerpo obligatorio `{ "reason" }`, de 1 a 500 caracteres. Mismas respuestas y errores que la cancelación del dueño.
+- **Cancelar:** cuerpo obligatorio `{ "reason" }`, de 1 a 500 caracteres y no en blanco. Mismas reglas, respuestas y errores que la cancelación del dueño; la reserva se devuelve en la representación administrativa, con `cancelledBy` = login del administrador.
+- **Rango de fechas:** `from` y `to` son independientes y van incluidos; `from` posterior a `to` es `400 VALIDATION_ERROR`. No se limitan a hoy ni al horizonte: el administrador revisa también reservas pasadas.
 
 Errores comunes: `400 VALIDATION_ERROR`, `401`, `403`, `404 RESERVATION_NOT_FOUND`, `409 RESERVATION_NOT_CANCELLABLE`, `503 INTEGRATION_UNAVAILABLE`.
