@@ -11,6 +11,8 @@ La solución debe proteger la comunicación entre la interfaz y los servicios ba
 
 Los dos servicios exponen su API por HTTPS. En el entorno local se usa un certificado autofirmado, cargado desde configuración externa, y la app se configura para confiar en ese certificado.
 
+Cuántos certificados hay, cómo se generan y cuándo está activo HTTPS lo decide el [ADR-0073](0073-certificado-unico-y-https-por-perfil.md).
+
 ## Alternativas consideradas
 
 - **HTTP en local, documentado como limitación.** Queda como plan B si la configuración en Android se complica. Descartada como opción principal: contraseñas y tokens viajarían en texto plano, y el enunciado pide proteger el canal.

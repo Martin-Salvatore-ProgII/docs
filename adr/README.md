@@ -78,6 +78,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0070](0070-reglas-ante-concurrencia-en-la-base.md) | Las reglas que tienen que valer ante pedidos simultáneos las garantiza la base de datos | Aceptado |
 | [0071](0071-no-se-cancela-un-turno-que-ya-empezo.md) | Una reserva cuyo turno ya empezó no se cancela | Aceptado |
 | [0072](0072-app-solo-android.md) | La app se compila solo para Android | Aceptado |
+| [0073](0073-certificado-unico-y-https-por-perfil.md) | Un solo certificado autofirmado para los dos servicios, y HTTPS activado por un perfil | Aceptado |
 
 ## Plantilla
 
