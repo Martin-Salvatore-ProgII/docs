@@ -8,7 +8,7 @@ Cómo se trabaja en los tres repositorios de código (`app-kmp`, `catalogo-servi
 - **Qué entra en cada milestone se conversa antes** entre el alumno y el agente: por dónde encarar el trabajo y cómo partirlo en issues.
 - El agente trabaja sobre una issue que ya existe. Crea la rama de esa issue **solo en local**, a partir de `develop` actualizada (`git checkout -b <tipo>/<N>-<descripcion>`), escribe los archivos y propone los mensajes de commit. No escribe nada en GitHub: la rama remota la crea el push del alumno, y el pull request la vincula a la issue con "Cierra la Issue #N".
 - Los comandos que el agente entrega para pegar van **uno por línea**, sin `\` de continuación: pegados en zsh, los cortes de línea se rompen y el comando no se ejecuta.
-- **Los commits, el push, el pull request y el merge los hace el alumno**, después de revisar los cambios. El agente no commitea ni mergea en los repos de código.
+- **El push, el pull request y el merge los hace el alumno**, después de revisar los cambios. El agente nunca pushea ni mergea. Con [ramas acumuladas](#ramas-acumuladas), el agente commitea en local cada issue; en el resto de los casos commitea el alumno.
 
 ## Ramas
 
@@ -66,6 +66,18 @@ Un pull request no guarda una copia de la rama de origen: la sigue. Todo lo que 
 - Al mergear el PR a `main`, la rama de milestone se borra.
 
 **Excepción: el repo `docs`.** No tiene ramas protegidas y se commitea directo a `main`, con Conventional Commits. Es documentación de trabajo propia y no forma parte de la entrega evaluada, así que no necesita el flujo de issues y PR.
+
+### Ramas acumuladas
+
+Es la forma de trabajar desde la M7 de turnos, y la de todas las milestones de la app. Evita frenar entre issues esperando un merge, y el historial sigue mostrando una rama y un PR por issue.
+
+1. **Las decisiones de la milestone se toman al empezar**, todas juntas, antes de escribir código.
+2. **Cada rama sale de la anterior**, no de `develop`: la primera issue sale de `develop` actualizada, la segunda de la rama de la primera, y así. Por ejemplo, `feat/1-...` → `feat/2-...` → `feat/3-...`.
+3. **El agente commitea en local** al terminar cada issue, antes de crear la rama siguiente. Usa la identidad de Git del alumno, con Conventional Commits y sin atribuciones a herramientas. No pushea ni escribe nada en GitHub.
+4. **Al terminar la milestone, el alumno revisa y sube todo.** Pushea las ramas y abre los PR a `develop` en el orden de las issues, mergeando cada uno antes de abrir el siguiente. Así cada PR muestra solo los commits de su issue. Después sigue el paso de la rama de milestone.
+5. **Los cambios en `docs`** quedan sin commitear, y el alumno los commitea al final junto con el resto.
+
+El agente entrega un solo bloque de comandos para toda la milestone, con el mismo formato de siempre: uno por línea y sin `\`.
 
 ## Milestones
 
