@@ -79,6 +79,8 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0071](0071-no-se-cancela-un-turno-que-ya-empezo.md) | Una reserva cuyo turno ya empezó no se cancela | Aceptado |
 | [0072](0072-app-solo-android.md) | La app se compila solo para Android | Aceptado |
 | [0073](0073-certificado-unico-y-https-por-perfil.md) | Un solo certificado autofirmado para los dos servicios, y HTTPS activado por un perfil | Aceptado |
+| [0074](0074-app-en-dos-modulos-con-agp-9.md) | La app tiene dos módulos: el código común y la app Android | Aceptado |
+| [0075](0075-configuracion-de-red-de-la-app.md) | Configuración de red de la app: URL en `BuildConfig`, Ktor sobre OkHttp y el certificado copiado al compilar | Aceptado |
 
 ## Plantilla
 
