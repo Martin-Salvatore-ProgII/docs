@@ -70,4 +70,4 @@ La app decide qué mostrar por el `status` y el `code` de la respuesta, nunca po
 - **Componentes de Material 3**, los que trae Compose, antes que componentes a medida. Se pueden tomar como referencia catálogos de componentes prefabricados.
 - **Prototipos con las herramientas de diseño de Claude** antes de implementar las pantallas principales, para acordar la disposición y el flujo ([ADR-0050](../adr/0050-prototipos-con-herramientas-de-diseno.md)). El prototipo sirve de guía visual; la fuente de verdad sigue siendo este documento.
 - **El JWT se guarda cifrado** en el dispositivo ([ADR-0049](../adr/0049-jwt-cifrado-en-el-dispositivo.md)).
-- **Configuración de la app:** las URL base de los dos servicios y la confianza en el certificado local ([ADR-0035](../adr/0035-https-entre-app-y-backends.md)).
+- **Configuración de la app:** las URL base de los dos servicios y la confianza en el certificado local ([ADR-0035](../adr/0035-https-entre-app-y-backends.md), [ADR-0075](../adr/0075-configuracion-de-red-de-la-app.md)).

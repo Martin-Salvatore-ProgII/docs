@@ -96,6 +96,7 @@ Los valores operativos del sistema se definen por configuración externa, con un
 | Horizonte de fechas para la disponibilidad y el filtro de la búsqueda (el mismo valor en los dos servicios) | 60 días | [ADR-0015](../adr/0015-reglas-disponibilidad-turnos.md), [ADR-0065](../adr/0065-reglas-entrada-filtro-disponibilidad.md) |
 | Tamaño de página por defecto y máximo | 20 y 100 | [`arq/contratos.md`](../arq/contratos.md) |
 | Intervalo de consulta del estado de una reserva (en la app) | 2 segundos | [ADR-0021](../adr/0021-app-consulta-estado-por-polling.md) |
+| Timeouts de conexión y de respuesta de la app hacia los backends | 5 y 60 segundos. La respuesta cubre el peor caso de iniciar una reserva, con todos los reintentos de turnos ante el catálogo y la cátedra (unos 45 segundos), para que la app no corte antes que el backend | [ADR-0075](../adr/0075-configuracion-de-red-de-la-app.md) |
 | Timeouts de conexión y de respuesta hacia la cátedra y el catálogo | 2 y 5 segundos | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
 | Reintentos de operaciones seguras de repetir | 2 (1 en lecturas) | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
 | Espera antes de cada reintento de una operación segura de repetir | 500 ms, y se duplica en cada uno (500 ms y 1 s) | [ADR-0029](../adr/0029-reintentos-acotados-por-operacion.md) |
