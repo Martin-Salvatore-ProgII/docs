@@ -81,6 +81,8 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0073](0073-certificado-unico-y-https-por-perfil.md) | Un solo certificado autofirmado para los dos servicios, y HTTPS activado por un perfil | Aceptado |
 | [0074](0074-app-en-dos-modulos-con-agp-9.md) | La app tiene dos módulos: el código común y la app Android | Aceptado |
 | [0075](0075-configuracion-de-red-de-la-app.md) | Configuración de red de la app: URL en `BuildConfig`, Ktor sobre OkHttp y el certificado copiado al compilar | Aceptado |
+| [0076](0076-jwt-cifrado-con-android-keystore.md) | El JWT se cifra con una clave del Android Keystore, sin librería | Aceptado |
+| [0077](0077-sesion-de-la-app.md) | Sesión de la app: vencimiento leído del JWT y el 401 resuelto en el cliente HTTP | Aceptado |
 
 ## Plantilla
 

@@ -25,14 +25,16 @@ flowchart TD
 
 \* Solo visible con `ROLE_ADMIN` ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)).
 
-Al abrir la app, si hay un JWT vigente se entra directo a Buscar; si no, a Login. Si hay un proceso de reserva activo, la app ofrece volver a Reserva en curso ([ADR-0021](../adr/0021-app-consulta-estado-por-polling.md)).
+Al abrir la app, si hay un JWT vigente se entra directo a Buscar; si no, a Login ([ADR-0077](../adr/0077-sesion-de-la-app.md)). Si hay un proceso de reserva activo, la app ofrece volver a Reserva en curso ([ADR-0021](../adr/0021-app-consulta-estado-por-polling.md)).
+
+Las secciones de la barra inferior tienen arriba el botón **Cerrar sesión**. Al cerrar la sesión, por ese botón o por un 401, la app vuelve a Login sin dejar pantallas protegidas en la pila; si fue por un 401, avisa que la sesión venció.
 
 ## Pantallas
 
 | Pantalla | Qué permite | Servicio | Requisito |
 | --- | --- | --- | --- |
-| **Login** | Iniciar sesión, con la opción de recordar la sesión (`rememberMe`) | Turnos | HU-02 |
-| **Registro** | Crear la cuenta con los campos y validaciones de HU-01 | Turnos | HU-01 |
+| **Login** | Iniciar sesión, con la opción de recordar la sesión (`rememberMe`). Credenciales incorrectas se informan sin decir cuál de los dos datos falló | Turnos | HU-02 |
+| **Registro** | Crear la cuenta con los campos y validaciones de HU-01. `langKey` no se pregunta: la app está en español y envía `es`. Al terminar vuelve a Login con el usuario escrito, sin iniciar sesión | Turnos | HU-01 |
 | **Buscar** | Filtrar por categoría, nombre, estado habilitado y disponibilidad (fecha y franja opcional); lista paginada; aviso no bloqueante de "catálogo actualizándose" | Catálogo | HU-04, HU-05 |
 | **Profesional** | Ver la agenda vigente del profesional y elegir una fecha (por defecto, la del filtro de búsqueda) | Catálogo | HU-05, ADR-0017 |
 | **Turnos disponibles** | Ver los slots libres de la fecha, cambiar de día y tocar "Reservar" | Turnos | HU-06 |
@@ -59,7 +61,7 @@ La app decide qué mostrar por el `status` y el `code` de la respuesta, nunca po
 | --- | --- |
 | 401 | Descarta el JWT y vuelve a Login |
 | 403 | Informa que no tiene permiso |
-| 400 con `fieldErrors` | Marca los campos inválidos del formulario |
+| 400 con `fieldErrors` | Marca los campos inválidos del formulario, con un mensaje propio de la app para cada campo (los del backend no se muestran) |
 | 400, 404 o 409 con `code` | Muestra un mensaje propio para cada `code` |
 | 503 | Informa que el servicio no está disponible temporalmente y permite reintentar |
 
