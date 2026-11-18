@@ -83,6 +83,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0075](0075-configuracion-de-red-de-la-app.md) | Configuración de red de la app: URL en `BuildConfig`, Ktor sobre OkHttp y el certificado copiado al compilar | Aceptado |
 | [0076](0076-jwt-cifrado-con-android-keystore.md) | El JWT se cifra con una clave del Android Keystore, sin librería | Aceptado |
 | [0077](0077-sesion-de-la-app.md) | Sesión de la app: vencimiento leído del JWT y el 401 resuelto en el cliente HTTP | Aceptado |
+| [0078](0078-permiso-de-red-local-en-android-17.md) | La app pide el permiso de red local de Android 17 | Aceptado |
 
 ## Plantilla
 
