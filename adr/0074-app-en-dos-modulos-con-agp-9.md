@@ -11,7 +11,7 @@ Desde la versión 9 del plugin de Android para Gradle (AGP), el plugin de Kotlin
 
 ## Decisión
 
-El proyecto usa la última versión estable de AGP 9 y tiene dos módulos:
+El proyecto usa AGP 9, en la última versión que soporta el Android Studio estable (para que el proyecto abra en cualquier instalación al día), y tiene dos módulos:
 
 - **`composeApp`**: biblioteca KMP con todo el código común (pantallas, ViewModels, dominio, repositorios, red) y sus pruebas. Tiene solo `commonMain` y `commonTest`.
 - **`androidApp`**: la app Android. Contiene `MainActivity`, el manifiesto, la configuración de red (confianza en el certificado local, [ADR-0073](0073-certificado-unico-y-https-por-perfil.md)) y las implementaciones Android de las interfaces de plataforma, por ejemplo el almacenamiento cifrado del JWT ([ADR-0049](0049-jwt-cifrado-en-el-dispositivo.md)). Depende de `composeApp`, nunca al revés.
