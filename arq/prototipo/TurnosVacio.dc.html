@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Turnos disponibles, sin turnos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 16px 0 4px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#191C1C;padding:0;text-decoration:none;flex-shrink:0}
+.iconbtn:disabled{color:#BEC9C8}
+.content{flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:20px}
+.content > *{flex-shrink:0}
+.sub{font-size:14px;color:#3F4948}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;height:48px;border-radius:24px;background:#006A6A;color:#FFFFFF;border:0;font:500 16px 'Roboto',sans-serif;text-decoration:none;width:100%;box-sizing:border-box}
+.cta:hover{color:#FFFFFF}
+.cta:disabled{background:#DFE4E3;color:#6F7979}
+.outlined{height:48px;border:1px solid #6F7979;border-radius:24px;background:none;color:#006A6A;font:500 15px 'Roboto',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 24px;text-decoration:none;box-sizing:border-box}
+.textbtn{height:48px;border:0;background:none;color:#006A6A;font:500 15px 'Roboto',sans-serif;border-radius:24px;display:flex;align-items:center;justify-content:center;text-decoration:none;padding:0 16px}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#FFDAD6;color:#410002;font-size:14px;line-height:20px}
+.msg{padding:14px 16px;border-radius:12px;background:#DBE1FF;color:#04174B;font-size:14px;line-height:20px}
+.ring{width:20px;height:20px;border-radius:50%;border:2px solid #CCE8E7;border-top-color:#006A6A;box-sizing:border-box;flex-shrink:0}
+.ring.light{border-color:rgba(255,255,255,.35);border-top-color:#FFFFFF}
+.daybar{display:flex;align-items:center;justify-content:space-between;border:1px solid #BEC9C8;border-radius:28px;padding:4px}
+.daybtn{border:0;background:none;display:flex;align-items:center;gap:8px;font:500 16px 'Roboto',sans-serif;color:#191C1C;height:48px;padding:0 12px;border-radius:24px}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.slot{height:48px;border:1px solid #6F7979;border-radius:12px;background:none;font:500 16px 'Roboto',sans-serif;color:#191C1C}
+.slot.sel{background:#006A6A;border-color:#006A6A;color:#FFFFFF}
+.slot:disabled{border-color:#DAE5E4;color:#9AA3A3}
+.slot.sel:disabled{background:#6F9E9D;border-color:#6F9E9D;color:#FFFFFF}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:28px 8px 0}
+.empty .ico{width:64px;height:64px;border-radius:32px;background:#E3EAE9;display:flex;align-items:center;justify-content:center;color:#3F4948;margin-bottom:6px}
+.empty h2{margin:0;font-size:18px;font-weight:500}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.32);display:flex;align-items:center;justify-content:center;padding:24px}
+.dialog{background:#EEF5F4;border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:16px;width:100%;box-sizing:border-box}
+.dialog h2{margin:0;font-size:22px;font-weight:400}
+.dialog .actions{display:flex;justify-content:flex-end;gap:8px}
+.filled{height:40px;padding:0 20px;border-radius:20px;background:#006A6A;color:#FFFFFF;font:500 14px 'Roboto',sans-serif;display:flex;align-items:center;text-decoration:none}
+.filled:hover{color:#FFFFFF}
+.dialog .textbtn{height:40px;font-size:14px;padding:0 12px}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <a class="iconbtn" href="Profesional.dc.html" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"></path></svg></a>
+    <h1>Turnos disponibles</h1>
+  </header>
+
+  <main class="content">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 18px">Martín Rivas</span>
+      <span class="sub">Cardiología</span>
+    </div>
+
+    <div class="daybar">
+      <button class="iconbtn" aria-label="Día anterior que atiende"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button>
+      <button class="daybtn" aria-label="Elegir otra fecha"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Martes 1 de diciembre</button>
+      <button class="iconbtn" aria-label="Próximo día que atiende"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button>
+    </div>
+
+    <div class="empty">
+      <span class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></span>
+      <h2>No quedan turnos libres este día</h2>
+      <span class="sub">Probá con el próximo día que atiende.</span>
+    </div>
+    <a class="outlined" href="Turnos.dc.html" style="align-self: center">Ver jueves 3 de diciembre</a>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -20,8 +20,23 @@ La fuente de verdad sigue siendo [`interfaz.md`](../interfaz.md) y los ADR: si e
 | Login, sesión vencida y error | [`LoginAviso.dc.html`](LoginAviso.dc.html) | M2, ajustada en la M3 (#43) |
 | Registro | [`Registro.dc.html`](Registro.dc.html) | M2, ajustada en la M3 (#43) |
 | Registro, errores por campo | [`RegistroErrores.dc.html`](RegistroErrores.dc.html) | M2, ajustada en la M3 (#43) |
-| Turnos disponibles | [`Turnos.dc.html`](Turnos.dc.html) | M4 (guía) |
-| Reserva en curso | [`Reserva.dc.html`](Reserva.dc.html) | M4 (guía) |
+| Turnos disponibles | [`Turnos.dc.html`](Turnos.dc.html) | M4 |
+| Turnos disponibles, reservando | [`TurnosReservando.dc.html`](TurnosReservando.dc.html) | M4 |
+| Turnos disponibles, el turno ya no está libre | [`TurnosTomado.dc.html`](TurnosTomado.dc.html) | M4 |
+| Turnos disponibles, ya hay una reserva en curso | [`TurnosEnCurso.dc.html`](TurnosEnCurso.dc.html) | M4 |
+| Turnos disponibles, sin turnos libres | [`TurnosVacio.dc.html`](TurnosVacio.dc.html) | M4 |
+| Turnos disponibles, fecha fuera de rango | [`TurnosFueraDeRango.dc.html`](TurnosFueraDeRango.dc.html) | M4 |
+| Turnos disponibles, servicio no disponible | [`TurnosNoDisponible.dc.html`](TurnosNoDisponible.dc.html) | M4 |
+| Buscar, retomar la reserva en curso | [`BuscarEnCurso.dc.html`](BuscarEnCurso.dc.html) | M4 |
+| Reserva en curso, reservando | [`ReservaIniciando.dc.html`](ReservaIniciando.dc.html) | M4 |
+| Reserva en curso, pide el teléfono | [`Reserva.dc.html`](Reserva.dc.html) | M4 |
+| Reserva en curso, teléfono con formato inválido | [`ReservaTelefonoInvalido.dc.html`](ReservaTelefonoInvalido.dc.html) | M4 |
+| Reserva en curso, teléfono rechazado | [`ReservaRechazada.dc.html`](ReservaRechazada.dc.html) | M4 |
+| Reserva en curso, confirmando | [`ReservaConfirmando.dc.html`](ReservaConfirmando.dc.html) | M4 |
+| Reserva en curso, se terminó el tiempo | [`ReservaTiempoTerminado.dc.html`](ReservaTiempoTerminado.dc.html) | M4 |
+| Reserva confirmada | [`ReservaConfirmada.dc.html`](ReservaConfirmada.dc.html) | M4 |
+| Reserva vencida | [`ReservaVencida.dc.html`](ReservaVencida.dc.html) | M4 |
+| Reserva que no se pudo completar | [`ReservaFallida.dc.html`](ReservaFallida.dc.html) | M4 |
 | Mis reservas | [`MisReservas.dc.html`](MisReservas.dc.html) | M5 (guía) |
 
 Las pantallas marcadas como guía son una primera idea: se revisan y se aprueban en su milestone.

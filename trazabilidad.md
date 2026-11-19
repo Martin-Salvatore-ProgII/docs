@@ -28,7 +28,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 14 | app-kmp | M1 Esqueleto de la app | Proyecto KMP solo para Android en dos módulos (ADR-0074), paquetes MVVM, contenedor de dependencias, navegación, cliente HTTP de los dos servicios con confianza en el certificado local (ADR-0073, ADR-0075), errores `problem+json`, CI | 13 | 🟦 |
 | 15 | app-kmp | M2 Usuario y sesión | Registro, inicio de sesión, JWT cifrado en el dispositivo, cierre de sesión y vuelta a Login ante un 401 | 3, 14 | 🟦 |
 | 16 | app-kmp | M3 Búsqueda de profesionales | Prototipo de las pantallas en un lienzo común (ADR-0050), los cuatro filtros que se van sumando, lista paginada, aviso del estado del catálogo y agenda del profesional con accesos a sus turnos (ADR-0079); ajustes de Login y Registro según su prototipo | 6, 15 | 🟦 |
-| 17 | app-kmp | M4 Disponibilidad y reserva | Turnos disponibles, inicio de la reserva, seguimiento del proceso, envío del teléfono y retomar un proceso activo | 7, 10, 16 | 🟨 |
+| 17 | app-kmp | M4 Disponibilidad y reserva | Turnos disponibles con cambio de día por días de atención, inicio de la reserva, seguimiento del proceso con cuenta regresiva que bloquea el envío, envío del teléfono y retomar un proceso activo desde Buscar (ADR-0080) | 7, 10, 16 | 🟦 |
 | 18 | app-kmp | M5 Mis reservas | Lista de las reservas propias, detalle y cancelación | 11, 17 | 🟨 |
 | 19 | app-kmp | ~~M6 Canal seguro~~ | Absorbida por la 14: los backends en Compose hablan solo HTTPS (ADR-0073), así que la app confía en el certificado desde el esqueleto | — | — |
 | 20 | app-kmp | M7 Administración (opcional) | Sección de administración visible según el rol: lista, detalle y cancelación de cualquier reserva | 12, 18 | 🟨 |

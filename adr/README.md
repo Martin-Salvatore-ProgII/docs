@@ -85,6 +85,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0077](0077-sesion-de-la-app.md) | Sesión de la app: vencimiento leído del JWT y el 401 resuelto en el cliente HTTP | Aceptado |
 | [0078](0078-permiso-de-red-local-en-android-17.md) | La app pide el permiso de red local de Android 17 | Aceptado |
 | [0079](0079-busqueda-y-estado-del-catalogo-en-la-app.md) | Búsqueda, estado del catálogo y pantalla del profesional en la app | Aceptado |
+| [0080](0080-disponibilidad-y-reserva-en-la-app.md) | Disponibilidad y reserva en la app: cambio de día, proceso activo, cuenta regresiva y seguimiento | Aceptado |
 
 ## Plantilla
 
