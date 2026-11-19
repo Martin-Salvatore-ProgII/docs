@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Elegir categoría</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;padding:0 4px 0 16px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.ghost{border:1px solid #BEC9C8;border-radius:16px;flex-shrink:0}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,0.32);display:flex;flex-direction:column;justify-content:flex-end}
+.sheet{background:#EEF5F4;border-radius:28px 28px 0 0;padding:8px 0 24px;display:flex;flex-direction:column}
+.handle{width:32px;height:4px;border-radius:2px;background:#6F7979;align-self:center;margin:14px 0 18px}
+.sheet h2{margin:0 24px 8px;font-size:22px;font-weight:400}
+.opt{display:flex;align-items:center;gap:16px;height:56px;padding:0 24px;border:0;background:none;font:400 17px 'Roboto',sans-serif;color:#191C1C;text-align:left;width:100%}
+.opt span{flex:1}
+.opt.on{background:#CCE8E7;color:#051F1F;font-weight:500}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar"><h1>Buscar</h1></header>
+  <div style="flex: 1; padding: 8px 16px; display: flex; flex-direction: column; gap: 16px" aria-hidden="true">
+    <div class="ghost" style="height: 56px; border-radius: 28px; background: #E3EAE9; border: 0"></div>
+    <div style="display: flex; gap: 8px"><div class="ghost" style="width: 120px; height: 40px; border-radius: 10px"></div><div class="ghost" style="width: 90px; height: 40px; border-radius: 10px"></div></div>
+    <div class="ghost" style="height: 76px"></div>
+    <div class="ghost" style="height: 76px"></div>
+  </div>
+
+  <div class="scrim">
+    <section class="sheet" role="dialog" aria-labelledby="t">
+      <span class="handle" aria-hidden="true"></span>
+      <h2 id="t">Categoría</h2>
+      <button class="opt on"><span>Todas</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg></button>
+      <a class="opt" href="BuscarFiltros.dc.html" style="text-decoration: none; box-sizing: border-box"><span>Cardiología</span></a>
+      <button class="opt"><span>Clínica médica</span></button>
+      <button class="opt"><span>Dermatología</span></button>
+      <button class="opt"><span>Ginecología</span></button>
+      <button class="opt"><span>Oftalmología</span></button>
+      <button class="opt"><span>Pediatría</span></button>
+      <button class="opt"><span>Salud mental</span></button>
+      <button class="opt"><span>Traumatología</span></button>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 13 | turnos y catálogo | Turnos M8 y catálogo M6 Canal seguro | HTTPS entre la app y los backends y de turnos al catálogo, con un certificado autofirmado (ADR-0035, ADR-0073) | 3, 4 | 🟦 |
 | 14 | app-kmp | M1 Esqueleto de la app | Proyecto KMP solo para Android en dos módulos (ADR-0074), paquetes MVVM, contenedor de dependencias, navegación, cliente HTTP de los dos servicios con confianza en el certificado local (ADR-0073, ADR-0075), errores `problem+json`, CI | 13 | 🟦 |
 | 15 | app-kmp | M2 Usuario y sesión | Registro, inicio de sesión, JWT cifrado en el dispositivo, cierre de sesión y vuelta a Login ante un 401 | 3, 14 | 🟦 |
-| 16 | app-kmp | M3 Búsqueda de profesionales | Prototipo de las pantallas principales, los cuatro filtros, lista paginada, aviso del estado del catálogo y agenda del profesional | 6, 15 | 🟨 |
+| 16 | app-kmp | M3 Búsqueda de profesionales | Prototipo de las pantallas en un lienzo común (ADR-0050), los cuatro filtros que se van sumando, lista paginada, aviso del estado del catálogo y agenda del profesional con accesos a sus turnos (ADR-0079); ajustes de Login y Registro según su prototipo | 6, 15 | 🟦 |
 | 17 | app-kmp | M4 Disponibilidad y reserva | Turnos disponibles, inicio de la reserva, seguimiento del proceso, envío del teléfono y retomar un proceso activo | 7, 10, 16 | 🟨 |
 | 18 | app-kmp | M5 Mis reservas | Lista de las reservas propias, detalle y cancelación | 11, 17 | 🟨 |
 | 19 | app-kmp | ~~M6 Canal seguro~~ | Absorbida por la 14: los backends en Compose hablan solo HTTPS (ADR-0073), así que la app confía en el certificado desde el esqueleto | — | — |

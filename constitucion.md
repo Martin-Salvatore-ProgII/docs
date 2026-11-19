@@ -24,6 +24,8 @@ Cada principio cita su origen. Los que vienen del enunciado son requisitos evalu
 
 **P-07. Base de datos con servidor.** H2, SQLite y cualquier base embebida o en memoria no se aceptan como almacenamiento principal. *(ENUNCIADO §3)*
 
+**P-21. Los valores operativos de un backend se definen solo en ese backend.** Un valor que configura un backend (el horizonte de fechas, un tamaño máximo, una regla de [RNF-09](requisitos/no-funcionales.md#rnf-09-sin-supuestos-fijos-sobre-los-datos-de-la-cátedra-y-valores-operativos-configurables)) no se repite en la app ni en el otro servicio. Si la app lo necesita para la interfaz, lo lee de una respuesta del backend; si ningún contrato lo informa, deja que el backend rechace y muestra el error con un mensaje propio. Repetir un valor deja dos lugares que cambiar y que, tarde o temprano, dejan de coincidir. Se exceptúan las reglas fijas de un contrato externo, que la app repite a propósito solo para avisar antes de enviar (el formato del teléfono, [ADR-0027](adr/0027-validacion-local-del-telefono.md)), y los valores que son de la propia app (sus timeouts y su intervalo de consulta, RNF-09). *(Acuerdo del proyecto; [ADR-0079](adr/0079-busqueda-y-estado-del-catalogo-en-la-app.md))*
+
 ## Seguridad
 
 **P-08. Los secretos nunca se commitean ni se exponen.** El JWT técnico, las credenciales, los hosts de la cátedra y los valores del objeto `integration` van en configuración externa. No aparecen en el código, en los repos, en los logs, en capturas, en la documentación ni en la app. *(ENUNCIADO §9; REF §3, §5.1)*

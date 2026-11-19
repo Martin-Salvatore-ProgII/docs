@@ -55,7 +55,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0047](0047-tests-basicos-en-la-app.md) | La app KMP tiene pocas pruebas, básicas y sobre lógica pura | Aceptado |
 | [0048](0048-compose-multiplatform.md) | La interfaz se construye con Compose Multiplatform en el código común | Aceptado |
 | [0049](0049-jwt-cifrado-en-el-dispositivo.md) | El JWT de usuario se guarda cifrado en el dispositivo | Aceptado |
-| [0050](0050-prototipos-con-herramientas-de-diseno.md) | Las pantallas principales se prototipan con las herramientas de diseño de Claude antes de implementarlas | Aceptado |
+| [0050](0050-prototipos-con-herramientas-de-diseno.md) | Las pantallas se prototipan en un solo lienzo de diseño de Claude antes de implementarlas | Aceptado |
 | [0051](0051-mvvm-en-la-app.md) | La app KMP sigue la arquitectura MVVM de la skill `/mvvm-kmp` | Aceptado |
 | [0052](0052-stack-de-la-app.md) | Stack de la app: librerías oficiales, Ktor, kotlinx.serialization y dependencias armadas a mano | Aceptado |
 | [0053](0053-archunit-regla-de-dependencias.md) | La regla de dependencias de la hexagonal se verifica con un test de ArchUnit | Aceptado |
@@ -84,6 +84,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0076](0076-jwt-cifrado-con-android-keystore.md) | El JWT se cifra con una clave del Android Keystore, sin librería | Aceptado |
 | [0077](0077-sesion-de-la-app.md) | Sesión de la app: vencimiento leído del JWT y el 401 resuelto en el cliente HTTP | Aceptado |
 | [0078](0078-permiso-de-red-local-en-android-17.md) | La app pide el permiso de red local de Android 17 | Aceptado |
+| [0079](0079-busqueda-y-estado-del-catalogo-en-la-app.md) | Búsqueda, estado del catálogo y pantalla del profesional en la app | Aceptado |
 
 ## Plantilla
 

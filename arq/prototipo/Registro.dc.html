@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Registro</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 16px 0 4px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#191C1C;padding:0;text-decoration:none;flex-shrink:0}
+.content{flex:1;min-height:0;overflow:hidden;padding:4px 24px 0;display:flex;flex-direction:column;gap:20px}
+.content > *{flex-shrink:0}
+.section{font-size:14px;font-weight:500;color:#006A6A;margin:4px 0 -4px;letter-spacing:.2px}
+.field{position:relative;height:56px;border:1px solid #6F7979;border-radius:4px;display:flex;align-items:center;gap:8px;padding:0 4px 0 16px;box-sizing:border-box;color:#3F4948}
+.field input{border:0;background:none;font:400 17px 'Roboto',sans-serif;color:#191C1C;flex:1;min-width:0;outline:none;padding:0}
+.field input::placeholder{color:#5A6464}
+.field .lab{position:absolute;top:-9px;left:12px;padding:0 4px;background:#F4FBFA;font-size:12px;color:#3F4948}
+.help{font-size:12px;color:#3F4948;padding-left:16px;margin-top:-14px}
+.add{height:48px;border:0;background:none;color:#006A6A;font:500 15px 'Roboto',sans-serif;display:flex;align-items:center;gap:8px;padding:0;align-self:flex-start}
+.cta{height:56px;border-radius:28px;background:#006A6A;color:#FFFFFF;border:0;font:500 17px 'Roboto',sans-serif;width:100%}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <a class="iconbtn" href="Login.dc.html" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"></path></svg></a>
+    <h1>Crear cuenta</h1>
+  </header>
+
+  <main class="content">
+    <span class="section">Tus datos</span>
+    <div class="field"><span class="lab">Nombre</span><input aria-label="Nombre" value="Ana"></div>
+    <div class="field"><span class="lab">Apellido</span><input aria-label="Apellido" value="Pérez"></div>
+    <div class="field"><span class="lab">Email</span><input aria-label="Email" value="ana@example.com" inputmode="email"></div>
+
+    <span class="section">Tu cuenta</span>
+    <div class="field"><span class="lab">Usuario</span><input aria-label="Usuario" value="ana.perez"></div>
+    <span class="help">Letras, números y . _ @ -</span>
+    <div class="field">
+      <span class="lab">Contraseña</span>
+      <input aria-label="Contraseña" type="password" value="secreta">
+      <button class="iconbtn" aria-label="Mostrar la contraseña" style="color: #3F4948"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+    </div>
+    <span class="help">Al menos 4 caracteres</span>
+
+    <button class="add"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Agregar foto de perfil (opcional)</button>
+  </main>
+
+  <div style="padding: 12px 24px 32px">
+    <a class="cta" href="Login.dc.html" style="display: flex; align-items: center; justify-content: center; text-decoration: none; color: #FFFFFF">Crear cuenta</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reserva en curso</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 16px 0 4px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#191C1C;padding:0;text-decoration:none}
+.content{flex:1;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:20px}
+.sub{font-size:14px;color:#3F4948}
+.summary{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:12px;background:#E3EAE9}
+.steps{display:flex;align-items:center;gap:8px;font-size:12px;color:#3F4948}
+.step{display:flex;align-items:center;gap:6px}
+.num{width:24px;height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:12px;border:1px solid #6F7979}
+.num.done{background:#006A6A;border-color:#006A6A;color:#FFFFFF}
+.num.now{background:#CCE8E7;border-color:#CCE8E7;color:#051F1F}
+.line{flex:1;height:1px;background:#BEC9C8}
+.msg{padding:14px 16px;border-radius:12px;background:#DBE1FF;color:#04174B;font-size:14px;line-height:20px}
+.track{height:4px;border-radius:2px;background:#CCE8E7;overflow:hidden}
+.field{position:relative;height:56px;border:2px solid #006A6A;border-radius:4px;display:flex;align-items:center;gap:10px;padding:0 12px;box-sizing:border-box;color:#3F4948}
+.field input{border:0;background:none;font:400 16px 'Roboto',sans-serif;color:#191C1C;flex:1;min-width:0;outline:none;padding:0}
+.field .lab{position:absolute;top:-9px;left:10px;padding:0 4px;background:#F4FBFA;font-size:12px;color:#006A6A}
+.cta{height:48px;border-radius:24px;background:#006A6A;color:#FFFFFF;border:0;font:500 16px 'Roboto',sans-serif;width:100%}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <a class="iconbtn" href="Turnos.dc.html" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"></path></svg></a>
+    <h1>Reserva en curso</h1>
+  </header>
+
+  <main class="content">
+    <div class="summary">
+      <span style="font-size: 18px">Martín Rivas</span>
+      <span class="sub">Jueves 26 de noviembre · 19:30 a 20:00</span>
+    </div>
+
+    <div class="steps" aria-label="Progreso">
+      <span class="step"><span class="num done">✓</span>Reservado</span>
+      <span class="line"></span>
+      <span class="step"><span class="num now">2</span><b style="color: #191C1C; font-weight: 500">Teléfono</b></span>
+      <span class="line"></span>
+      <span class="step"><span class="num">3</span>Confirmado</span>
+    </div>
+
+    <div class="msg" role="status">Ingrese un número de teléfono para continuar.</div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; font-size: 14px">
+        <span class="sub">Tiempo para completar</span>
+        <span style="font-weight: 500; font-variant-numeric: tabular-nums">4:32</span>
+      </div>
+      <div class="track"><div style="width: 62%; height: 4px; background: #006A6A"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <div class="field">
+        <span class="lab">Teléfono</span>
+        <input aria-label="Teléfono" value="+54 9 11 5555-1234" inputmode="tel">
+      </div>
+      <span class="sub" style="font-size: 12px; padding-left: 16px">Podés escribirlo con espacios, guiones o paréntesis.</span>
+    </div>
+  </main>
+
+  <div style="padding: 16px 16px 24px">
+    <button class="cta">Enviar teléfono</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

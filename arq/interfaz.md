@@ -35,8 +35,8 @@ Las secciones de la barra inferior tienen arriba el botón **Cerrar sesión**. A
 | --- | --- | --- | --- |
 | **Login** | Iniciar sesión, con la opción de recordar la sesión (`rememberMe`). Credenciales incorrectas se informan sin decir cuál de los dos datos falló | Turnos | HU-02 |
 | **Registro** | Crear la cuenta con los campos y validaciones de HU-01. `langKey` no se pregunta: la app está en español y envía `es`. Al terminar vuelve a Login con el usuario escrito, sin iniciar sesión | Turnos | HU-01 |
-| **Buscar** | Filtrar por categoría, nombre, estado habilitado y disponibilidad (fecha y franja opcional); lista paginada; aviso no bloqueante de "catálogo actualizándose" | Catálogo | HU-04, HU-05 |
-| **Profesional** | Ver la agenda vigente del profesional y elegir una fecha (por defecto, la del filtro de búsqueda) | Catálogo | HU-05, ADR-0017 |
+| **Buscar** | Filtrar por categoría, nombre, estado habilitado y disponibilidad (fecha y franja opcional: Mañana, Tarde, Noche o personalizada); la búsqueda se ejecuta sola al cambiar un filtro; lista paginada con "Cargar más"; aviso no bloqueante de "catálogo actualizándose" | Catálogo | HU-04, HU-05, ADR-0079 |
+| **Profesional** | Ver los días y horarios en que atiende y entrar a sus turnos desde los próximos días en que atiende (primero el de la búsqueda, si lo hubo) o desde otra fecha | Catálogo | HU-05, ADR-0017, ADR-0079 |
 | **Turnos disponibles** | Ver los slots libres de la fecha, cambiar de día y tocar "Reservar" | Turnos | HU-06 |
 | **Reserva en curso** | Seguir el proceso: estado, mensaje de la cátedra, cuenta regresiva hasta `expiresAt`, campo de teléfono y resultado | Turnos | HU-07 |
 | **Mis reservas** | Lista paginada de las reservas propias, con filtro por estado | Turnos | HU-08 |
@@ -64,12 +64,14 @@ La app decide qué mostrar por el `status` y el `code` de la respuesta, nunca po
 | 400 con `fieldErrors` | Marca los campos inválidos del formulario, con un mensaje propio de la app para cada campo (los del backend no se muestran) |
 | 400, 404 o 409 con `code` | Muestra un mensaje propio para cada `code` |
 | 503 | Informa que el servicio no está disponible temporalmente y permite reintentar |
+| 503 con `CATALOG_NOT_READY` | Buscar muestra que el catálogo todavía se está cargando y permite reintentar ([ADR-0079](../adr/0079-busqueda-y-estado-del-catalogo-en-la-app.md)) |
 
 ## Tecnología y diseño
 
 - **Arquitectura MVVM** según la skill `/mvvm-kmp`: por cada pantalla, un ViewModel con un único estado y acciones; repositorios detrás de interfaces; errores traducidos una sola vez ([ADR-0051](../adr/0051-mvvm-en-la-app.md)). Cada pantalla de la tabla de arriba es una feature de esa skill.
 - **Interfaz compartida con Compose Multiplatform**, en el código común de KMP ([ADR-0048](../adr/0048-compose-multiplatform.md)), con el stack de [ADR-0052](../adr/0052-stack-de-la-app.md). La app se compila solo para Android ([ADR-0072](../adr/0072-app-solo-android.md)).
 - **Componentes de Material 3**, los que trae Compose, antes que componentes a medida. Se pueden tomar como referencia catálogos de componentes prefabricados.
-- **Prototipos con las herramientas de diseño de Claude** antes de implementar las pantallas principales, para acordar la disposición y el flujo ([ADR-0050](../adr/0050-prototipos-con-herramientas-de-diseno.md)). El prototipo sirve de guía visual; la fuente de verdad sigue siendo este documento.
+- **Prototipos con las herramientas de diseño de Claude** antes de implementar cada pantalla, para acordar la disposición y el flujo ([ADR-0050](../adr/0050-prototipos-con-herramientas-de-diseno.md)). Las pantallas aprobadas están en [`prototipo/`](prototipo/README.md). El prototipo sirve de guía visual; la fuente de verdad sigue siendo este documento.
+- **Pensada solo para el celular:** pantallas espaciosas, elementos cómodos para el dedo y filtros que se van sumando a medida que se eligen ([ADR-0079](../adr/0079-busqueda-y-estado-del-catalogo-en-la-app.md)).
 - **El JWT se guarda cifrado** en el dispositivo ([ADR-0049](../adr/0049-jwt-cifrado-en-el-dispositivo.md)).
 - **Configuración de la app:** las URL base de los dos servicios y la confianza en el certificado local ([ADR-0035](../adr/0035-https-entre-app-y-backends.md), [ADR-0075](../adr/0075-configuracion-de-red-de-la-app.md)).

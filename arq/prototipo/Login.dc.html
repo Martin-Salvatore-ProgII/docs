@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;padding:0 24px;overflow:hidden}
+.app > *{flex-shrink:0}
+.field{position:relative;height:56px;border:1px solid #6F7979;border-radius:4px;display:flex;align-items:center;gap:8px;padding:0 4px 0 16px;box-sizing:border-box;color:#3F4948}
+.field input{border:0;background:none;font:400 17px 'Roboto',sans-serif;color:#191C1C;flex:1;min-width:0;outline:none;padding:0}
+.field .lab{position:absolute;top:-9px;left:12px;padding:0 4px;background:#F4FBFA;font-size:12px;color:#3F4948}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#3F4948;padding:0}
+.remember{display:flex;align-items:center;justify-content:space-between;min-height:56px;font-size:16px}
+.switch{width:52px;height:32px;border-radius:16px;background:#006A6A;position:relative;flex-shrink:0;border:0;padding:0}
+.switch span{position:absolute;right:4px;top:4px;width:24px;height:24px;border-radius:12px;background:#FFFFFF}
+.cta{height:56px;border-radius:28px;background:#006A6A;color:#FFFFFF;border:0;font:500 17px 'Roboto',sans-serif;width:100%}
+.textlink{height:48px;border:0;background:none;color:#006A6A;font:500 15px 'Roboto',sans-serif;text-decoration:none;display:flex;align-items:center;justify-content:center}
+</style>
+</helmet>
+<div class="app">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 96px; padding-bottom: 48px">
+    <span style="width: 80px; height: 80px; border-radius: 24px; background: #CCE8E7; color: #051F1F; display: flex; align-items: center; justify-content: center">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="m9 15 2 2 4-4" stroke-linejoin="round"></path></svg>
+    </span>
+    <h1 style="margin: 0; font-size: 32px; font-weight: 400">Turnos</h1>
+    <p style="margin: 0; font-size: 16px; color: #3F4948; text-align: center">Buscá profesionales y reservá tu turno</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 20px">
+    <div class="field">
+      <span class="lab">Usuario</span>
+      <input aria-label="Usuario" value="ana.perez">
+    </div>
+    <div class="field">
+      <span class="lab">Contraseña</span>
+      <input aria-label="Contraseña" type="password" value="secreta">
+      <button class="iconbtn" aria-label="Mostrar la contraseña"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+    </div>
+    <label class="remember">
+      <span style="display: flex; flex-direction: column"><span>Recordarme</span><span style="font-size: 13px; color: #3F4948">No vas a tener que ingresar por 30 días</span></span>
+      <button class="switch" role="switch" aria-checked="true" aria-label="Recordarme"><span></span></button>
+    </label>
+  </div>
+
+  <div style="flex: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 32px">
+    <a class="cta" href="Main.dc.html" style="display: flex; align-items: center; justify-content: center; text-decoration: none; color: #FFFFFF">Ingresar</a>
+    <a class="textlink" href="Registro.dc.html">¿No tenés cuenta? Creá una</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

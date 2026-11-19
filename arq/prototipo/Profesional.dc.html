@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Profesional</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 16px 0 4px;flex-shrink:0}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#191C1C;padding:0;text-decoration:none;flex-shrink:0}
+.content{flex:1;min-height:0;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:28px}
+.content > *{flex-shrink:0}
+.section{font-size:16px;font-weight:500;margin:0 0 4px}
+.sub{font-size:14px;color:#3F4948}
+.sched{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid #DAE5E4;font-size:17px}
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.day{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-radius:16px;border:1px solid #BEC9C8;text-decoration:none;color:#191C1C;min-height:88px;box-sizing:border-box}
+.day b{font-size:22px;font-weight:500}
+.day .go{margin-top:auto;font:500 14px 'Roboto',sans-serif;color:#006A6A;display:flex;align-items:center;gap:2px}
+.day.first{background:#006A6A;border-color:#006A6A;color:#FFFFFF}
+.day.first .sub,.day.first .go{color:#FFFFFF}
+.day:hover{color:#191C1C}
+.day.first:hover{color:#FFFFFF}
+.outlined{height:48px;border:1px solid #6F7979;border-radius:24px;background:none;color:#006A6A;font:500 15px 'Roboto',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;width:100%}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <a class="iconbtn" href="Main.dc.html" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"></path></svg></a>
+  </header>
+
+  <main class="content">
+    <div style="display: flex; gap: 16px; align-items: center">
+      <span style="width: 64px; height: 64px; border-radius: 32px; background: #CCE8E7; color: #051F1F; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 500; flex-shrink: 0">MR</span>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h1 style="margin: 0; font-size: 26px; font-weight: 400">Martín Rivas</h1>
+        <span class="sub" style="font-size: 16px">Cardiología</span>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="section">Atiende</h2>
+      <div class="sched"><span>Martes</span><span>11:30 a 14:30</span></div>
+      <div class="sched"><span>Jueves</span><span>18:00 a 21:00</span></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <h2 class="section">Ver turnos</h2>
+      <div class="days">
+        <a class="day first" href="Turnos.dc.html">
+          <span class="sub">Jueves</span><b>26 nov</b>
+          <span class="go">El día que buscaste<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></span>
+        </a>
+        <a class="day" href="Turnos.dc.html">
+          <span class="sub">Martes</span><b>1 dic</b>
+          <span class="go">Ver turnos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></span>
+        </a>
+        <a class="day" href="Turnos.dc.html">
+          <span class="sub">Jueves</span><b>3 dic</b>
+          <span class="go">Ver turnos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></span>
+        </a>
+        <a class="day" href="Turnos.dc.html">
+          <span class="sub">Martes</span><b>8 dic</b>
+          <span class="go">Ver turnos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></span>
+        </a>
+      </div>
+      <button class="outlined"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Elegir otra fecha</button>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
