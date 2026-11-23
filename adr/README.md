@@ -87,6 +87,7 @@ Cada decisión que el enunciado deja a nuestro criterio (ENUNCIADO §10), o que 
 | [0079](0079-busqueda-y-estado-del-catalogo-en-la-app.md) | Búsqueda, estado del catálogo y pantalla del profesional en la app | Aceptado |
 | [0080](0080-disponibilidad-y-reserva-en-la-app.md) | Disponibilidad y reserva en la app: cambio de día, proceso activo, cuenta regresiva y seguimiento | Aceptado |
 | [0081](0081-mis-reservas-en-la-app.md) | Mis reservas y su detalle en la app: filtros, destino según el estado, cancelación y recarga | Aceptado |
+| [0082](0082-administracion-en-la-app.md) | Administración de reservas en la app: rol desde el JWT, filtros, datos de soporte y cancelación con motivo | Aceptado |
 
 ## Plantilla
 

@@ -23,7 +23,7 @@ flowchart TD
     A --> AD[Detalle de reserva, vista admin]
 ```
 
-\* Solo visible con `ROLE_ADMIN` ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)).
+\* Solo visible con `ROLE_ADMIN` ([ADR-0037](../adr/0037-rol-administrador-alcance-cerrado.md)), leído del JWT de la sesión ([ADR-0082](../adr/0082-administracion-en-la-app.md)).
 
 Al abrir la app, si hay un JWT vigente se entra directo a Buscar; si no, a Login ([ADR-0077](../adr/0077-sesion-de-la-app.md)). Si hay un proceso de reserva activo, Buscar muestra arriba una tarjeta para volver a Reserva en curso ([ADR-0021](../adr/0021-app-consulta-estado-por-polling.md), [ADR-0080](../adr/0080-disponibilidad-y-reserva-en-la-app.md)).
 
@@ -41,8 +41,8 @@ Las secciones de la barra inferior tienen arriba el botón **Cerrar sesión**. A
 | **Reserva en curso** | Seguir el proceso: estado, mensaje de la cátedra, cuenta regresiva hasta `expiresAt`, campo de teléfono y resultado | Turnos | HU-07 |
 | **Mis reservas** | Lista paginada de las reservas propias, con filtros Todas, Confirmadas y Canceladas; se recarga cada vez que se muestra. Una reserva en curso abre Reserva en curso; una final, el Detalle | Turnos | HU-08, ADR-0081 |
 | **Detalle de reserva** | Ver una reserva propia y cancelarla desde un diálogo con el motivo opcional. El botón aparece solo si está confirmada y el turno no empezó | Turnos | HU-08, HU-09, ADR-0081 |
-| **Admin** | Lista de todas las reservas con filtros por dueño, estado y fechas | Turnos | HU-10 |
-| **Detalle de reserva, vista admin** | Datos de soporte y cancelación con motivo obligatorio | Turnos | HU-10 |
+| **Admin** | Lista paginada de todas las reservas, con filtros que se suman: usuario (login completo, se busca al confirmar), cualquiera de los estados y fechas Desde y Hasta; se recarga cada vez que se muestra. Toda reserva abre el Detalle, vista admin | Turnos | HU-10, ADR-0082 |
+| **Detalle de reserva, vista admin** | Los datos de la reserva más los de soporte: dueño, identificador en la cátedra, motivo de la falla con su código y quién la canceló. Botón Actualizar y cancelación desde un diálogo con motivo obligatorio, si está confirmada y el turno no empezó | Turnos | HU-10, ADR-0082 |
 
 ## Reserva en curso
 

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Detalle de reserva admin, cancelar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 16px 0 4px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#191C1C;padding:0;text-decoration:none;flex-shrink:0}
+.content{flex:1;min-height:0;overflow:hidden;padding:8px 16px 0;display:flex;flex-direction:column;gap:24px}
+.content > *{flex-shrink:0}
+.sub{font-size:14px;color:#3F4948;line-height:22px}
+.status{display:inline-flex;align-self:flex-start;height:32px;align-items:center;gap:6px;padding:0 12px;border-radius:8px;font:500 14px 'Roboto',sans-serif}
+.summary{display:flex;flex-direction:column;gap:6px;padding:20px 16px;border-radius:16px;background:#E3EAE9}
+.danger{display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #BA1A1A;border-radius:24px;background:none;color:#BA1A1A;font:500 16px 'Roboto',sans-serif;width:100%;box-sizing:border-box}
+.scrim{position:absolute;inset:0;background:rgba(25,28,28,.32);display:flex;align-items:center;justify-content:center;padding:24px}
+.dialog{width:100%;background:#EEF5F4;border-radius:28px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.dialog h2{margin:0;font-size:24px;font-weight:400}
+.field{position:relative;min-height:96px;border:2px solid #006A6A;border-radius:4px;padding:16px 14px 12px;box-sizing:border-box;display:flex}
+.field textarea{border:0;background:none;font:400 16px 'Roboto',sans-serif;color:#191C1C;flex:1;resize:none;outline:none;padding:0;min-height:60px}
+.field .lab{position:absolute;top:-9px;left:10px;padding:0 4px;background:#EEF5F4;font-size:12px;color:#006A6A}
+.count{font-size:12px;color:#3F4948;text-align:right;margin-top:-14px;padding-right:4px}
+.actions{display:flex;justify-content:flex-end;gap:8px}
+.textbtn{height:48px;border:0;background:none;color:#006A6A;font:500 15px 'Roboto',sans-serif;border-radius:24px;padding:0 16px;text-decoration:none;display:flex;align-items:center}
+.filled-danger{height:48px;border:0;border-radius:24px;background:#BA1A1A;color:#FFFFFF;font:500 15px 'Roboto',sans-serif;padding:0 20px;text-decoration:none;display:flex;align-items:center}
+.filled-danger:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <span class="iconbtn" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4m6-6-6 6 6 6"></path></svg></span>
+    <h1>Reserva</h1>
+  </header>
+
+  <main class="content">
+    <span class="status" style="background: #CCE8E7; color: #051F1F">Confirmada</span>
+    <div class="summary">
+      <span style="font-size: 22px">Sofía Herrera</span>
+      <span class="sub" style="font-size: 16px">Miércoles 2 de diciembre · 11:00 a 11:30</span>
+    </div>
+  </main>
+  <div style="padding: 16px 16px 24px">
+    <span class="danger">Cancelar turno</span>
+  </div>
+
+  <div class="scrim">
+    <div class="dialog" role="dialog" aria-labelledby="t">
+      <h2 id="t">¿Cancelar el turno?</h2>
+      <span class="sub">Reserva&nbsp; de usuario Juan Pérez (jperez). Queda registrado que la canceló el admin.</span>
+      <label class="field"><span class="lab">Motivo (obligatorio)</span><textarea>El usuario pidió la baja por teléfono.</textarea></label>
+      <span class="count">38 / 500</span>
+      <div class="actions">
+        <a class="textbtn" href="AdminDetalle.dc.html">Volver</a>
+        <a class="filled-danger" href="AdminDetalleCancelada.dc.html">Cancelar turno</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

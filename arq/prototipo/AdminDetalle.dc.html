@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Detalle de reserva, vista admin</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 4px 0 4px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#191C1C;padding:0;text-decoration:none;flex-shrink:0}
+.content{flex:1;min-height:0;overflow:hidden;padding:8px 16px 0;display:flex;flex-direction:column;gap:24px}
+.content > *{flex-shrink:0}
+.sub{font-size:14px;color:#3F4948;line-height:20px}
+.status{display:inline-flex;align-self:flex-start;height:32px;align-items:center;gap:6px;padding:0 12px;border-radius:8px;font:500 14px 'Roboto',sans-serif}
+.summary{display:flex;flex-direction:column;gap:6px;padding:20px 16px;border-radius:16px;background:#E3EAE9}
+.row{display:flex;align-items:center;gap:14px;font-size:15px}
+.row svg{color:#3F4948;flex-shrink:0}
+.support{display:flex;flex-direction:column;gap:18px;padding:20px 18px;border:1px solid #BEC9C8;border-radius:16px}
+.support h2{margin:0;font:500 14px 'Roboto',sans-serif;color:#006A6A}
+.kv{display:flex;flex-direction:column;gap:4px}
+.kv span:first-child{font-size:12px;color:#3F4948}
+.kv span:last-child{font-size:15px;line-height:22px;overflow-wrap:anywhere}
+.danger{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border:1px solid #BA1A1A;border-radius:24px;background:none;color:#BA1A1A;font:500 16px 'Roboto',sans-serif;width:100%;box-sizing:border-box;text-decoration:none}
+.danger:hover{color:#93000A}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <a class="iconbtn" href="Admin.dc.html" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"></path></svg></a>
+    <h1>Reserva</h1>
+    <button class="iconbtn" aria-label="Actualizar"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg></button>
+  </header>
+
+  <main class="content">
+    <span class="status" style="background: #CCE8E7; color: #051F1F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>Confirmada</span>
+
+    <div class="summary">
+      <span style="font-size: 22px">Sofía Herrera</span>
+      <span class="sub" style="font-size: 16px">Miércoles 2 de diciembre · 11:00 a 11:30</span>
+    </div>
+
+    <span class="row" style="padding: 0 4px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Reservada el 21 de noviembre a las 10:15</span>
+
+    <section class="support" aria-labelledby="sp">
+      <h2 id="sp">Datos de soporte</h2>
+      <div class="kv"><span>Usuario</span><span>Juan Pérez · jperez</span></div>
+      <div class="kv"><span>Proceso en la cátedra</span><span>8c2f6a1e-4b7d-4e19-a3f0-5d6b2c9e7a41</span></div>
+    </section>
+  </main>
+  <div style="padding: 16px 16px 24px">
+    <a class="danger" href="AdminDetalleCancelar.dc.html">Cancelar turno</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Admin, elegir estado</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;font-family:'Roboto',system-ui,sans-serif;color:#191C1C}
+a{color:#006A6A}a:hover{color:#004F4F}
+.app{width:390px;height:844px;box-sizing:border-box;background:#F4FBFA;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topbar{height:64px;display:flex;align-items:center;gap:4px;padding:0 4px 0 16px;flex-shrink:0}
+.topbar h1{font-size:22px;font-weight:400;margin:0;flex:1}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#3F4948;padding:0;flex-shrink:0}
+.content{flex:1;overflow:hidden;padding:4px 16px 0;display:flex;flex-direction:column;gap:10px}
+.content > *{flex-shrink:0}
+.search{height:56px;border-radius:28px;background:#E3EAE9;display:flex;align-items:center;gap:12px;padding:0 4px 0 16px;color:#3F4948}
+.search input{flex:1;border:0;background:none;font:400 16px 'Roboto',sans-serif;color:#191C1C;outline:none;min-width:0}
+.search input::placeholder{color:#3F4948}
+.chips{display:flex;gap:8px;padding-bottom:6px}
+.chip{flex-shrink:0;height:40px;border:1px solid #6F7979;border-radius:8px;padding:0 8px 0 14px;display:inline-flex;align-items:center;gap:4px;font:500 14px 'Roboto',sans-serif;color:#3F4948;background:transparent;text-decoration:none}
+.card{display:flex;align-items:center;gap:14px;min-height:96px;padding:12px 4px 12px 14px;border:1px solid #BEC9C8;border-radius:16px;box-sizing:border-box;text-decoration:none;color:#191C1C}
+.date{width:48px;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.date b{font-size:22px;font-weight:500;line-height:26px}
+.date span{font-size:12px;color:#3F4948;letter-spacing:.5px}
+.sub{font-size:14px;color:#3F4948}
+.owner{display:flex;align-items:center;gap:6px;font-size:14px;color:#3F4948}
+.status{display:inline-flex;align-self:flex-start;height:24px;align-items:center;padding:0 8px;border-radius:6px;font:500 12px 'Roboto',sans-serif;margin-top:6px}
+.small{font-size:12px;color:#3F4948}
+.outlined{height:40px;border:1px solid #6F7979;border-radius:20px;background:none;color:#006A6A;font:500 14px 'Roboto',sans-serif;padding:0 20px;align-self:center}
+.nav{height:80px;background:#E3EAE9;display:flex;justify-content:space-around;align-items:center;flex-shrink:0}
+.navitem{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 12px 'Roboto',sans-serif;color:#3F4948;text-decoration:none;width:96px}
+.navitem .pill{width:64px;height:32px;border-radius:16px;display:flex;align-items:center;justify-content:center}
+.navitem.on{color:#191C1C}
+.navitem.on .pill{background:#CCE8E7;color:#051F1F}
+.scrim{position:absolute;inset:0;background:rgba(25,28,28,.32);display:flex;flex-direction:column;justify-content:flex-end}
+.sheet{background:#EEF5F4;border-radius:28px 28px 0 0;padding:8px 0 16px;display:flex;flex-direction:column}
+.handle{width:32px;height:4px;border-radius:2px;background:#6F7979;align-self:center;margin:14px 0 10px}
+.sheet h2{margin:0;padding:8px 24px 8px;font-size:22px;font-weight:400}
+.group{padding:12px 24px 4px;font:500 14px 'Roboto',sans-serif;color:#006A6A}
+.opt{display:flex;align-items:center;gap:16px;height:48px;padding:0 24px;font-size:16px;color:#191C1C;text-decoration:none}
+.radio{width:20px;height:20px;border-radius:50%;border:2px solid #3F4948;box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.radio.on{border-color:#006A6A}
+.radio.on::after{content:"";width:10px;height:10px;border-radius:50%;background:#006A6A}
+</style>
+</helmet>
+<div class="app">
+  <header class="topbar">
+    <h1>Admin</h1>
+    <button class="iconbtn" aria-label="Cerrar sesión"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3M16 17l5-5-5-5M21 12H9"></path></svg></button>
+  </header>
+
+  <main class="content">
+    <label class="search">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>
+      <input type="text" placeholder="Usuario" aria-label="Usuario">
+      <a class="iconbtn" href="AdminFiltros.dc.html" aria-label="Buscar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></a>
+    </label>
+    <div class="chips" role="group" aria-label="Filtros">
+      <a class="chip" href="AdminEstado.dc.html">Estado<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a>
+      <button class="chip">Desde<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+      <button class="chip">Hasta<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+    </div>
+
+    <a class="card" href="AdminDetalle.dc.html">
+      <span class="date"><b>02</b><span>DIC</span></span>
+      <span style="flex: 1; display: flex; flex-direction: column">
+        <span style="font-size: 16px">Sofía Herrera</span>
+        <span class="sub">11:00 a 11:30</span>
+        <span class="owner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Juan Pérez · jperez</span>
+        <span class="status" style="background: #CCE8E7; color: #051F1F">Confirmada</span>
+      </span>
+      <span class="iconbtn" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></span>
+    </a>
+    <a class="card" href="AdminDetalle.dc.html">
+      <span class="date"><b>26</b><span>NOV</span></span>
+      <span style="flex: 1; display: flex; flex-direction: column">
+        <span style="font-size: 16px">Martín Rivas</span>
+        <span class="sub">19:30 a 20:00</span>
+        <span class="owner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Lucía Méndez · lmendez</span>
+        <span class="status" style="background: #DBE1FF; color: #04174B">Esperando teléfono</span>
+      </span>
+      <span class="iconbtn" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></span>
+    </a>
+    <a class="card" href="AdminDetalleFallida.dc.html">
+      <span class="date"><b>25</b><span>NOV</span></span>
+      <span style="flex: 1; display: flex; flex-direction: column">
+        <span style="font-size: 16px">Gabriel Sosa</span>
+        <span class="sub">17:30 a 18:00</span>
+        <span class="owner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Juan Pérez · jperez</span>
+        <span class="status" style="background: #FFDAD6; color: #410002">Fallida</span>
+      </span>
+      <span class="iconbtn" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></span>
+    </a>
+    <a class="card" href="AdminDetalleCancelada.dc.html">
+      <span class="date"><b>24</b><span>NOV</span></span>
+      <span style="flex: 1; display: flex; flex-direction: column">
+        <span style="font-size: 16px">Ana Torres</span>
+        <span class="sub">12:00 a 12:30</span>
+        <span class="owner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Carla Ruiz · cruiz</span>
+        <span class="status" style="background: #DAE5E4; color: #3F4948">Cancelada</span>
+      </span>
+      <span class="iconbtn" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></span>
+    </a>
+
+    <button class="outlined">Cargar más</button>
+  </main>
+
+  <nav class="nav" aria-label="Secciones">
+    <a class="navitem" href="Main.dc.html"><span class="pill"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></span>Buscar</a>
+    <a class="navitem" href="MisReservas.dc.html"><span class="pill"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></span>Mis reservas</a>
+    <a class="navitem on" href="Admin.dc.html"><span class="pill"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></span>Admin</a>
+  </nav>
+  <div class="scrim">
+    <div class="sheet" role="dialog" aria-labelledby="st">
+      <span class="handle" aria-hidden="true"></span>
+      <h2 id="st">Estado</h2>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Todos los estados</a>
+      <span class="group">En curso</span>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Iniciada</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Turno retenido</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Esperando pedido de teléfono</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Esperando teléfono</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Teléfono enviado</a>
+      <span class="group">Terminadas</span>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Confirmada</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Cancelada</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Vencida</a>
+      <a class="opt" href="AdminFiltros.dc.html"><span class="radio on" aria-hidden="true"></span>Fallida</a>
+      <a class="opt" href="Admin.dc.html"><span class="radio" aria-hidden="true"></span>Inválida</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

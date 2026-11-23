@@ -31,7 +31,7 @@ Una fila marcada como *parcial* tiene una parte hecha y otra planificada en una 
 | 17 | app-kmp | M4 Disponibilidad y reserva | Turnos disponibles con cambio de día por días de atención, inicio de la reserva, seguimiento del proceso con cuenta regresiva que bloquea el envío, envío del teléfono y retomar un proceso activo desde Buscar (ADR-0080) | 7, 10, 16 | 🟦 |
 | 18 | app-kmp | M5 Mis reservas | Lista de las reservas propias con filtros por estado, detalle y cancelación con motivo opcional (ADR-0081) | 11, 17 | 🟦 |
 | 19 | app-kmp | ~~M6 Canal seguro~~ | Absorbida por la 14: los backends en Compose hablan solo HTTPS (ADR-0073), así que la app confía en el certificado desde el esqueleto | — | — |
-| 20 | app-kmp | M7 Administración (opcional) | Sección de administración visible según el rol: lista, detalle y cancelación de cualquier reserva | 12, 18 | 🟨 |
+| 20 | app-kmp | M7 Administración (opcional) | Sección de administración visible según el rol del JWT: lista de todas las reservas con filtros por usuario, estado y fechas, detalle con datos de soporte y cancelación con motivo obligatorio (ADR-0082) | 12, 18 | 🟦 |
 
 Las milestones 1 a 11 están en `main`, aprobadas por el profesor. La 12 (Turnos M7) y la 13 (Canal seguro de los dos backends) están terminadas y en revisión. Las demás se detallan al llegar a ellas. La app puede empezar antes de que los backends terminen: cada una de sus milestones necesita solo los endpoints que usa.
 
@@ -76,7 +76,7 @@ Las milestones 1 a 11 están en `main`, aprobadas por el profesor. La 12 (Turnos
 
 | Requisito | Especificación | Milestone | Tests | Estado |
 | --- | --- | --- | --- | --- |
-| Rol administrador (ENUNCIADO §9) | HU-10, ADR-0037, ADR-0061, Constitución P-18 | Rol, administrador inicial y protección de `/api/admin/**`: Turnos M2. Operaciones administrativas: Turnos M7 | `ProvisionAdminUserUseCaseImplTest`, `AdminUserInitializerTest`, `SecurityConfigTest` (turnos), `UserAuthenticationFlowTest`, `AdminAuthorizationTest`, `ListAllReservationsUseCaseImplTest`, `GetAnyReservationUseCaseImplTest`, `CancelAnyReservationUseCaseImplTest`, `AdminReservationControllerTest`, `JpaReservationProcessRepositoryAdapterTest` | 🟦 |
+| Rol administrador (ENUNCIADO §9) | HU-10, ADR-0037, ADR-0061, Constitución P-18 | Rol, administrador inicial y protección de `/api/admin/**`: Turnos M2. Operaciones administrativas: Turnos M7. Sección en la app según el rol del JWT: App M7 (ADR-0082) | `ProvisionAdminUserUseCaseImplTest`, `AdminUserInitializerTest`, `SecurityConfigTest` (turnos), `UserAuthenticationFlowTest`, `AdminAuthorizationTest`, `ListAllReservationsUseCaseImplTest`, `GetAnyReservationUseCaseImplTest`, `CancelAnyReservationUseCaseImplTest`, `AdminReservationControllerTest`, `JpaReservationProcessRepositoryAdapterTest` | 🟦 |
 
 ## Requisitos no funcionales
 

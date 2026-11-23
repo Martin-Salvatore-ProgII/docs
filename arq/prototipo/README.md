@@ -43,4 +43,10 @@ La fuente de verdad sigue siendo [`interfaz.md`](../interfaz.md) y los ADR: si e
 | Detalle de reserva, cancelar | [`ReservaDetalleCancelar.dc.html`](ReservaDetalleCancelar.dc.html) | M5 |
 | Detalle de reserva, cancelada | [`ReservaDetalleCancelada.dc.html`](ReservaDetalleCancelada.dc.html) | M5 |
 | Detalle de reserva, no se puede cancelar | [`ReservaDetalleNoCancelable.dc.html`](ReservaDetalleNoCancelable.dc.html) | M5 |
-
+| Admin | [`Admin.dc.html`](Admin.dc.html) | M7 |
+| Admin, con filtros | [`AdminFiltros.dc.html`](AdminFiltros.dc.html) | M7 |
+| Admin, elegir estado | [`AdminEstado.dc.html`](AdminEstado.dc.html) | M7 |
+| Detalle admin, confirmada | [`AdminDetalle.dc.html`](AdminDetalle.dc.html) | M7 |
+| Detalle admin, cancelar con motivo | [`AdminDetalleCancelar.dc.html`](AdminDetalleCancelar.dc.html) | M7 |
+| Detalle admin, cancelada | [`AdminDetalleCancelada.dc.html`](AdminDetalleCancelada.dc.html) | M7 |
+| Detalle admin, no se completó | [`AdminDetalleFallida.dc.html`](AdminDetalleFallida.dc.html) | M7 |
