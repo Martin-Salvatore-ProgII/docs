@@ -37,6 +37,10 @@ La fuente de verdad sigue siendo [`interfaz.md`](../interfaz.md) y los ADR: si e
 | Reserva confirmada | [`ReservaConfirmada.dc.html`](ReservaConfirmada.dc.html) | M4 |
 | Reserva vencida | [`ReservaVencida.dc.html`](ReservaVencida.dc.html) | M4 |
 | Reserva que no se pudo completar | [`ReservaFallida.dc.html`](ReservaFallida.dc.html) | M4 |
-| Mis reservas | [`MisReservas.dc.html`](MisReservas.dc.html) | M5 (guía) |
+| Mis reservas | [`MisReservas.dc.html`](MisReservas.dc.html) | M5 |
+| Mis reservas, sin reservas | [`MisReservasVacia.dc.html`](MisReservasVacia.dc.html) | M5 |
+| Detalle de reserva, confirmada | [`ReservaDetalle.dc.html`](ReservaDetalle.dc.html) | M5 |
+| Detalle de reserva, cancelar | [`ReservaDetalleCancelar.dc.html`](ReservaDetalleCancelar.dc.html) | M5 |
+| Detalle de reserva, cancelada | [`ReservaDetalleCancelada.dc.html`](ReservaDetalleCancelada.dc.html) | M5 |
+| Detalle de reserva, no se puede cancelar | [`ReservaDetalleNoCancelable.dc.html`](ReservaDetalleNoCancelable.dc.html) | M5 |
 
-Las pantallas marcadas como guía son una primera idea: se revisan y se aprueban en su milestone.

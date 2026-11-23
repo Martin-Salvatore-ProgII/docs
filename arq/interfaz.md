@@ -39,8 +39,8 @@ Las secciones de la barra inferior tienen arriba el botón **Cerrar sesión**. A
 | **Profesional** | Ver los días y horarios en que atiende y entrar a sus turnos desde los próximos días en que atiende (primero el de la búsqueda, si lo hubo) o desde otra fecha | Catálogo | HU-05, ADR-0017, ADR-0079 |
 | **Turnos disponibles** | Ver los slots libres de la fecha, pasar al día anterior o siguiente en que atiende, elegir un slot y tocar "Reservar" | Turnos | HU-06, ADR-0080 |
 | **Reserva en curso** | Seguir el proceso: estado, mensaje de la cátedra, cuenta regresiva hasta `expiresAt`, campo de teléfono y resultado | Turnos | HU-07 |
-| **Mis reservas** | Lista paginada de las reservas propias, con filtro por estado | Turnos | HU-08 |
-| **Detalle de reserva** | Ver una reserva propia y cancelarla, con motivo opcional | Turnos | HU-08, HU-09 |
+| **Mis reservas** | Lista paginada de las reservas propias, con filtros Todas, Confirmadas y Canceladas; se recarga cada vez que se muestra. Una reserva en curso abre Reserva en curso; una final, el Detalle | Turnos | HU-08, ADR-0081 |
+| **Detalle de reserva** | Ver una reserva propia y cancelarla desde un diálogo con el motivo opcional. El botón aparece solo si está confirmada y el turno no empezó | Turnos | HU-08, HU-09, ADR-0081 |
 | **Admin** | Lista de todas las reservas con filtros por dueño, estado y fechas | Turnos | HU-10 |
 | **Detalle de reserva, vista admin** | Datos de soporte y cancelación con motivo obligatorio | Turnos | HU-10 |
 
